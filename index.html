@@ -1,0 +1,3156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly - Online Toy Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Modern Vector Preloader Screen -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <!-- Vector Blocks Icon Loader -->
+            <svg class="vector-loader-icon" xmlns="http://w3.org" viewBox="0 0 24 24" width="80" height="80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+            <h2 class="preloader-text">Stackly Joy...</h2>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+    const preloader = document.getElementById('preloader');
+    const appContent = document.getElementById('app-content');
+
+    // Automatically transition under the 3 second threshold
+    setTimeout(() => {
+        preloader.style.opacity = '0';
+        preloader.style.visibility = 'hidden';
+        appContent.classList.add('show-content');
+    }, 2500); 
+});
+
+    </script>
+
+
+<!-- Transparent, Floating Sticky Header Component -->
+<!-- Transparent, Floating Sticky Header Component -->
+<header class="floating-header">
+    <div class="header-container">
+        
+        <!-- Brand Image Logo (Refreshes Page on Click) -->
+        <a href="#" class="logo-wrapper" onclick="handleBrandRefresh(event)">
+            <img src="./Assests/toy -logo.webp" alt="Stackly Logo" class="brand-logo">
+        </a>
+
+        <!-- Central Navigation Hub (Manages Mobile Sliding Drawer Layout) -->
+        <nav class="nav-menu" id="navMenu">
+            <div class="nav-links-wrapper">
+                <a href="#" class="nav-link" onclick="handleNavigation404(event, 'Home')">Home</a>
+                <a href="#" class="nav-link" onclick="handleNavigation404(event, 'Shop Toys')">Shop Toys</a>
+                <a href="#" class="nav-link" onclick="handleNavigation404(event, 'New Arrivals')">New Arrivals</a>
+                <a href="#" class="nav-link" onclick="handleNavigation404(event, 'Special Offers')">Offers</a>
+                <a href="#" class="nav-link" onclick="handleNavigation404(event, 'Our Story')">About Us</a>
+            </div>
+
+            <!-- Mobile Responsive View Dedicated Auth Actions Menu Footer -->
+            <div class="mobile-drawer-auth">
+                <button class="auth-btn mobile-nav-login" onclick="handleNavigation404(event, 'Login Prompt')">Log In</button>
+                <button class="auth-btn mobile-nav-signup" onclick="handleNavigation404(event, 'Account Registration')">Sign Up</button>
+            </div>
+        </nav>
+
+        <!-- Right Action Utilities Terminal -->
+        <div class="header-actions">
+            <!-- Wishlist Button Counter Component -->
+            <button class="action-btn" onclick="handleNavigation404(event, 'Wishlist Section')" title="Wishlist">
+                <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                <span class="badge">0</span>
+            </button>
+
+            <!-- Shopping Cart Button Counter Component -->
+            <button class="action-btn" onclick="handleNavigation404(event, 'Shopping Cart Sidebar')" title="Cart">
+                <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                <span class="badge badge-primary">0</span>
+            </button>
+
+            <!-- Desktop Monitor Wide Exclusive Authentication Buttons Group -->
+            <div class="auth-buttons-group desktop-auth">
+                <button class="auth-btn login-btn" onclick="handleNavigation404(event, 'Login Prompt')">Log In</button>
+                <button class="auth-btn signup-btn" onclick="handleNavigation404(event, 'Account Registration')">Sign Up</button>
+            </div>
+
+            <!-- Responsive Hamburger Trigger Menu -->
+            <button class="hamburger-toggle" id="hamburgerBtn" onclick="toggleMobileHeaderDrawer()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+    </div>
+</header>
+
+
+<script>
+    // Monitor vertical scroll window offset value to apply frosted filter effects
+window.addEventListener('scroll', () => {
+    const headerNode = document.querySelector('.floating-header');
+    
+    if (window.scrollY > 30) {
+        headerNode.classList.add('scrolled');
+    } else {
+        headerNode.classList.remove('scrolled');
+    }
+});
+
+// Toggle mobile drawer panel visibility and freeze document background scroll states
+// Toggle mobile responsive navigation drawer display visibility status 
+function toggleMobileHeaderDrawer() {
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    
+    hamburgerBtn.classList.toggle('active');
+    navMenu.classList.toggle('mobile-active');
+    
+    // Evaluate display class state to freeze body window touch scrolling paths
+    if (navMenu.classList.contains('mobile-active')) {
+        document.body.classList.add('drawer-open-lock');
+    } else {
+        document.body.classList.remove('drawer-open-lock');
+    }
+}
+
+// Global Interception handler for unlinked template targets
+function handleNavigation404(event, interfaceSegmentName) {
+    event.preventDefault(); 
+    
+    // Automatically close open menu drawers and unlock background scroll hooks
+    document.getElementById('hamburgerBtn').classList.remove('active');
+    document.getElementById('navMenu').classList.remove('mobile-active');
+    document.body.classList.remove('drawer-open-lock');
+    
+    alert(`🔍 Stackly Route Monitor:\n\n"${interfaceSegmentName}" has been routed into a 404 navigation point safely!`);
+}
+
+// Native page reload reset function mapped onto the brand logo anchor
+function handleBrandRefresh(event) {
+    event.preventDefault();
+    window.location.reload();
+}
+
+
+</script>
+
+<!-- Creative 3D Playground Hero Frame -->
+<!-- Brighter Creative Playground Hero Frame with Concrete Image Nodes -->
+<section class="creative-hero">
+    <div class="hero-max-container">
+        
+        <!-- Left Column: Content Hub with High-Readability Typography -->
+        <div class="hero-text-block animate-slide-right">
+            <div class="hero-micro-badge">
+                <span class="pulse-dot"></span>
+                <span>The Future of Creative Play</span>
+            </div>
+            
+            <h1 class="hero-headline">
+                Stacking <span class="glow-cyan">Dreams</span><br>
+                Building <span class="glow-coral">Genius</span>.
+            </h1>
+            
+            <!-- Upgraded High-Visibility Paragraph Block -->
+            <p class="hero-paragraph">
+                Step away from the screens. Discover a luxury universe of smart, interlocking architectural blocks and eco-friendly geometric toys meticulously engineered to expand curiosity and spatial intelligence.
+            </p>
+            
+            <div class="hero-cta-group">
+                <button class="hero-prime-btn" onclick="handleNavigation404(event, 'Primary Shop Catalog')">
+                    <span>Explore Catalog</span>
+                    <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <button class="hero-sec-btn" onclick="handleNavigation404(event, 'Brand Philosophy Video')">
+                    <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <span>Our Story</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Column: Interactive 3D Exploded Toy Grid Layout -->
+        <div class="hero-visual-grid animate-fade-in-delayed">
+            <div class="bg-glow-orb orb-1"></div>
+            <div class="bg-glow-orb orb-2"></div>
+
+            <!-- Card 1: Main Architecture Image Block -->
+            <div class="toy-card card-main">
+                <img src="./Assests/cars.webp" alt="Architect Series Building Blocks" class="toy-img">
+                <div class="card-glass-label">Architect Series</div>
+            </div>
+
+            <!-- Card 2: Top Right Geometric Shapes Block -->
+            <div class="toy-card card-accent-top">
+                <img src="./Assests/baby with toys.webp" alt="Geometric Sorting Set" class="toy-img">
+            </div>
+
+            <!-- Card 3: Bottom Left Eco-Train Set Block -->
+            <div class="toy-card card-accent-bottom">
+                <img src="./Assests/train.webp" alt="Eco Wooden Train Drop" class="toy-img">
+                <div class="card-badge-discount">New Drop</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Mouse Scroll Wheel Visual Anchor -->
+    <div class="hero-scroll-prompt" onclick="smoothScrollToContent()">
+        <div class="mouse-housing">
+            <div class="mouse-scroller"></div>
+        </div>
+        <span>Discover Stackly</span>
+    </div>
+</section>
+
+
+
+<style>
+    /* --- High-Visibility Headline and Paragraph Properties --- */
+.hero-headline {
+    color: var(--dark-charcoal);
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
+}
+
+/* Crisp high-contrast paragraph typography */
+.hero-paragraph {
+    color: #111111; /* Ultra-visible pure deep charcoal black */
+    font-size: clamp(1.05rem, 2.2vw, 1.25rem); /* Slightly enlarged for immediate scanning clarity */
+    line-height: 1.7;
+    font-weight: 500; /* Medium thickness profile to ensure sharp anti-aliasing */
+    max-width: 620px;
+    margin-bottom: 3rem;
+    cursor: default;
+    transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-origin: left center;
+}
+
+/* Modern text interactive hover reaction shifts color into coral accent */
+.hero-paragraph:hover {
+    color: var(--primary-coral);
+    transform: scale(1.01);
+}
+
+/* --- Fixed Image Rendering and Layout Rules --- */
+.toy-card {
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(160, 175, 185, 0.15);
+    z-index: 2;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+    padding: 0; /* Clear inner bezel pads so image spans flush to container borders */
+}
+
+.toy-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crops image box seamlessly without distortion */
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Card 3D Placement Coordinates Matrix */
+.card-main { width: 320px; height: 400px; transform: rotate(-3deg) translateZ(0); z-index: 4; }
+.card-accent-top { width: 200px; height: 240px; top: 0; right: 20px; transform: rotate(6deg) translateY(10px) translateZ(0); z-index: 5; animation: floatingCardRest 4s infinite ease-in-out alternate; }
+.card-accent-bottom { width: 180px; height: 220px; bottom: -10px; left: 20px; transform: rotate(-8deg) translateY(-10px) translateZ(0); z-index: 6; animation: floatingCardRest 5s infinite ease-in-out alternate-reverse; }
+
+.toy-card:hover .toy-img {
+    transform: scale(1.08); /* Zooms image inside frame on interaction */
+}
+
+   /* --- Ultra-Creative Pleasant Brighter Hero Layout Framework --- */
+.creative-hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    /* Soft, pleasant modern cream-white gradient backdrop */
+    background: radial-gradient(circle at 80% 20%, #ffffff 0%, #f4f8f9 60%, #edf3f5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 5% 80px 5%;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.hero-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* --- Left Column Layout --- */
+.hero-text-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 10;
+}
+
+/* Capsule Pill Badge Style */
+.hero-micro-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    color: var(--dark-charcoal);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--secondary-teal);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--secondary-teal);
+    animation: liveIndicatorPulse 1.8s infinite ease-in-out;
+}
+
+/* Fluid Typography Headline Controls */
+.hero-headline {
+    color: var(--dark-charcoal);
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
+}
+
+/* Elegant Soft-glow Contrast Typography Shimmers */
+.glow-cyan {
+    color: #3bbcb4; /* Slightly darkened for premium readability against light canvas backgrounds */
+    text-shadow: 0 0 20px rgba(78, 205, 196, 0.25);
+    transition: all 0.3s ease;
+}
+
+.glow-coral {
+    color: var(--primary-coral);
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.25);
+    transition: all 0.3s ease;
+}
+
+.glow-cyan:hover, .glow-coral:hover {
+    color: var(--dark-charcoal);
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+}
+
+.hero-paragraph {
+    color: #5a6578;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.65;
+    max-width: 620px;
+    margin-bottom: 3rem;
+}
+
+/* CTA Buttons Layout Container Link Group */
+.hero-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.hero-prime-btn {
+    background-color: var(--primary-coral);
+    color: white;
+    border: none;
+    padding: 1.1rem 2.4rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-prime-btn:hover {
+    transform: translateY(-4px);
+    background-color: #ff5252;
+    box-shadow: 0 15px 35px rgba(255, 107, 107, 0.45);
+}
+
+.hero-prime-btn svg { transition: transform 0.3s ease; }
+.hero-prime-btn:hover svg { transform: translateX(5px); }
+
+.hero-sec-btn {
+    background: #ffffff;
+    color: var(--dark-charcoal);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 1.1rem 2.4rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-sec-btn:hover {
+    background: var(--dark-charcoal);
+    color: #ffffff;
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Right Column: Asymmetrical Vector Graphic Panels --- */
+.hero-visual-grid {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Vibrant Light-Themed Accent Lighting Orbs */
+.bg-glow-orb {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    z-index: 1;
+    pointer-events: none;
+}
+.orb-1 { background-color: #cdeff2; top: 5%; left: 5%; animation: orbFloatMove 6s infinite ease-in-out alternate; }
+.orb-2 { background-color: #ffdce0; bottom: 5%; right: 5%; animation: orbFloatMove 8s infinite ease-in-out alternate-reverse; }
+
+/* Structural Toy Vector Card Bases */
+.toy-card {
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(160, 175, 185, 0.15);
+    z-index: 2;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+    padding: 12px; /* Inner bezel border styling */
+}
+
+/* Local Embedded Vector Canvas Elements */
+.vector-graphic-canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.vector-graphic-canvas svg {
+    width: 45%;
+    height: 45%;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Soft Pastel Accent Fills for Cards */
+.teal-bg { background-color: #e6f7f6; color: var(--secondary-teal); }
+.yellow-bg { background-color: #fff9e6; color: #e6b800; }
+.coral-bg { background-color: #fff0f0; color: var(--primary-coral); }
+
+/* Card Dimensions Matrix mappings */
+.card-main { width: 320px; height: 400px; transform: rotate(-3deg) translateZ(0); z-index: 4; }
+.card-accent-top { width: 200px; height: 240px; top: 0; right: 20px; transform: rotate(6deg) translateY(10px) translateZ(0); z-index: 5; animation: floatingCardRest 4s infinite ease-in-out alternate; }
+.card-accent-bottom { width: 180px; height: 220px; bottom: -10px; left: 20px; transform: rotate(-8deg) translateY(-10px) translateZ(0); z-index: 6; animation: floatingCardRest 5s infinite ease-in-out alternate-reverse; }
+
+/* Glass Overlay Badges and labels */
+.card-glass-label {
+    position: absolute;
+    bottom: 22px;
+    left: 22px;
+    right: 22px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: var(--dark-charcoal);
+    padding: 0.8rem;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.card-badge-discount {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    background-color: var(--dark-charcoal);
+    color: #ffffff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+/* Hover Physics */
+.toy-card:hover {
+    z-index: 10 !important;
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 30px 60px rgba(13, 15, 20, 0.12);
+}
+
+.card-main:hover { transform: scale(1.05) rotate(0deg) translateZ(20px); }
+.card-accent-top:hover { transform: scale(1.08) rotate(2deg) translateZ(20px); }
+.card-accent-bottom:hover { transform: scale(1.1) rotate(-3deg) translateZ(20px); }
+
+.toy-card:hover svg {
+    transform: scale(1.12) rotate(4deg);
+}
+
+/* --- Scroll Prompt Styling Updates --- */
+.hero-scroll-prompt {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    z-index: 15;
+    color: #8c9ba5;
+}
+
+.hero-scroll-prompt:hover { color: var(--primary-coral); }
+.hero-scroll-prompt span { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+.mouse-housing { width: 22px; height: 36px; border: 2px solid #cbd5cc; border-radius: 20px; position: relative; display: flex; justify-content: center; }
+.hero-scroll-prompt:hover .mouse-housing { border-color: var(--primary-coral); }
+.mouse-scroller { width: 4px; height: 8px; background-color: var(--primary-coral); border-radius: 2px; position: absolute; top: 6px; animation: mouseTrackMove 1.6s infinite ease-in-out; }
+
+/* --- High Performance CSS Core Animations --- */
+.animate-slide-right { opacity: 0; transform: translateX(-40px); animation: performSlideRight 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+.animate-fade-in-delayed { opacity: 0; animation: performFadeIn 1s ease 0.3s forwards; }
+
+@keyframes performSlideRight { 100% { opacity: 1; transform: translateX(0); } }
+@keyframes performFadeIn { 100% { opacity: 1; } }
+@keyframes liveIndicatorPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.5; box-shadow: 0 0 15px var(--secondary-teal); } }
+@keyframes floatingCardRest { 0% { transform: translateY(0) rotate(5deg); } 100% { transform: translateY(-15px) rotate(7deg); } }
+@keyframes orbFloatMove { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(25px, -15px) scale(1.1); } }
+@keyframes mouseTrackMove { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(12px); opacity: 0; } }
+
+/* --- Responsive Layout Breakdown Maps --- */
+@media (max-width: 1200px) {
+    .hero-max-container { gap: 2rem; }
+    .card-main { width: 260px; height: 340px; }
+    .card-accent-top { width: 170px; height: 210px; }
+    .card-accent-bottom { width: 150px; height: 190px; }
+}
+
+@media (max-width: 992px) {
+    .hero-max-container { grid-template-columns: 1fr; text-align: center; gap: 5rem; }
+    .hero-text-block { align-items: center; }
+    .hero-paragraph { margin-left: auto; margin-right: auto; }
+    .hero-cta-group { justify-content: center; }
+    .hero-visual-grid { height: 440px; max-width: 500px; margin: 0 auto; }
+}
+
+@media (max-width: 550px) {
+    .creative-hero { padding-top: 100px; }
+    .hero-cta-group { flex-direction: column; gap: 1rem; }
+.hero-prime-btn, .hero-sec-btn { width: 100%; justify-content: center; }.hero-visual-grid { height: 350px; }.card-main { width: 200px; height: 260px; }.card-accent-top { width: 120px; height: 150px; right: 10px; }.card-accent-bottom { width: 110px; height: 140px; left: 10px; }.card-glass-label, .hero-scroll-prompt, .bg-glow-orb { display: none !important; }}
+    </style>
+
+<!-- Space-Efficient Infinite Brand Carousel Showcase -->
+<section class="brand-carousel-section">
+    <div class="brand-container">
+        
+        <h2 class="brand-section-label">Curating Global Premium Play Brands</h2>
+        
+        <!-- Infinite Scrolling Viewport Mirror -->
+        <div class="brand-viewport">
+            <div class="brand-track">
+                
+                <!-- Brand Node 1 -->
+                <div class="brand-node">
+                    <span class="brand-text">BRICK•LAB</span>
+                </div>
+                
+                <!-- Brand Node 2 -->
+                <div class="brand-node">
+                    <span class="brand-text">VELOCITY</span>
+                </div>
+                
+                <!-- Brand Node 3 -->
+                <div class="brand-node">
+                    <span class="brand-text">ECOTIMBER</span>
+                </div>
+                
+                <!-- Brand Node 4 -->
+                <div class="brand-node">
+                    <span class="brand-text">PLAYGIANT</span>
+                </div>
+                
+                <!-- Brand Node 5 -->
+                <div class="brand-node">
+                    <span class="brand-text">KID-CRAFT</span>
+                </div>
+
+                <!-- Brand Node 6 -->
+                <div class="brand-node">
+                    <span class="brand-text">MATRIXPUZZLE</span>
+                </div>
+
+                <!-- --- DUPLICATE SET FOR INFINITE CSS LOOPING --- -->
+                <div class="brand-node"><span class="brand-text">BRICK•LAB</span></div>
+                <div class="brand-node"><span class="brand-text">VELOCITY</span></div>
+                <div class="brand-node"><span class="brand-text">ECOTIMBER</span></div>
+                <div class="brand-node"><span class="brand-text">PLAYGIANT</span></div>
+                <div class="brand-node"><span class="brand-text">KID-CRAFT</span></div>
+                <div class="brand-node"><span class="brand-text">MATRIXPUZZLE</span></div>
+
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<style>
+    /* --- High-Contrast Seamless Brand Showcase --- */
+.brand-carousel-section {
+    position: relative;
+    width: 100%;
+    background-color: #ffffff; 
+    padding: 30px 5% 35px 5%; 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.brand-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.brand-section-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #8c9ba5;
+    text-align: center;
+    cursor: default;
+}
+
+.brand-viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%);
+}
+
+.brand-track {
+    display: flex;
+    width: max-content;
+    gap: 5rem; 
+    align-items: center;
+    animation: infiniteLogoScroll 25s linear infinite; 
+}
+
+.brand-viewport:hover .brand-track {
+    animation-play-state: paused;
+}
+
+.brand-node {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    user-select: none;
+    padding: 10px 20px;
+}
+
+/* Enforced clean typography consistency */
+.brand-text {
+    font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+    font-weight: 900; /* Identical structural thickness across all names */
+    color: #1a1d24;   /* Matches every text element into the same ink-black profile */
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Harmonized hovering color change states across every node */
+.brand-node:hover {
+    transform: scale(1.06) translateY(-2px);
+}
+
+.brand-node:hover .brand-text {
+    color: var(--primary-coral);
+    text-shadow: 0 5px 15px rgba(255, 107, 107, 0.15);
+}
+
+/* --- High Performance CSS Endless Moving Track Keyframes --- */
+@keyframes infiniteLogoScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+    .brand-carousel-section { padding: 20px 3% 25px 3%; }
+    .brand-track { gap: 3.5rem; } 
+}
+
+</style>
+
+<!-- Compact, Creative Multi-Category Promo Grid Section -->
+<section class="category-grid-section">
+    <div class="grid-max-container">
+        
+        <!-- Large Hero Card: Left Panel Column -->
+        <div class="promo-card card-large animate-on-scroll">
+            <img src="./Assests/early development.webp" alt="Toddler developmental geometric block sets" class="promo-img">
+            <div class="promo-gradient-overlay"></div>
+            
+            <div class="promo-content-hull">
+                <span class="promo-badge-tag">Ages 1 - 3 Years</span>
+                <h3 class="promo-title">Early Development Labs</h3>
+                <p class="promo-paragraph-black">
+                    Nurture fine motor skills and tactile logic with non-toxic geometric balancing shapes designed for small exploring hands.
+                </p>
+                <button class="promo-link-btn" onclick="handleNavigation404(event, 'Toddler Labs Catalog')">
+                    <span>Shop Toddler Collection</span>
+                    <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Side Column Splitting Into Two Horizontal Sub-Decks -->
+        <div class="grid-right-subdeck">
+            
+            <!-- Sub-Card 1: Architectural Series -->
+            <div class="promo-card card-sub-top animate-on-scroll">
+                <img src="./Assests/junior architects.webp" alt="Advanced stacking architecture blocks" class="promo-img">
+                <div class="promo-gradient-overlay"></div>
+                
+                <div class="promo-content-hull">
+                    <span class="promo-badge-tag theme-coral">Ages 4 - 7 Years</span>
+                    <h3 class="promo-title">Junior Architects</h3>
+                    <p class="promo-paragraph-black">
+                        Introduce advanced spatial planning and mathematical structural balance with raw timber geometric systems.
+                    </p>
+                    <button class="promo-link-btn" onclick="handleNavigation404(event, 'Junior Architects Catalog')">
+                        <span>Explore Kits</span>
+                        <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sub-Card 2: Brain-Teaser Mechanical Puzzles -->
+            <div class="promo-card card-sub-bottom animate-on-scroll">
+                <img src="./Assests/brain dev.webp" alt="Eco transport interlocking train arrays" class="promo-img">
+                <div class="promo-gradient-overlay"></div>
+                
+                <div class="promo-content-hull">
+                    <span class="promo-badge-tag theme-yellow">Ages 8+ Years</span>
+                    <h3 class="promo-title">Logic Mechanics</h3>
+                    <p class="promo-paragraph-black">
+                        Challenge analytical engineering thinking using complex interconnecting puzzle tracks and kinetic machines.
+                    </p>
+                    <button class="promo-link-btn" onclick="handleNavigation404(event, 'Logic Mechanics Catalog')">
+                        <span>View Puzzles</span>
+                        <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- Ultra-Creative Multi-Category Grid Framework --- */
+.category-grid-section {
+    position: relative;
+    width: 100%;
+    background-color: #edf3f5; 
+    padding: 20px 5% 40px 5%; /* Minimized top spacing eliminates dead layout void gaps completely */
+}
+
+.grid-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.grid-right-subdeck {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* --- Base Universal Promo Card Architectures --- */
+.promo-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 15px 35px rgba(160, 175, 185, 0.12);
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+/* Concrete Media Positioning Context */
+.promo-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Multi-step overlay layer ensures text reads beautifully regardless of the image content */
+.promo-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.85) 45%, rgba(255, 255, 255, 0.1) 100%);
+    z-index: 2;
+    transition: background 0.4s ease;
+}
+
+/* Dynamic Content Alignment Container */
+.promo-content-hull {
+    position: relative;
+    z-index: 3;
+    padding: 3rem;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Card Dimensional Matrix Ratios */
+.card-large {
+    min-height: 540px;
+}
+
+.card-sub-top, .card-sub-bottom {
+    min-height: 254px;
+}
+
+/* --- High Visibility Typography Mapping --- */
+.promo-badge-tag {
+    background-color: var(--secondary-teal);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.4rem 0.9rem;
+    border-radius: 30px;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.2);
+}
+.promo-badge-tag.theme-coral { background-color: var(--primary-coral); box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2); }
+.promo-badge-tag.theme-yellow { background-color: #e6b800; box-shadow: 0 4px 12px rgba(230, 184, 0, 0.2); }
+
+.promo-title {
+    color: var(--dark-charcoal);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+/* Enforced thick, high-visibility description paragraph font rules */
+.promo-paragraph-black {
+    color: #000000; /* Crisp pure high-contrast black visibility */
+    font-size: 0.98rem;
+    line-height: 1.6;
+    font-weight: 600; /* Medium-bold profile protects content readability */
+    margin-bottom: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+    cursor: default;
+}
+
+/* Interactive link vector buttons */
+.promo-link-btn {
+    background: transparent;
+    border: none;
+    color: var(--dark-charcoal);
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.promo-link-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--dark-charcoal);
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s;
+}
+
+/* --- Hardware Accelerated Hover & Glow Effects --- */
+.promo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(13, 15, 20, 0.12);
+}
+
+.promo-card:hover .promo-img {
+    transform: scale(1.05); /* Zooms inside container on interaction boundaries */
+}
+
+/* Glow reflections inject light accents underneath card layers on mouse enter */
+.promo-card:hover .promo-title {
+    color: var(--primary-coral);
+}
+
+/* Paragraph text shifts gracefully to emphasize focal point visibility */
+.promo-card:hover .promo-paragraph-black {
+    color: var(--primary-coral);
+    transform: scale(1.01);
+}
+
+.promo-card:hover .promo-link-btn {
+    color: var(--primary-coral);
+}
+.promo-card:hover .promo-link-btn::after {
+    background-color: var(--primary-coral);
+    transform: scaleX(1.1);
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 992px) {
+    /* Collapse double grids gracefully into a unified single column alignment vertical flow */
+    .grid-max-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .grid-right-subdeck {
+        gap: 1.5rem;
+    }
+    .card-large, .card-sub-top, .card-sub-bottom {
+        min-height: 280px; /* Uniform storage metrics for stacked tablet modules */
+    }
+    .promo-content-hull {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 550px) {
+    /* Modify image maps to overlay text smoothly on compact smartphone form-factors */
+    .promo-gradient-overlay {
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.88) 70%, rgba(255, 255, 255, 0.75) 100%);
+    }
+    .card-large, .card-sub-top, .card-sub-bottom {
+        min-height: 320px; /* Grants text blocks ample expansion clearance room */
+    }
+    .promo-content-hull {
+        max-width: 100%;
+        padding: 1.5rem;
+    }
+}
+
+</style>
+
+<!-- Creative Glassmorphic Interactive CTA Banner -->
+<section class="cta-banner-section">
+    <div class="cta-max-container">
+        
+        <!-- Interactive Background Ambient Glow Halo Orbs -->
+        <div class="cta-glow-orb cta-orb-left"></div>
+        <div class="cta-glow-orb cta-orb-right"></div>
+        
+        <!-- Main Glass Box Hull -->
+        <div class="cta-glass-card animate-on-scroll">
+            
+            <div class="cta-content-panel">
+                <h2 class="cta-headline">
+                    Ready to Build the <span class="cta-glow-teal">Next Generation</span> of Big Thinkers?
+                </h2>
+                <p class="cta-sub-paragraph">
+                    Join the Stackly family today to unlock premium members-only collection drops, complimentary nationwide shipping thresholds, and expert developmental play toolkits.
+                </p>
+            </div>
+
+            <div class="cta-actions-hub">
+                <button class="cta-btn cta-prime-btn" onclick="handleNavigation404(event, 'CTA Join Club Target')">
+                    <span>Join The Club</span>
+                    <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+                
+                <button class="cta-btn cta-sec-btn" onclick="handleNavigation404(event, 'CTA Birthday Club Rewards')">
+                    <span>Gift Registry</span>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- High-Specificity Core Contrast Fix --- */
+
+/* Forces the main header statement out of white into dark charcoal */
+.cta-banner-section .cta-content-panel h2 {
+    color: #2f2f2f !important;
+}
+
+/* Forces the underlying descriptive paragraph out of white into dark charcoal */
+.cta-banner-section .cta-content-panel p {
+    color: #2f2f2f !important;
+    opacity: 1 !important;
+}
+
+/* Fixes the invisible white secondary button on the right */
+.cta-banner-section .cta-actions-hub .cta-sec-btn {
+    background-color: transparent !important;
+    border: 2px solid #2f2f2f !important;
+    color: #2f2f2f !important;
+    opacity: 1 !important;
+}
+
+/* Hover effect: Smooth text color-shift when mouse enters the secondary button */
+.cta-banner-section .cta-actions-hub .cta-sec-btn:hover {
+    background-color: #2f2f2f !important;
+    color: #ffffff !important;
+}
+
+/* Hover effect: Changes text color dynamically when hovering anywhere on the card */
+.cta-banner-section .cta-glass-card:hover h2 {
+    color: #ff6b6b !important;
+}
+
+.cta-banner-section .cta-glass-card:hover p {
+    color: #ff6b6b !important;
+}
+
+    /* --- Ultra-Creative Glassmorphic CTA Framework --- */
+.cta-banner-section {
+    position: relative;
+    width: 100%;
+    background-color: #edf3f5; 
+    padding: 20px 5% 40px 5%; /* Tight 20px padding reduces spacing layout voids */
+    overflow: hidden;
+}
+
+.cta-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Ambient Backlight Lighting Glow halos */
+.cta-glow-orb {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.18;
+    z-index: 1;
+    pointer-events: none;
+}
+.cta-orb-left { background-color: var(--secondary-teal); top: -50px; left: 10%; animation: ctaOrbWobble 6s infinite ease-in-out alternate; }
+.cta-orb-right { background-color: var(--primary-coral); bottom: -50px; right: 10%; animation: ctaOrbWobble 8s infinite ease-in-out alternate-reverse; }
+
+/* The Main Asymmetrical Frosted Card Board Wrapper */
+.cta-glass-card {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 32px;
+    padding: 3.5rem;
+    box-shadow: 0 20px 45px rgba(160, 175, 185, 0.15);
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s;
+}
+
+/* --- High-Visibility Section Content Blocks --- */
+.cta-content-panel {
+    max-width: 750px;
+}
+
+.cta-headline {
+    color: black;
+    font-size: clamp(1.8rem, 3.8vw, 2.4rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+/* Bright Soft-glow Headline Shimmer Modifier */
+.cta-glow-teal {
+    color: #3bbcb4;
+    text-shadow: 0 0 20px rgba(78, 205, 196, 0.2);
+    transition: text-shadow 0.3s ease;
+}
+
+/* Exactly 2 lines of description mapped to ultra-visible crisp black font rules */
+.cta-sub-paragraph {
+    color: #000000; /* Deep pure black readability layer profile */
+    font-size: clamp(0.98rem, 2vw, 1.12rem);
+    line-height: 1.6;
+    font-weight: 600; /* Protects anti-aliasing sharpness */
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+    cursor: default;
+}
+
+/* Action Utility Button Links Hub */
+.cta-actions-hub {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-shrink: 0;
+}
+
+.cta-btn {
+    border: none;
+    padding: 1.1rem 2.2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Solid Main Accent CTA Coral Button */
+.cta-prime-btn {
+    background-color: var(--primary-coral);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.25);
+}
+
+.cta-prime-btn:hover {
+    background-color: #ff5252;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(255, 107, 107, 0.4);
+}
+
+.cta-prime-btn svg { transition: transform 0.3s ease; }
+.cta-prime-btn:hover svg { transform: translateX(4px); }
+
+/* Minimalist Clean Secondary Outline Button */
+.cta-sec-btn {
+    background-color: transparent;
+    border: 2px solid var(--dark-charcoal);
+    color: var(--dark-charcoal);
+}
+
+.cta-sec-btn:hover {
+    background-color: var(--dark-charcoal);
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Hardware Accelerated Hover & Aura Glow Effects --- */
+.cta-glass-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 25px 55px rgba(13, 15, 20, 0.1);
+}
+
+.cta-glass-card:hover .cta-headline {
+    color: var(--primary-coral);
+}
+
+.cta-glass-card:hover .cta-glow-teal {
+    text-shadow: 0 0 25px rgba(78, 205, 196, 0.4);
+}
+
+/* The paragraph content glows out softly and shifts weights on hover */
+.cta-glass-card:hover .cta-sub-paragraph {
+    color: var(--primary-coral);
+    transform: scale(1.005);
+}
+
+/* --- High Performance CSS Ambient Keyframe Animations --- */
+@keyframes ctaOrbWobble {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(20px, -15px) scale(1.1); }
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 1024px) {
+    /* Collapse side-by-side elements down to a centered vertical profile grid mapping */
+    .cta-glass-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 3rem 2rem;
+        gap: 2rem;
+    }
+    .cta-sub-paragraph {
+        margin-bottom: 0;
+    }
+    .cta-actions-hub {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 550px) {
+    .cta-glass-card {
+        padding: 2.2rem 1.2rem;
+        border-radius: 24px;
+    }
+    .cta-actions-hub {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .cta-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+</style>
+
+<!-- Compressed Clean 3-Column Feature & Feedback Hub -->
+<section class="premium-hub-section">
+    <div class="hub-max-container">
+        
+        <!-- Column 1: Core Typography Pillar -->
+        <div class="hub-column text-pillar">
+            <span class="hub-pretitle">The Master Builder Vault</span>
+            <h2 class="hub-headline">Engineered For Generations</h2>
+            <p class="hub-intro-paragraph">
+                We craft intentional toys that bridge the gap between architectural gravity, tactile physics, and childhood curiosity.
+            </p>
+        </div>
+
+        <!-- Column 2: Upgraded Core Image Showcase Card -->
+        <div class="hub-column product-pillar">
+            <div class="showcase-vector-card">
+                <div class="vector-artwork-hull">
+                    <!-- Standard high-resolution imagery tag replaces the raw vector outline -->
+                    <img src="./Assests/junior architects.webp" alt="Signature Kit Architect Pro Grid" class="hub-center-img">
+                </div>
+                <div class="vector-card-details">
+                    <h3>Architect Pro Grid</h3>
+                    <span class="vector-card-tag">Signature Kit</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Column 3: High-Contrast Minimal Parent Review Box -->
+        <div class="hub-column review-pillar">
+            <div class="minimal-review-box">
+                <div class="star-rating-row">
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="currentColor" class="star-icon"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="currentColor" class="star-icon"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="currentColor" class="star-icon"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="currentColor" class="star-icon"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="currentColor" class="star-icon"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </div>
+                <h4 class="review-title-text">Unrivaled <span class="teal-glow-text">Tactile Quality</span></h4>
+                <p class="review-paragraph-black">
+                    "Stackly blocks transformed our afternoon play routines. The mathematical engineering weight behind each block feels incredibly premium. They fit together effortlessly, inspiring structural layouts that push problem-solving skills past screens."
+                </p>
+                <div class="review-author-bio">
+                    <span class="author-name">Eleanor Vance</span>
+                    <span class="author-verify">Verified Collector</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<style>
+    /* --- Center Showcase Card Image Adjustments --- */
+.vector-artwork-hull {
+    width: 100%;
+    height: 220px;
+    background-color: #f7fafc;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Clips the child image elements tightly on rounded borders */
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+/* Concrete layout positioning mechanics for the physical product image */
+.hub-center-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents raw warping distortion while stretching perfectly across the box canvas */
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+/* --- Hardware Accelerated Scale Actions --- */
+.showcase-vector-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(13, 15, 20, 0.08);
+}
+
+/* Zooms directly into the product scene on section card focus boundary triggers */
+.showcase-vector-card:hover .hub-center-img {
+    transform: scale(1.06);
+}
+
+    /* --- High-Contrast 3-Column Premium Hub Framework --- */
+.premium-hub-section {
+    position: relative;
+    width: 100%;
+    background-color: #edf3f5; 
+    padding: 25px 5% 45px 5%; /* Tight padding parameters ensure zero giant white spaces */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.hub-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 0.9fr 1.1fr; /* Distinct grid ratios balance content rows gracefully */
+    gap: 3rem;
+    align-items: stretch;
+}
+
+.hub-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* --- Column 1: Typography Pillars --- */
+.hub-pretitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary-coral);
+    margin-bottom: 6px;
+}
+
+.hub-headline {
+    color: var(--dark-charcoal);
+    font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 1rem;
+}
+
+.hub-intro-paragraph {
+    color: #4a5568;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* --- Column 2: Pristine Vector Showcase Card --- */
+.showcase-vector-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 10px 30px rgba(160, 175, 185, 0.1);
+    padding: 1.2rem;
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+.vector-artwork-hull {
+    width: 100%;
+    height: 220px;
+    background-color: #f7fafc;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-teal);
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.vector-artwork-hull svg {
+    width: 35%;
+    height: 35%;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.vector-card-details h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--dark-charcoal);
+    margin-bottom: 4px;
+}
+
+.vector-card-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #718096;
+}
+
+/* Column 2 Hover Glow Reflections */
+.showcase-vector-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(13, 15, 20, 0.08);
+}
+.showcase-vector-card:hover .vector-artwork-hull {
+    background-color: #e6f7f6;
+    color: var(--primary-coral);
+}
+.showcase-vector-card:hover svg {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* --- Column 3: Minimal Testimonial Review Box --- */
+.minimal-review-box {
+    background-color: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 10px 30px rgba(160, 175, 185, 0.1);
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+.star-rating-row {
+    display: flex;
+    gap: 3px;
+    color: var(--yellow-color);
+    margin-bottom: 0.8rem;
+}
+.star-icon { width: 14px; height: 14px; }
+
+.review-title-text {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--dark-charcoal);
+    margin-bottom: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+.teal-glow-text {
+    color: #3bbcb4;
+    text-shadow: 0 0 15px rgba(78, 205, 196, 0.1);
+}
+
+/* Enforced high visibility black review paragraph font rules */
+.review-paragraph-black {
+    color: #000000; /* Crisp pure black readable text layer */
+    font-size: 0.92rem;
+    line-height: 1.6;
+    font-weight: 600; /* Protected medium thickness */
+    margin-bottom: 1.2rem;
+    cursor: default;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+}
+
+.review-author-bio {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #edf2f7;
+    padding-top: 0.8rem;
+}
+
+.author-name { font-size: 0.95rem; font-weight: 800; color: var(--dark-charcoal); }
+.author-verify { font-size: 0.75rem; font-weight: 600; color: #a0aec0; }
+
+/* Column 3 Hover Glow Reflections */
+.minimal-review-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(13, 15, 20, 0.08);
+}
+.minimal-review-box:hover .review-title-text {
+    color: var(--primary-coral);
+}
+/* Review paragraph shifts cleanly to coral accent line weight */
+.minimal-review-box:hover .review-paragraph-black {
+    color: var(--primary-coral);
+    transform: scale(1.005);
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 1024px) {
+    /* Balance column grid structure down to a 2-column model for tablets */
+    .hub-max-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+    .text-pillar { grid-column: span 2; text-align: center; }
+}
+
+@media (max-width: 650px) {
+    /* Snap completely down to a clean, centered vertical listing on mobile viewports */
+    .hub-max-container {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+    }
+    .text-pillar { grid-column: span 1; }
+    .minimal-review-box { padding: 1.5rem; border-radius: 18px; }
+}
+
+</style>
+
+<!-- Compact Interactive Feature Grid Section -->
+<section class="feature-grid-section">
+    <div class="feature-max-container">
+        
+        <!-- Left Side: Large Immersive Promo Panel -->
+        <div class="feature-card card-hero-glow">
+            <img src="./Assests/toy shop.webp" alt="Children building advanced wooden architectural layouts" class="feature-img">
+            <div class="feature-dark-overlay"></div>
+            
+            <div class="feature-content-hull">
+                <span class="feature-pill-badge">Premium Collection</span>
+                <h3 class="feature-title-white">Master Builders Laboratory</h3>
+                <p class="feature-paragraph-white">
+                    Step inside a digital-free learning environment where complex interlocking mechanics teach children advanced structural integrity and spatial awareness.
+                </p>
+                <button class="feature-action-btn btn-white" onclick="handleNavigation404(event, 'Master Laboratory Catalog')">
+                    <span>Explore Lab Kits</span>
+                    <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Side: Dual Stacked Spotlight Product Cards -->
+        <div class="feature-right-stack">
+            
+            <!-- Stack Card 1: Kinetic Marble Run -->
+            <div class="feature-card card-spotlight-light">
+                <div class="card-image-bezel">
+                    <img src="./Assests/building blocks.webp" alt="Eco kinetic block maze system" class="feature-img">
+                </div>
+                <div class="feature-content-hull inline-padding">
+                    <h4 class="feature-title-dark">Kinetic <span class="teal-glow-text">Marble Run</span></h4>
+                    <p class="feature-paragraph-black">
+                        Engage critical physics and trajectory analytics using gravity-fed modular interlocking ball tracks.
+                    </p>
+                    <button class="feature-action-btn btn-dark" onclick="handleNavigation404(event, 'Kinetic Run Product View')">
+                        <span>Discover Mechanics</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stack Card 2: Geometric Balance Arches -->
+            <div class="feature-card card-spotlight-light">
+                <div class="card-image-bezel">
+                    <img src="./Assests/architecter.webp" alt="Rainbow modular architectural arches set" class="feature-img">
+                </div>
+                <div class="feature-content-hull inline-padding">
+                    <h4 class="feature-title-dark">Geometric <span class="coral-glow-text">Balance Arches</span></h4>
+                    <p class="feature-paragraph-black">
+                        Challenge foundational stonemason geometry coordinates using raw tactile open-ended balancing pillars.
+                    </p>
+                    <button class="feature-action-btn btn-dark" onclick="handleNavigation404(event, 'Balance Arches Product View')">
+                        <span>Discover Balance</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- High-Contrast Interactive Feature Grid --- */
+.feature-grid-section {
+    position: relative;
+    width: 100%;
+    background-color: #edf3f5; 
+    padding: 20px 5% 45px 5%; /* Minimized top spacing prevents blank empty vertical zones */
+}
+
+.feature-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* Asymmetrical width ratio balancing layout lines */
+    gap: 2.5rem;
+}
+
+.feature-right-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* --- Core Card Structures with Hardware Acceleration --- */
+.feature-card {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 15px 35px rgba(160, 175, 185, 0.12);
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+    will-change: transform;
+}
+
+/* Immersive Hero Card Dimensions */
+.card-hero-glow {
+    min-height: 560px;
+    align-items: flex-end; /* Grounds text block neatly at the bottom edge */
+}
+
+/* Horizontal Spotlight Card Dimensions */
+.card-spotlight-light {
+    min-height: 264px;
+    flex-direction: row; /* Rows image left and content block right side */
+    align-items: center;
+}
+
+/* Container Bezel to handle the right-side images cleanly */
+.card-image-bezel {
+    position: relative;
+    width: 220px;
+    height: 100%;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+/* Base Image Cover Rules */
+.feature-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Dark gradient scrim ensures white typography is highly readable on the left card */
+.feature-dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(13, 15, 20, 0.9) 0%, rgba(13, 15, 20, 0.4) 60%, transparent 100%);
+    z-index: 2;
+}
+
+/* Content Core Alignment Pad Hull */
+.feature-content-hull {
+    position: relative;
+    z-index: 3;
+    padding: 3rem;
+}
+
+.feature-content-hull.inline-padding {
+    padding: 2rem 2.5rem;
+}
+
+/* --- High Visibility Section Typography Mappings --- */
+.feature-pill-badge {
+    background-color: var(--secondary-teal);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.4rem 0.9rem;
+    border-radius: 30px;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.feature-title-white {
+    color: #ffffff;
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.8rem;
+}
+
+.feature-title-dark {
+    color: var(--dark-charcoal);
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.6rem;
+    transition: color 0.3s ease;
+}
+
+/* Light theme localized text aura glow parameters */
+.teal-glow-text { color: #3bbcb4; text-shadow: 0 0 15px rgba(78, 205, 196, 0.15); }
+.coral-glow-text { color: var(--primary-coral); text-shadow: 0 0 15px rgba(255, 107, 107, 0.15); }
+
+.feature-paragraph-white {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Enforced crisp pure black paragraph content readability rules */
+.feature-paragraph-black {
+    color: #000000; /* Crisp pure black readable layer font */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 600; /* Protects sharpness against pixelation blurring */
+    margin-bottom: 1.2rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+    cursor: default;
+}
+
+/* Interactive CTA Action Links */
+.feature-action-btn {
+    border: none;
+    background: transparent;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    padding-bottom: 3px;
+    transition: color 0.3s ease;
+}
+
+.btn-white { color: #ffffff; }
+.btn-white::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: #ffffff; }
+
+.btn-dark { color: var(--dark-charcoal); }
+.btn-dark::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: var(--dark-charcoal); transform: scaleX(1); transform-origin: left; transition: transform 0.3s ease, background-color 0.3s; }
+
+/* --- Advanced Hover Card Activation Physics --- */
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(13, 15, 20, 0.12);
+}
+
+/* Triggers subtle scale magnification on nested child image elements */
+.feature-card:hover .feature-img {
+    transform: scale(1.05);
+}
+
+/* Right-side title text shifts into coral highlights on card focus */
+.feature-card:hover .feature-title-dark {
+    color: var(--primary-coral);
+}
+
+/* Right-side description block transforms smoothly into contrast coral accent text */
+.feature-card:hover .feature-paragraph-black {
+    color: var(--primary-coral);
+    transform: scale(1.005);
+}
+
+.feature-card:hover .btn-dark {
+    color: var(--primary-coral);
+}
+.feature-card:hover .btn-dark::after {
+    background-color: var(--primary-coral);
+    transform: scaleX(1.08);
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 992px) {
+    /* Collapse split column framework parameters down to a structural vertical line */
+    .feature-max-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .feature-right-stack {
+        gap: 1.5rem;
+    }
+    .card-hero-glow {
+        min-height: 380px;
+    }
+}
+
+@media (max-width: 650px) {
+    /* Pivot right horizontal spotlight rows into standard uniform column cards */
+    .card-spotlight-light {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .card-image-bezel {
+        width: 100%;
+        height: 200px;
+    }
+    .feature-content-hull {
+        padding: 1.5rem !important;
+    }
+}
+
+</style>
+
+<!-- Immersive Cinematic Stats Section with Background Image Cover -->
+<section class="stats-hub-section">
+    <!-- Base Background Cover Layer -->
+    <img src="./Assests/train.webp" alt="Premium Playground Backdrop Canvas" class="stats-bg-backdrop">
+    
+    <!-- Dark Readability Multi-Mix Scrim Mask Overlay -->
+    <div class="stats-dark-overlay"></div>
+
+    <div class="stats-max-container">
+        
+        <!-- Left Side Panel Column: Frosted Glass Narrative Block -->
+        <div class="stats-text-block glass-hull">
+            <span class="stats-pretitle">The Stackly Impact</span>
+            <h2 class="stats-headline">More Than Just <span class="stats-glow-coral">Building Blocks</span>.</h2>
+            
+            <p class="stats-paragraph-black">
+                We measure our success by the millions of creative sparks ignited worldwide. Every milestone represents sustainable material procurement, developmental milestones crossed, and thousands of households choosing raw sensory curiosity over digital screens.
+            </p>
+            
+            <button class="stats-explore-btn" onclick="handleNavigation404(event, 'Sustainability Report View')">
+                <span>Our Impact Blueprint</span>
+                <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+        </div>
+
+        <!-- Right Side Panel Column: Clean Frosted Glass Metrics Grid Deck -->
+        <div class="stats-glass-grid">
+            <!-- Stat Box 1: Creative Kids Served -->
+            <div class="stat-glass-card">
+                <div class="stat-vector-icon text-teal">
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <div class="stat-number-glow text-teal">2.5M+</div>
+                <div class="stat-label">Active Young Builders</div>
+            </div>
+
+            <!-- Stat Box 2: Eco-Trees Planted -->
+            <div class="stat-glass-card">
+                <div class="stat-vector-icon text-coral">
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"></path><path d="M12 12c-3-2.5-5-2-5-2V7c0-2.5 2.5-3 5 0 2.5-3 5-2 5 0v3s-2-.5-5 2z"></path></svg>
+                </div>
+                <div class="stat-number-glow text-coral">100K+</div>
+                <div class="stat-label">Timber Trees Re-planted</div>
+            </div>
+
+            <!-- Stat Box 3: Innovation Design Awards -->
+            <div class="stat-glass-card">
+                <div class="stat-vector-icon text-yellow">
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                </div>
+                <div class="stat-number-glow text-yellow">14+</div>
+                <div class="stat-label">Play Architecture Awards</div>
+            </div>
+
+            <!-- Stat Box 4: Global Distribution Countries -->
+            <div class="stat-glass-card">
+                <div class="stat-vector-icon text-white">
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </div>
+                <div class="stat-number-glow text-white">45+</div>
+                <div class="stat-label text-white-dim">Countries Supplied</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- High-Fidelity Cinematic Backdrop Stats Hub --- */
+.stats-hub-section {
+    position: relative;
+    width: 100%;
+    min-height: 80vh; /* Fills screen context dynamically */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 35px 5% 45px 5%; /* Compressed padding blocks whitespace layout voids completely */
+    overflow: hidden;
+}
+
+/* Background Image Base Layer Settings */
+.stats-bg-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    transform: scale(1.02); /* Accommodates zoom hover paths cleanly */
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.stats-hub-section:hover .stats-bg-backdrop {
+    transform: scale(1.00);
+}
+
+/* Dark masking scrim ensures absolute readability over any image composition */
+.stats-dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(13, 15, 20, 0.85) 0%, rgba(20, 24, 33, 0.7) 100%);
+    z-index: 2;
+}
+
+.stats-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 3; /* Lifts glass panels over background cover layers */
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 3.5rem;
+    align-items: center;
+}
+
+/* --- Left Column: Frosted Narrative Box --- */
+.stats-text-block.glass-hull {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 32px;
+    padding: 3.5rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stats-pretitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--secondary-teal);
+    margin-bottom: 6px;
+}
+
+.stats-headline {
+    color: #ffffff; /* Swapped to pure white for perfect contrast against dark image canvas */
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: 1.2rem;
+}
+
+.stats-glow-coral {
+    color: var(--primary-coral);
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+}
+
+/* Crisp ultra-visible pure white paragraph description text layer */
+.stats-paragraph-black {
+    color: rgba(255, 255, 255, 0.95); /* Perfect text visibility constraint mapping */
+    font-size: 1rem;
+    line-height: 1.7;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+    cursor: default;
+}
+
+/* Interactive link vector buttons modifier hooks */
+.stats-explore-btn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 4px;
+}
+.stats-explore-btn::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: #ffffff; transform: scaleX(1); transform-origin: left; transition: transform 0.3s ease, background-color 0.3s; }
+
+.stats-explore-btn:hover { color: var(--secondary-teal); }
+.stats-explore-btn:hover::after { background-color: var(--secondary-teal); transform: scaleX(1.08); }
+
+/* --- Right Column: Uniform Glass Grid Deck --- */
+.stats-glass-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+/* Sleek Translucent Metric Cards with Hover Scaling Actions */
+.stat-glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 24px;
+    padding: 2.2rem 1.8rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s, background-color 0.4s;
+    will-change: transform;
+}
+
+/* Circular Vector Icon Frames */
+.stat-vector-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+.stat-vector-icon svg { width: 20px; height: 20px; }
+
+/* Dynamic Fills Mappings Profiles */
+.text-teal { color: var(--secondary-teal); }
+.text-coral { color: var(--primary-coral); }
+.text-yellow { color: var(--primary-coral);}
+.text-white { color: var(--secondary-teal) }
+
+/* Massive Data Numbers Text Shadow Aura Glow Effect Layouts */
+.stat-number-glow {
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 4px;
+    transition: text-shadow 0.3s ease;
+}
+.stat-number-glow.text-teal { text-shadow: 0 0 20px rgba(78, 205, 196, 0.3); }
+.stat-number-glow.text-coral { text-shadow: 0 0 20px rgba(255, 107, 107, 0.3); }
+.stat-number-glow.text-yellow { text-shadow: 0 0 20px rgba(204, 218, 42, 0.3); }
+.stat-number-glow.text-white { text-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+
+.stat-label {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.3;
+}
+.text-white-dim { color: rgba(255, 255, 255, 0.55); }
+
+/* --- Advanced Hover Card Activation Physics --- */
+.stat-glass-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.25);
+}
+
+.stat-glass-card:hover .stat-vector-icon { transform: scale(1.08) rotate(3deg); }
+.stat-glass-card:hover .stat-number-glow { text-shadow: 0 0 25px currentColor; }
+
+/* Left narrative paragraph text shifts color smoothly when hovering the glass hull */
+.stats-text-block.glass-hull:hover .stats-paragraph-black {
+    color: var(--secondary-teal);
+    transform: scale(1.002);
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 992px) {
+    /* Collapse split parameters down to a structural vertical profile line */
+    .stats-max-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    .stats-text-block.glass-hull { padding: 2.5rem 1.5rem; align-items: center; text-align: center; }
+    .stats-glass-grid { max-width: 600px; margin: 0 auto; width: 100%; gap: 1.2rem; }
+    .stat-glass-card { padding: 1.8rem 1.2rem; }
+}
+
+@media (max-width: 480px) {
+    .stats-glass-grid { grid-template-columns: 1fr; } /* Drops to a single list deck vertical on narrow smartphone displays */
+}
+
+</style>
+
+<!-- Compact Automatically Scrolling Testimonial Carousel -->
+<!-- Compact Automatically Scrolling Testimonial Carousel -->
+<section class="testimonial-scroller-section">
+    <div class="testimonial-max-container">
+        
+        <div class="testimonial-section-header">
+            <span class="testimonial-pretitle">The Stackly Family</span>
+            <h2 class="testimonial-headline">Praise From Master Builders</h2>
+        </div>
+        
+        <!-- Continuous Auto-Scrolling Slider Core Window -->
+        <div class="testimonial-viewport">
+            <div class="testimonial-track">
+                
+                <!-- [CARD 1] -->
+                <div class="testimonial-glass-card">
+                    <div class="client-upper-row">
+                        <div class="client-avatar-frame">
+                            <img src="./Assests/testimonial 1.webp" alt="Sarah Jenkins" class="client-avatar-img">
+                        </div>
+                        <div class="client-meta-hull">
+                            <span class="client-name">Sarah Jenkins</span>
+                            <span class="client-status">Verified Parent</span>
+                        </div>
+                    </div>
+                    <div class="stars-vector-bar">★★★★★</div>
+                    <p class="testimonial-quote-black">"The mathematical precision engineering behind each block feels incredibly premium. They fit together effortlessly, inspiring structural layouts that push problem-solving way past screens."</p>
+                </div>
+
+                <!-- [CARD 2] -->
+                <div class="testimonial-glass-card">
+                    <div class="client-upper-row">
+                        <div class="client-avatar-frame">
+                            <img src="./Assests/testimonial 2.webp" alt="David Miller" class="client-avatar-img">
+                        </div>
+                        <div class="client-meta-hull">
+                            <span class="client-name">David Miller</span>
+                            <span class="client-status">Junior Architect Mentor</span>
+                        </div>
+                    </div>
+                    <div class="stars-vector-bar">★★★★★</div>
+                    <p class="testimonial-quote-black">"An exceptional resource for open-ended childhood engineering development. The structural weight allows multi-level complex scaffolding structures to lock without collapsing."</p>
+                </div>
+
+                <!-- [CARD 3] -->
+                <div class="testimonial-glass-card">
+                    <div class="client-upper-row">
+                        <div class="client-avatar-frame">
+                            <img src="./Assests/testimonial 3.webp" alt="Elena Rostova" class="client-avatar-img">
+                        </div>
+                        <div class="client-meta-hull">
+                            <span class="client-name">Elena Rostova</span>
+                            <span class="client-status">Kindergarten Director</span>
+                        </div>
+                    </div>
+                    <div class="stars-vector-bar">★★★★★</div>
+                    <p class="testimonial-quote-black">"Stackly sets survive heavy classroom workloads day in and day out. The timber grain finishes look clean, feel amazing, and hold clean geometric color tones under rigorous use."</p>
+                </div>
+
+                <!-- =======================================================================
+                     CRITICAL MULTI-CLONES: Required to achieve seamless infinite scrolling. 
+                     Do not skip any of these cards!
+                     ======================================================================= -->
+                
+                <!-- [CLONE OF CARD 1] -->
+                <div class="testimonial-glass-card">
+                    <div class="client-upper-row">
+                        <div class="client-avatar-frame">
+                            <img src="./Assests/testimonial 1.webp" alt="Sarah Jenkins" class="client-avatar-img">
+                        </div>
+                        <div class="client-meta-hull">
+                            <span class="client-name">Sarah Jenkins</span>
+                            <span class="client-status">Verified Parent</span>
+                        </div>
+                    </div>
+                    <div class="stars-vector-bar">★★★★★</div>
+                    <p class="testimonial-quote-black">"The mathematical precision engineering behind each block feels incredibly premium. They fit together effortlessly, inspiring structural layouts that push problem-solving way past screens."</p>
+                </div>
+
+                <!-- [CLONE OF CARD 2] -->
+                <div class="testimonial-glass-card">
+                    <div class="client-upper-row">
+                        <div class="client-avatar-frame">
+                            <img src="./Assests/testimonial 2.webp" alt="David Miller" class="client-avatar-img">
+                        </div>
+                        <div class="client-meta-hull">
+                            <span class="client-name">David Miller</span>
+                            <span class="client-status">Junior Architect Mentor</span>
+                        </div>
+                    </div>
+                    <div class="stars-vector-bar">★★★★★</div>
+                    <p class="testimonial-quote-black">"An exceptional resource for open-ended childhood engineering development. The structural weight allows multi-level complex scaffolding structures to lock without collapsing."</p>
+                </div>
+
+                <!-- [CLONE OF CARD 3] -->
+                <div class="testimonial-glass-card">
+                    <div class="client-upper-row">
+                        <div class="client-avatar-frame">
+                            <img src="./Assests/testimonial 3.webp" alt="Elena Rostova" class="client-avatar-img">
+                        </div>
+                        <div class="client-meta-hull">
+                            <span class="client-name">Elena Rostova</span>
+                            <span class="client-status">Kindergarten Director</span>
+                        </div>
+                    </div>
+                    <div class="stars-vector-bar">★★★★★</div>
+                    <p class="testimonial-quote-black">"Stackly sets survive heavy classroom workloads day in and day out. The timber grain finishes look clean, feel amazing, and hold clean geometric color tones under rigorous use."</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- High-Contrast Seamless Responsive Testimonials --- */
+.testimonial-scroller-section {
+    position: relative;
+    width: 100%;
+    background-color: #edf3f5; 
+    padding: 20px 5% 40px 5%; /* Minimized top spacing removes gap voids completely */
+    overflow: hidden;
+}
+
+.testimonial-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.testimonial-section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.testimonial-pretitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary-coral);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.testimonial-headline {
+    color: var(--dark-charcoal);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+}
+
+/* Linear Masking Viewport Box Framework */
+.testimonial-viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    /* Softly fades out the scrolling edge boundaries left and right side seamlessly */
+    mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    padding: 15px 0;
+}
+
+/* Automated Endless CSS Scroll Animation Rail Track Container */
+.testimonial-track {
+    display: flex;
+    width: max-content; /* Enforces track extension up to absolute pixel width threshold sums */
+    gap: 2rem; /* Uniform spacing track gap */
+    align-items: center;
+    animation: automatedSlideLoop 28s linear infinite; /* Silky-smooth loop crawling speed */
+}
+
+/* Pauses movement actions entirely when mouse cursor hovers over card container elements */
+.testimonial-viewport:hover .testimonial-track {
+    animation-play-state: paused;
+}
+
+/* --- Pristine High-Visibility Card Components --- */
+.testimonial-glass-card {
+    width: clamp(290px, 35vw, 420px); /* Responsive fluid box width mapping dimensions */
+    background-color: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 15px 35px rgba(160, 175, 185, 0.08);
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s;
+}
+
+/* Client Identity Row Setup */
+.client-upper-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0.8rem;
+}
+
+.client-avatar-frame {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    border: 2px solid white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.client-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.client-meta-hull { display: flex; flex-direction: column; }
+.client-name { font-size: 1.05rem; font-weight: 800; color: var(--dark-charcoal); }
+.client-status { font-size: 0.78rem; font-weight: 700; color: #718096; }
+
+/* Uniform Star Rating styling layout */
+.stars-vector-bar {
+    color: var(--yellow-color);
+    letter-spacing: 3px;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Enforced strict pure black description text content rules layers */
+.testimonial-quote-black {
+    color: #000000; /* Deep high-contrast pure black visibility font mapping */
+    font-size: 0.95rem;
+    line-height: 1.65;
+    font-weight: 600; /* Protected thickness shields anti-aliasing text blurs */
+    cursor: default;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+}
+
+/* --- Hardware Accelerated Hover & Aura Glow Effects --- */
+.testimonial-glass-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(78, 205, 196, 0.25);
+    box-shadow: 0 25px 50px rgba(13, 15, 20, 0.12);
+}
+
+.testimonial-glass-card:hover .client-avatar-frame {
+    transform: scale(1.05);
+    border-color: var(--secondary-teal);
+}
+
+/* Text glow color-shift effect activates cleanly */
+.testimonial-glass-card:hover .testimonial-quote-black {
+    color: var(--primary-coral);
+    transform: scale(1.002);
+}
+
+/* --- THE LOOP FIX KEYFRAME MAP ---
+   Translates exactly negative half width parameters (-50% track offset) because clones 
+   perfectly mirror the base spacing metrics, guaranteeing infinite playback. */
+@keyframes automatedSlideLoop {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-50% - 1rem)); 
+    }
+}
+
+/* --- Mobile Breakpoints Adaptive Framework --- */
+@media (max-width: 650px) {
+    .testimonial-scroller-section { padding-top: 15px; }
+    .testimonial-glass-card {
+        width: 290px; /* Secure compact width sizing configuration for smartphone monitors */
+        padding: 1.5rem;
+        border-radius: 18px;
+    }
+    .testimonial-quote-black { font-size: 0.9rem; }
+}
+
+</style>
+
+<!-- Immersive Cinematic CTA Banner with New Strategic Content -->
+<section class="immersive-cta-section">
+    <!-- Base Background Image Cover Layer -->
+    <img src="./Assests/junior architects.webp" alt="Stackly Craft Workshop" class="cta-bg-backdrop">
+    
+    <!-- Dark Scrim Mask Overlay for Text Readability -->
+    <div class="cta-dark-mask"></div>
+
+    <div class="cta-max-container">
+        <!-- Frosted Glass Action Box Box -->
+        <div class="cta-glass-hull animate-on-scroll">
+            
+            <div class="cta-content-panel">
+                <h2 class="cta-headline">
+                    Design Your Own Custom <span class="cta-glow-text">Heirloom Playset</span>.
+                </h2>
+                <p class="cta-sub-paragraph">
+                    Collaborate with our master woodworkers to engrave customized block modules, specify premium organic dye palettes, and manufacture a completely tailored learning kit unique to your home.
+                </p>
+            </div>
+
+            <!-- 404 Route Intercept Action Buttons Group -->
+            <div class="cta-actions-hub">
+                <button class="cta-btn cta-prime-btn" onclick="handleNavigation404(event, 'CTA Custom Craft Studio Target')">
+                    <span>Enter Craft Studio</span>
+                    <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+                
+                <button class="cta-btn cta-sec-btn" onclick="handleNavigation404(event, 'CTA Consultation Scheduler')">
+                    <span>Consult Artisan</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* --- Ultra-Creative Cinematic CTA Framework --- */
+.immersive-cta-section {
+    position: relative;
+    width: 100%;
+    min-height: 45vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 5% 40px 5%; /* Tight 20px padding reduces spacing layout voids */
+    overflow: hidden;
+}
+
+/* Background Image Layer Settings */
+.cta-bg-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    transform: scale(1.02); /* Padding room for smooth hover transformations */
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.immersive-cta-section:hover .cta-bg-backdrop {
+    transform: scale(1.00);
+}
+
+/* Dark masking scrim ensures absolute readability over any background picture */
+.cta-dark-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(13, 15, 20, 0.85) 0%, rgba(20, 24, 33, 0.65) 100%);
+    z-index: 2;
+}
+
+.cta-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 3;
+}
+
+/* The Main Frosted Glass Card Panel Box Wrapper */
+.cta-glass-hull {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 32px;
+    padding: 3.5rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s, background-color 0.4s;
+}
+
+/* --- High-Visibility Section Content Blocks --- */
+.cta-content-panel {
+    max-width: 750px;
+}
+
+.cta-headline {
+    color: #ffffff; /* Crisp white for max contrast on dark images */
+    font-size: clamp(1.8rem, 3.8vw, 2.4rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+/* Bright Coral Text Aura Glow Effect */
+.cta-glow-text {
+    color: var(--primary-coral);
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+    transition: text-shadow 0.3s ease;
+}
+
+/* Exactly 2 lines of description text mapped to crisp visible font rules */
+.cta-sub-paragraph {
+    color: rgba(255, 255, 255, 0.9); /* High contrast white readability layer profile */
+    font-size: clamp(0.98rem, 2vw, 1.12rem);
+    line-height: 1.6;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+    cursor: default;
+}
+
+/* Action Utility Button Links Hub */
+.cta-actions-hub {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-shrink: 0;
+}
+
+.cta-btn {
+    border: none;
+    padding: 1.1rem 2.2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Solid Main Coral CTA Button */
+.cta-prime-btn {
+    background-color: var(--primary-coral);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.25);
+}
+
+.cta-prime-btn:hover {
+    background-color: #ff5252;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(255, 107, 107, 0.4);
+}
+
+.cta-prime-btn svg { transition: transform 0.3s ease; }
+.cta-prime-btn:hover svg { transform: translateX(4px); }
+
+/* Minimalist Clean Secondary Translucent Button */
+.cta-sec-btn {
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}
+
+.cta-sec-btn:hover {
+    background-color: #ffffff;
+    color: var(--dark-charcoal);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+}
+
+/* --- Hardware Accelerated Hover & Aura Glow Effects --- */
+.cta-glass-hull:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.3);
+}
+
+.cta-glass-hull:hover .cta-glow-text {
+    text-shadow: 0 0 25px rgba(255, 107, 107, 0.5);
+}
+
+/* The paragraph content glows out softly and shifts weights on hover */
+.cta-glass-hull:hover .cta-sub-paragraph {
+    color: var(--secondary-teal);
+    transform: scale(1.002);
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 1024px) {
+    /* Collapse side-by-side elements down to a centered vertical profile grid mapping */
+    .cta-glass-hull {
+        flex-direction: column;
+        text-align: center;
+        padding: 3rem 2rem;
+        gap: 2rem;
+    }
+    .cta-actions-hub {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 550px) {
+    .cta-glass-hull {
+        padding: 2.2rem 1.2rem;
+        border-radius: 24px;
+    }
+    .cta-actions-hub {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .cta-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+</style>
+
+<!-- High-Contrast Creative Immersive Footer Deck -->
+<footer class="stackly-footer">
+    <div class="footer-max-container">
+        
+        <!-- Primary Structural Column Array Block Grid -->
+        <div class="footer-columns-grid">
+            
+            <!-- Column 1: Brand Profile Terminal Hub -->
+           <!-- Column 1: Brand Profile Terminal Hub with Integrated Social Vectors -->
+<div class="footer-col brand-pillar">
+    <a href="#" class="footer-logo-link" onclick="executeScrollToTop(event)" title="Back to Top">
+        <img src="./Assests/footer logo.webp" alt="Stackly Logo Footer" class="footer-brand-logo">
+    </a>
+    <p class="footer-brand-bio">
+        Engineering luxury tactile play systems designed to bridge geometric architectural mechanics with childhood curiosity.
+    </p>
+    <div class="company-address-box">
+        <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="addr-vector"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <span>100 Playwright Avenue, Craft Studio 4, Boston, MA</span>
+    </div>
+
+    <!-- New High-Visibility Vector Social Media Icon Row -->
+    <div class="footer-social-row">
+        <!-- Facebook -->
+        <button class="social-circle-btn" onclick="handleNavigation404(event, 'Footer Facebook Link')" title="Follow on Facebook">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-4h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+        </button>
+        <!-- Instagram -->
+        <button class="social-circle-btn" onclick="handleNavigation404(event, 'Footer Instagram Link')" title="Follow on Instagram">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+        </button>
+        <!-- Pinterest -->
+        <button class="social-circle-btn" onclick="handleNavigation404(event, 'Footer Pinterest Link')" title="Follow on Pinterest">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        </button>
+        <!-- YouTube -->
+        <button class="social-circle-btn" onclick="handleNavigation404(event, 'Footer YouTube Link')" title="Follow on YouTube">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 28 0 0 0 1 11.75a29 28 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 28 0 0 0 .46-5.25 29 28 0 0 0-.46-5.33z"></path>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+            </svg>
+        </button>
+    </div>
+</div>
+
+
+            <!-- Column 2: Quick Menus Collection -->
+            <div class="footer-col links-pillar">
+                <h4 class="footer-heading">Quick Links</h4>
+                <div class="footer-links-list">
+                    <a href="#" class="footer-link" onclick="handleNavigation404(event, 'Footer Track Order Link')">Track Your Order</a>
+                    <a href="#" class="footer-link" onclick="handleNavigation404(event, 'Footer Store Locator Link')">Find a Retailer</a>
+                    <a href="#" class="footer-link" onclick="handleNavigation404(event, 'Footer Wholesale Partner Program')">Wholesale Program</a>
+                    <a href="#" class="footer-link" onclick="handleNavigation404(event, 'Footer Safe Materials Certification')">Safety Labs Reports</a>
+                </div>
+            </div>
+
+            <!-- Column 3: Corporate Profile Menus -->
+            <div class="footer-col links-pillar">
+                <h4 class="footer-heading">Support Hub</h4>
+                <div class="footer-links-list">
+                    <a href="#" class="footer-link" onclick="handleNavigation404(event, 'Footer Extended Warranties')">Artisan Warranty</a>
+                    <a href="#" class="footer-link" onclick="handleNavigation404(event, 'Footer Returns Guidelines')">Easy Exchange Portal</a>
+                    <a href="#" class="footer-link" onclick="handleNavigation404(event, 'Footer Help FAQs Matrix')">Help &amp; FAQ Center</a>
+                    <a href="#" class="footer-link" onclick="handleNavigation404(event, 'Footer Media Contact Portal')">Press Resources</a>
+                </div>
+            </div>
+
+            <!-- Column 4: Newsletter Subscriber Actions Console -->
+            <div class="footer-col subscribe-pillar">
+                <h4 class="footer-heading">The Playground Dispatch</h4>
+                <p class="subscribe-caption">Subscribe to unlock premium custom blueprint designs and private product launches.</p>
+                
+                <form class="footer-newsletter-form" onsubmit="simulateNewsletterSubmit(event)">
+                    <div class="input-bezel-hull">
+                        <input type="email" placeholder="Enter your artisan email..." required class="newsletter-input">
+                        <button type="submit" class="newsletter-submit-btn" title="Subscribe Now">
+                            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Secondary Bottom Regulatory Ledger Bar -->
+        <div class="footer-ledger-base">
+            <div class="ledger-left-copyright">
+                &copy; <span id="currentYear">2026</span> Stackly Industries. All rights reserved.
+            </div>
+            
+            <!-- Privacy Legal Links Stacks -->
+            <div class="ledger-center-legal">
+                <a href="#" class="legal-link" onclick="handleNavigation404(event, 'Footer Privacy Declaration Context')">Privacy Policy</a>
+                <a href="#" class="legal-link" onclick="handleNavigation404(event, 'Footer Terms of Service Alignment')">Terms of Service</a>
+                <a href="#" class="legal-link" onclick="handleNavigation404(event, 'Footer Cookies Settings Hub')">Cookie Management</a>
+            </div>
+
+            <!-- Right-Side Floating Back to Top Control Anchor Button -->
+            <button class="footer-top-arrow-btn" onclick="executeScrollToTop(event)" title="Back to Top">
+                <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="up-arrow-vector"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+            </button>
+        </div>
+
+    </div>
+</footer>
+
+<style>
+    /* --- Brand Pillar Social Icons Hub Layout --- */
+.footer-social-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1.5rem; /* Forces a safe, clear gap directly below the address text box */
+    width: 100%;
+}
+
+/* --- Brand Pillar Social Icons Hub Layout --- */
+.footer-social-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1.5rem; 
+    width: 100%;
+}
+
+.social-circle-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.65);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.social-circle-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* --- Uniform Hover and Glow Effects (Removes Red Override) --- */
+.social-circle-btn:hover {
+    background-color: var(--secondary-teal);
+    color: #ffffff;
+    border-color: var(--secondary-teal);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+}
+
+
+    /* --- High-Contrast Immersive Footer Framework --- */
+.stackly-footer {
+    position: relative;
+    width: 100%;
+    background-color: #0d0f14; /* Deep premium canvas backdrop matching header transparency tones */
+    padding: 50px 5% 25px 5%; /* Tight space configuration prevents dead empty whitespace gaps */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+}
+
+/* Master Grid Grid Mapping Columns Ratios */
+.footer-columns-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr 0.8fr 1.1fr;
+    gap: 3rem;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* --- Column 1: Brand Profile Alignment --- */
+.footer-logo-link {
+    display: inline-block;
+    margin-bottom: 1.2rem;
+    transition: transform 0.3s ease;
+}
+.footer-logo-link:hover { transform: scale(1.03); }
+.footer-brand-logo { height: 40px; width: auto; object-fit: contain; border-radius: 6px; }
+
+.footer-brand-bio {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.company-address-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.88rem;
+    line-height: 1.4;
+    font-weight: 500;
+}
+.addr-vector { width: 18px; height: 18px; color: var(--secondary-teal); flex-shrink: 0; margin-top: 2px; }
+
+/* --- Columns 2 & 3: Quick Navigation Link Stacks --- */
+.footer-heading {
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 6px;
+}
+/* Micro neon underscore line below headings */
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--primary-coral);
+    border-radius: 2px;
+}
+
+.footer-links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    width: 100%;
+}
+
+.footer-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    display: inline-block;
+    width: max-content;
+    transform-origin: left center;
+}
+
+/* Link Hover Highlight Shimmer Actions */
+.footer-link:hover {
+    color: var(--secondary-teal);
+    transform: translateX(4px) scale(1.02);
+    text-shadow: 0 0 15px rgba(78, 205, 196, 0.4);
+}
+
+/* --- Column 4: Newsletter Module Settings --- */
+.subscribe-caption {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+}
+
+.footer-newsletter-form {
+    width: 100%;
+}
+
+.input-bezel-hull {
+    position: relative;
+    width: 100%;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.newsletter-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0.6rem 1rem;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.newsletter-input::placeholder { color: rgba(255, 255, 255, 0.4); }
+
+.newsletter-submit-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-coral);
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.2s;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+}
+.newsletter-submit-btn svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+
+/* Focus and hover reactions for input field box elements */
+.input-bezel-hull:focus-within {
+    border-color: var(--secondary-teal);
+    box-shadow: 0 0 15px rgba(78, 205, 196, 0.15);
+}
+.newsletter-submit-btn:hover {
+    background-color: #ff5252;
+    transform: scale(1.05);
+}
+.newsletter-submit-btn:hover svg {
+    transform: scale(1.1) translate(1px, -1px);
+}
+
+/* --- Secondary Bottom Regulatory Ledger Bar --- */
+.footer-ledger-base {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 1.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.ledger-left-copyright {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.ledger-center-legal {
+    display: flex;
+    gap: 2rem;
+}
+
+.legal-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+.legal-link:hover { color: #ffffff; }
+
+/* Right aligned circular Back-to-Top trigger button */
+.footer-top-arrow-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.up-arrow-vector { width: 16px; height: 16px; }
+
+.footer-top-arrow-btn:hover {
+    background-color: var(--secondary-teal);
+    color: #ffffff;
+    border-color: var(--secondary-teal);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.3);
+}
+.footer-top-arrow-btn:hover .up-arrow-vector {
+    animation: upwardBounceArrow 0.8s infinite alternate ease-in-out;
+}
+
+/* --- High Performance Keyframe Arrow Loops --- */
+@keyframes upwardBounceArrow {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-4px); }
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 1024px) {
+    /* Pivot columns to form a balanced 2x2 grid map on tablet monitors */
+    .footer-columns-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 2.5rem;
+    }
+    .brand-pillar, .subscribe-pillar { grid-column: span 1; }
+}
+
+@media (max-width: 768px) {
+    /* Collapse the base layout items into a vertically aligned structural listing */
+    .footer-columns-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .footer-ledger-base {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    .ledger-center-legal {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.2rem;
+    }
+    .footer-heading { margin-bottom: 1rem; }
+}
+
+</style>
+
+<script>
+    // Native smooth page scroller linked to brand log link and right floating button
+function executeScrollToTop(event) {
+    event.preventDefault(); // Stop standard hash window anchor jumps
+    
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' /* Dispatches native hardware accelerated animation frame easing curves */
+    });
+}
+
+// Simulated automated dispatcher notification layout for subscription form fields
+function simulateNewsletterSubmit(event) {
+    event.preventDefault(); // Hold form processing data loops
+    
+    const inputNode = event.target.querySelector('.newsletter-input');
+    const subscriberEmail = inputNode ? inputNode.value : '';
+    
+    alert(`🎉 Stackly Club Monitor:\n\nThank you for choosing creative curiosity!\n"${subscriberEmail}" has been registered inside our premium blueprint drop dispatch network successfully.`);
+    
+    if (inputNode) inputNode.value = ''; // Reset the input layout
+}
+
+// Automatically update structural footer copyright parameters live 
+window.addEventListener('DOMContentLoaded', () => {
+    const yearNode = document.getElementById('currentYear');
+    if (yearNode) yearNode.innerText = new Date().getFullYear();
+});
+
+</script>
+</body>
+</html>

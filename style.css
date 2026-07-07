@@ -1,0 +1,491 @@
+/* Core Configurations */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-color: #ff6b6b;
+    --secondary-color: #4ecdc4;
+    --dark-color: #2f2f2f;
+    --light-color: #f7f9fa;
+}
+
+body {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+/* Full Screen Preloader Overlay Layout */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle, #ffffff 0%, #f0f7f7 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.preloader-content {
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Vector Animation Layer */
+.vector-loader-icon {
+    color: var(--primary-color);
+    animation: bounceAndSpin 1.4s infinite ease-in-out alternate;
+}
+
+.preloader-text {
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    letter-spacing: 0.5px;
+    animation: textPulse 1.5s infinite ease-in-out;
+}
+
+/* Progress Bar Component */
+.progress-bar {
+    width: 180px;
+    height: 6px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    margin: 1.2rem auto 0 auto;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    border-radius: 10px;
+    animation: fillProgress 2.3s forwards cubic-bezier(0.1, 0.8, 0.3, 1);
+}
+
+/* Site Visibility State Controllers */
+.hidden-content {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.show-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Keyframe Performance Engines */
+@keyframes bounceAndSpin {
+    0% { transform: translateY(0) rotate(-4deg); }
+    100% { transform: translateY(-25px) rotate(4deg); }
+}
+
+@keyframes textPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+@keyframes fillProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+
+/* --- Global Document Scroll Controls --- */
+body.drawer-open-lock {
+    overflow: hidden !important;
+    touch-action: none;
+}
+
+/* --- Responsive Floating Header Layout --- */
+:root {
+    --primary-coral: #ff6b6b;
+    --secondary-teal: #4ecdc4;
+    --dark-charcoal: #2f2f2f;
+    --nav-default-height: 80px;
+    --nav-scrolled-height: 70px;
+}
+
+.floating-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-default-height);
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    padding: 0 5%;
+}
+
+/* Glassmorphic Frost styling class injected upon scroll down activity */
+.floating-header.scrolled {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    height: var(--nav-scrolled-height);
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Brand Image Logo styling elements */
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.logo-wrapper:hover {
+    transform: scale(1.02);
+}
+
+.brand-logo {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+/* Horizontal Central 5 Navigation items */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2.2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--dark-charcoal);
+    font-weight: 600;
+    font-size: 0.98rem;
+    position: relative;
+    padding: 6px 0;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-coral);
+}
+
+/* Modern Sliding Horizontal Line Effect Under Links */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-coral);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius: 4px;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Right-aligned Navigation Utilities Base */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+/* Dynamic Interactive Circular Icon Elements */
+.action-btn {
+    background: transparent;
+    border: none;
+    color: var(--dark-charcoal);
+    cursor: pointer;
+    position: relative;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    color: var(--primary-coral);
+    transform: translateY(-2px);
+}
+
+/* Numeric Floating Alert Badges */
+.badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color: var(--secondary-teal);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 2px solid white;
+}
+
+.badge.badge-primary {
+    background-color: var(--primary-coral);
+}
+
+/* Profile Access Auth Control Group */
+.auth-buttons-group {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-left: 0.4rem;
+}
+
+.auth-btn {
+    border: none;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.login-btn {
+    background-color: transparent;
+    color: var(--dark-charcoal);
+}
+
+.login-btn:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    color: var(--primary-coral);
+}
+
+.signup-btn {
+    background-color: var(--dark-charcoal);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.signup-btn:hover {
+    background-color: var(--primary-coral);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* Mobile Layout Hamburger Button Settings */
+.hamburger-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1010;
+}
+
+.hamburger-toggle span {
+    width: 100%;
+    height: 2.5px;
+    background-color: var(--dark-charcoal);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- Responsive Responsive Viewports Framework --- */
+@media (max-width: 1024px) {
+    .auth-buttons-group { display: none; } /* Drops profile text buttons on tight laptop viewports */
+}
+
+@media (max-width: 768px) {
+    .hamburger-toggle { 
+        display: flex; 
+    }
+
+    /* 75% Screen-Width Frosted Overlay Navigation Menu Drawer */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -75vw; /* Completely pushes drawer out of the view bounds */
+        width: 75vw;  /* Locks drawer width space allocation to exactly 75% */
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: -12px 0 35px rgba(0, 0, 0, 0.07);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 110px 2.2rem 2rem 2.2rem;
+        gap: 1.6rem;
+        transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        z-index: 1005;
+        overflow-y: auto;
+    }
+
+    /* Action to bring drawer out cleanly from right side */
+    .nav-menu.mobile-active {
+        right: 0;
+    }
+
+    .nav-link {
+        width: 100%;
+        font-size: 1.25rem;
+        border-bottom: 1px solid #f2f2f2;
+        padding-bottom: 0.9rem;
+    }
+
+    .nav-link::after { 
+        display: none; /* Strips slider graphic off mobile layout items */
+    }
+
+    /* Morphing transformation animation keys for cross menu state */
+    .hamburger-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger-toggle.active span:nth-child(2) { opacity: 0; }
+    .hamburger-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
+
+/* --- Desktop Variables and Settings Base --- */
+:root {
+    --primary-coral: #ff6b6b;
+    --secondary-teal: #4ecdc4;
+    --dark-charcoal: #2f2f2f;
+    --nav-default-height: 80px;
+}
+
+body.drawer-open-lock {
+    overflow: hidden !important;
+    touch-action: none;
+}
+
+/* Hide the responsive drawer elements by default on widescreen settings */
+.mobile-drawer-auth {
+    display: none;
+}
+
+.nav-links-wrapper {
+    display: flex;
+    gap: 2.2rem;
+}
+
+/* --- Responsive Media Viewports Overhaul (Context Shifting) --- */
+@media (max-width: 1024px) {
+    /* Instantly hide original inline desktop buttons group so they don't break content grid lines */
+    .desktop-auth { 
+        display: none !important; 
+    }
+}
+
+@media (max-width: 768px) {
+    .hamburger-toggle { 
+        display: flex; 
+    }
+
+    /* Transform sliding navigation deck layout container block */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -75vw;
+        width: 75vw;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: -12px 0 35px rgba(0, 0, 0, 0.08);
+        
+        /* Flex Alignment parameters to balance top links and base footer actions */
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between; 
+        padding: 110px 2rem 3rem 2rem; 
+        transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        z-index: 1005;
+    }
+
+    .nav-menu.mobile-active {
+        right: 0;
+    }
+
+    .nav-links-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 1.5rem;
+    }
+
+    .nav-link {
+        width: 100%;
+        font-size: 1.2rem;
+        border-bottom: 1px solid #f5f5f5;
+        padding-bottom: 0.8rem;
+    }
+    .nav-link::after { display: none; }
+
+    /* Safely introduce, map, and style the buttons cluster inside the mobile view layout drawer footer */
+    .mobile-drawer-auth {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.8rem;
+        border-top: 1px solid #eee;
+        padding-top: 1.5rem;
+    }
+
+    .mobile-drawer-auth .auth-btn {
+        width: 100%;
+        padding: 0.85rem;
+        font-size: 1rem;
+        font-weight: 700;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.2s, transform 0.2s;
+    }
+
+    /* Transparent Modern Outline design for responsive view Login target */
+    .mobile-nav-login {
+        background-color: transparent;
+        border: 2px solid var(--dark-charcoal) !important;
+        color: var(--dark-charcoal);
+    }
+    .mobile-nav-login:hover {
+        background-color: rgba(0, 0, 0, 0.03);
+    }
+
+    /* Solid Dark Theme design fill look for responsive view Sign up target */
+    .mobile-nav-signup {
+        background-color: var(--dark-charcoal);
+        color: white;
+    }
+    .mobile-nav-signup:hover {
+        background-color: var(--primary-coral);
+    }
+}
