@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly - Online Toy Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Modern Vector Preloader Screen -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <!-- Vector Blocks Icon Loader -->
+            <svg class="vector-loader-icon" xmlns="http://w3.org" viewBox="0 0 24 24" width="80" height="80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+            <h2 class="preloader-text">Stackly Joy...</h2>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+    const preloader = document.getElementById('preloader');
+    const appContent = document.getElementById('app-content');
+
+    // Automatically transition under the 3 second threshold
+    setTimeout(() => {
+        preloader.style.opacity = '0';
+        preloader.style.visibility = 'hidden';
+        appContent.classList.add('show-content');
+    }, 2500); 
+});
+
+    </script>
+
+
+<!-- Transparent, Floating Sticky Header Component -->
+<!-- Transparent, Floating Sticky Header Component -->
+<header class="floating-header">
+    <div class="header-container">
+        
+        <!-- Brand Image Logo (Refreshes Page on Click) -->
+        <a href="#" class="logo-wrapper" onclick="handleBrandRefresh(event)">
+            <img src="./Assests/toy -logo.webp" alt="Stackly Logo" class="brand-logo">
+        </a>
+
+        <!-- Central Navigation Hub (Manages Mobile Sliding Drawer Layout) -->
+        <nav class="nav-menu" id="navMenu">
+    <div class="nav-links-wrapper">
+        <a href="index.html" class="nav-link">Home</a>
+        <!-- Injected the 'active' class on the Shop Toys link -->
+        <a href="shop.html" class="nav-link active">Shop Toys</a>
+        <a href="404.html" class="nav-link">New Arrivals</a>
+        <a href="404.html" class="nav-link">Offers</a>
+        <a href="404.html" class="nav-link">Contact Us</a>
+    </div>
+
+            <!-- Mobile Responsive View Dedicated Auth Actions Menu Footer -->
+            <div class="mobile-drawer-auth">
+                <button class="auth-btn mobile-nav-login" onclick="handleNavigation404(event, 'Login Prompt')">Log In</button>
+                <button class="auth-btn mobile-nav-signup" onclick="handleNavigation404(event, 'Account Registration')">Sign Up</button>
+            </div>
+        </nav>
+
+        <!-- Right Action Utilities Terminal -->
+       <div class="header-actions">
+    <!-- Wishlist Button Counter Component (Navigates to 404.html) -->
+    <a href="404.html" class="action-btn" title="Wishlist">
+        <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <span class="badge">0</span>
+    </a>
+
+    <!-- Shopping Cart Button Counter Component (Navigates to 404.html) -->
+    <a href="404.html" class="action-btn" title="Cart">
+        <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="badge badge-primary">0</span>
+    </a>
+
+    <!-- Desktop Monitor Wide Exclusive Authentication Buttons Group -->
+    <div class="auth-buttons-group desktop-auth">
+        <!-- Links directly to login.html -->
+        <a href="login.html" class="auth-btn login-btn">Log In</a>
+        <!-- Links directly to signup.html -->
+        <a href="signup.html" class="auth-btn signup-btn">Sign Up</a>
+    </div>
+</div>
+
+
+            <!-- Responsive Hamburger Trigger Menu -->
+            <button class="hamburger-toggle" id="hamburgerBtn" onclick="toggleMobileHeaderDrawer()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+    </div>
+</header>
+
+
+<script>
+    // Monitor vertical scroll window offset value to apply frosted filter effects
+window.addEventListener('scroll', () => {
+    const headerNode = document.querySelector('.floating-header');
+    
+    if (window.scrollY > 30) {
+        headerNode.classList.add('scrolled');
+    } else {
+        headerNode.classList.remove('scrolled');
+    }
+});
+
+// Toggle mobile drawer panel visibility and freeze document background scroll states
+// Toggle mobile responsive navigation drawer display visibility status 
+function toggleMobileHeaderDrawer() {
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    
+    hamburgerBtn.classList.toggle('active');
+    navMenu.classList.toggle('mobile-active');
+    
+    // Evaluate display class state to freeze body window touch scrolling paths
+    if (navMenu.classList.contains('mobile-active')) {
+        document.body.classList.add('drawer-open-lock');
+    } else {
+        document.body.classList.remove('drawer-open-lock');
+    }
+}
+
+// Global Interception handler for unlinked template targets
+function handleNavigation404(event, interfaceSegmentName) {
+    event.preventDefault(); 
+    
+    // Automatically close open menu drawers and unlock background scroll hooks
+    document.getElementById('hamburgerBtn').classList.remove('active');
+    document.getElementById('navMenu').classList.remove('mobile-active');
+    document.body.classList.remove('drawer-open-lock');
+    
+    alert(`🔍 Stackly Route Monitor:\n\n"${interfaceSegmentName}" has been routed into a 404 navigation point safely!`);
+}
+
+// Native page reload reset function mapped onto the brand logo anchor
+function handleBrandRefresh(event) {
+    event.preventDefault();
+    window.location.reload();
+}
+
+
+</script>
+
+<!-- Immersive Full-Width Artisan Sandbox Console Hero -->
+<section class="sandbox-console-hero full-width-hero">
+    <!-- Blueprint Radial Grid Line Overlay -->
+    <div class="console-grid-overlay"></div>
+
+    <!-- Full-Width Floating Glass Control Deck Box -->
+    <div class="console-glass-deck full-width-deck animate-scale-in">
+        
+        <!-- Left Vector Indicator Pillar -->
+        <div class="console-artwork-pillar">
+            <div class="vector-radar-ring">
+                <div class="radar-center-core"></div>
+                <div class="radar-pulse-wave-1"></div>
+                <div class="radar-pulse-wave-2"></div>
+            </div>
+        </div>
+
+        <!-- Right Content Terminal Hub -->
+        <div class="console-content-pillar">
+            <div class="console-micro-badge">
+                <span class="laser-indicator"></span>
+                <span>Play Matrix Sandbox v3.0</span>
+            </div>
+
+            <!-- Structured 2-Line Headline Statement -->
+            <h1 class="console-headline">
+                The Play Matrix.<br>
+                Deconstructed Studio.
+            </h1>
+
+            <!-- Crisp Pure Black Visibility Description Paragraph -->
+            <p class="console-paragraph-black">
+                Deconstruct spatial geometry coordinates. Filter our curated workshop logs by evolutionary age brackets, block complexities, and sustainable timber grain properties.
+            </p>
+
+            <!-- Dedicated Pair of Action Recovery Buttons -->
+            <div class="console-actions-hub">
+                <button class="console-btn btn-prime-glow" onclick="smoothScrollToFilters()">
+                    <span>Initialize Matrix</span>
+                    <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                </button>
+                
+                <a href="404.html" class="console-btn btn-sec-outline">
+                    <span>Artisan Vault</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- High-Contrast Full-Width Artisan Console --- */
+.sandbox-console-hero.full-width-hero {
+    position: relative;
+    width: 100vw;
+    min-height: 85vh; /* Reduced height compresses gaps to the next section */
+    background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f4f8f9 60%, #edf3f5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0 0 0; /* Removed side paddings to align flush with the screen edges */
+    overflow: hidden;
+}
+
+.console-grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(78, 205, 196, 0.03) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(78, 205, 196, 0.03) 1px, transparent 1px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Full-Width Glass Card — Spans 100% edge-to-edge safely */
+.console-glass-deck.full-width-deck {
+    width: 100%;
+    height: 100%;
+    min-height: calc(85vh - 100px);
+    background: rgba(255, 255, 255, 0.65);
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    border-left: none;
+    border-right: none;
+    border-radius: 0px; /* Removes rounded corners to create a clean full-bleed panel bar look */
+    padding: 3.5rem 10%; /* Inward side margins align content with header boundaries */
+    box-shadow: 0 15px 40px rgba(160, 175, 185, 0.08);
+    
+    display: grid;
+    grid-template-columns: 0.3fr 1.7fr; /* Squeezes icon spacing close to text block fields */
+    gap: 4rem;
+    align-items: center;
+    z-index: 5;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* --- Left Column Elements --- */
+.console-artwork-pillar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.vector-radar-ring {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radar-center-core {
+    width: 16px;
+    height: 16px;
+    background-color: var(--secondary-teal);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--secondary-teal);
+    z-index: 3;
+}
+
+.radar-pulse-wave-1, .radar-pulse-wave-2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px dashed rgba(78, 205, 196, 0.25);
+    border-radius: 50%;
+    z-index: 1;
+}
+.radar-pulse-wave-1 { animation: spinRadarTrack 14s linear infinite; }
+.radar-pulse-wave-2 { transform: scale(0.65); border-style: dotted; border-color: var(--primary-coral); animation: spinRadarTrack 9s linear infinite reverse; }
+
+/* --- Right Column Elements --- */
+.console-content-pillar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.console-micro-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 0.5rem 1.1rem;
+    border-radius: 50px;
+    color: var(--dark-charcoal);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.01);
+}
+
+.laser-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-coral);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary-coral);
+    animation: beaconLaserPulse 1.6s infinite ease-in-out;
+}
+
+.console-headline {
+    color: var(--dark-charcoal);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    margin-bottom: 1rem;
+}
+
+.console-paragraph-black {
+    color: #000000;
+    font-size: clamp(0.98rem, 2vw, 1.12rem);
+    line-height: 1.65;
+    font-weight: 600;
+    max-width: 850px; /* Expands paragraph reading bounds nicely */
+    margin-bottom: 2.2rem;
+    cursor: default;
+    transition: color 0.3s ease;
+}
+
+.console-actions-hub {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.console-btn {
+    text-decoration: none;
+    border: none;
+    padding: 1.05rem 2.4rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-prime-glow {
+    background-color: var(--primary-coral);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.25);
+}
+.btn-prime-glow:hover { background-color: #ff5252; transform: translateY(-3px); box-shadow: 0 12px 28px rgba(255, 107, 107, 0.45); }
+.btn-prime-glow svg { transition: transform 0.3s ease; }
+.btn-prime-glow:hover svg { transform: rotate(90deg); }
+
+.btn-sec-outline {
+    background-color: transparent;
+    border: 2px solid var(--dark-charcoal);
+    color: var(--dark-charcoal);
+}
+.btn-sec-outline:hover { background-color: var(--dark-charcoal); color: #ffffff; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); }
+
+/* --- Hover Highlight Aura Controls --- */
+.console-glass-deck.full-width-deck:hover {
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: 0 20px 50px rgba(13, 15, 20, 0.05);
+}
+
+.console-glass-deck.full-width-deck:hover .console-paragraph-black {
+    color: var(--primary-coral);
+}
+
+/* --- Animation Systems Keyframe Mechanics --- */
+@keyframes beaconLaserPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.4; } }
+@keyframes spinRadarTrack { 100% { transform: rotate(360deg); } }
+
+.animate-scale-in {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fullWidthConsoleSlideIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes fullWidthConsoleSlideIn { 100% { opacity: 1; transform: translateY(0); } }
+
+/* --- Responsive Media Viewports Overhaul --- */
+@media (max-width: 992px) {
+    .console-glass-deck.full-width-deck {
+        grid-template-columns: 1fr;
+        padding: 3.5rem 5%;
+        gap: 2rem;
+    }
+    .console-content-pillar { align-items: center; text-align: center; }
+    .console-actions-hub { justify-content: center; }
+}
+
+@media (max-width: 550px) {
+    .sandbox-console-hero.full-width-hero { padding-top: 100px; }
+    .console-glass-deck.full-width-deck { padding: 2.5rem 1.2rem; }
+    .console-actions-hub { flex-direction: column; gap: 1rem; }
+    .console-btn { width: 100%; justify-content: center; }
+    .console-artwork-pillar { display: none !important; }
+}
+
+</style>
+<!-- Space-Efficient Creative Catalog Product Cards Showcase Section -->
+<section class="catalog-showcase-section">
+    <!-- Immersive Backdrop Fabric Grid Image Cover -->
+    <img src="./Assests/early development.webp" alt="Playground Blueprint Backdrop" class="catalog-section-bg">
+    <div class="catalog-section-overlay"></div>
+
+    <div class="catalog-max-container">
+        
+        <div class="catalog-section-header">
+            <div class="catalog-title-group">
+                <span class="catalog-pretitle">The Master Builder Drop</span>
+                <h2 class="catalog-headline">Signature Architectural Sets</h2>
+            </div>
+            <a href="404.html" class="catalog-view-all-link">
+                <span>View Complete Sandbox</span>
+                <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+        </div>
+
+        <!-- High-Contrast Proportional Grid Array Mapping -->
+        <div class="catalog-products-grid">
+            
+            <!-- Product Item Unit Card 1 -->
+            <div class="catalog-product-card">
+                <div class="product-media-hull">
+                    <img src="./Assests/architecter.webp" alt="Architect Pro Grid Modular Block Set" class="product-grid-img">
+                    <div class="product-glass-glow-aura"></div>
+                    <span class="product-badge-flag status-cyan">Best Seller</span>
+                </div>
+                <div class="product-details-hull">
+                    <h3 class="product-name">Architect Pro Grid</h3>
+                    <p class="product-short-desc">Tactile modular interlocking raw timber geometric architecture systems.</p>
+                    <div class="product-purchase-footer-row">
+                        <div class="price-container-column">
+                            <span class="price-label">Artisan Value</span>
+                            <span class="price-digits">$45.00</span>
+                        </div>
+                        <a href="404.html" class="basket-action-circle" title="Add to Cart Bundle">
+                            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Item Unit Card 2 -->
+            <div class="catalog-product-card">
+                <div class="product-media-hull">
+                    <img src="./Assests/Cube.webp" alt="Early Tactile Balance Geometric Cubes" class="product-grid-img">
+                    <div class="product-glass-glow-aura"></div>
+                    <span class="product-badge-flag status-coral">Limited Drop</span>
+                </div>
+                <div class="product-details-hull">
+                    <h3 class="product-name">Early Tactile Cubes</h3>
+                    <p class="product-short-desc">Cognitive matching sorting shapes engineered with organic beeswax finishes.</p>
+                    <div class="product-purchase-footer-row">
+                        <div class="price-container-column">
+                            <span class="price-label">Artisan Value</span>
+                            <span class="price-digits">$24.99</span>
+                        </div>
+                        <a href="404.html" class="basket-action-circle" title="Add to Cart Bundle">
+                            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Item Unit Card 3 -->
+            <div class="catalog-product-card">
+                <div class="product-media-hull">
+                    <img src="./Assests/train.webp" alt="Eco Kinetic Train Assembly Tracks" class="product-grid-img">
+                    <div class="product-glass-glow-aura"></div>
+                    <span class="product-badge-flag status-amber">New Arrival</span>
+                </div>
+                <div class="product-details-hull">
+                    <h3 class="product-name">Eco-Freight Express</h3>
+                    <p class="product-short-desc">Magnetic interlocking transport systems organizing analytical play pathways.</p>
+                    <div class="product-purchase-footer-row">
+                        <div class="price-container-column">
+                            <span class="price-label">Artisan Value</span>
+                            <span class="price-digits">$38.00</span>
+                        </div>
+                        <a href="404.html" class="basket-action-circle" title="Add to Cart Bundle">
+                            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Item Unit Card 4 (New) -->
+            <div class="catalog-product-card">
+                <div class="product-media-hull">
+                    <img src="./Assests/fly rotate.webp" alt="Interlocking Timber Beams" class="product-grid-img">
+                    <div class="product-glass-glow-aura"></div>
+                    <span class="product-badge-flag status-cyan">Restocked</span>
+                </div>
+                <div class="product-details-hull">
+                    <h3 class="product-name">Fortress Link Beams</h3>
+                    <p class="product-short-desc">Interlocking structural engineering joints to scaffold high-density castle arrays.</p>
+                    <div class="product-purchase-footer-row">
+                        <div class="price-container-column">
+                            <span class="price-label">Artisan Value</span>
+                            <span class="price-digits">$49.99</span>
+                        </div>
+                        <a href="404.html" class="basket-action-circle" title="Add to Cart Bundle">
+                            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Item Unit Card 5 (New) -->
+            <div class="catalog-product-card">
+                <div class="product-media-hull">
+                    <img src="./Assests/balancing toy.webp" alt="Rainbow Balance Arches Set" class="product-grid-img">
+                    <div class="product-glass-glow-aura"></div>
+                    <span class="product-badge-flag status-coral">Trending</span>
+                </div>
+                <div class="product-details-hull">
+                    <h3 class="product-name">Gravity Balance Arches</h3>
+                    <p class="product-short-desc">Stonemason precision arch sets stacking open-ended balancing physics laws.</p>
+                    <div class="product-purchase-footer-row">
+                        <div class="price-container-column">
+                            <span class="price-label">Artisan Value</span>
+                            <span class="price-digits">$42.50</span>
+                        </div>
+                        <a href="404.html" class="basket-action-circle" title="Add to Cart Bundle">
+                            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Item Unit Card 6 (New) -->
+            <div class="catalog-product-card">
+                <div class="product-media-hull">
+                    <img src="./Assests/geometric.webp" alt="Origami Creative Folding Deck" class="product-grid-img">
+                    <div class="product-glass-glow-aura"></div>
+                    <span class="product-badge-flag status-amber">Artisan Choice</span>
+                </div>
+                <div class="product-details-hull">
+                    <h3 class="product-name">Geometric Craft Studio</h3>
+                    <p class="product-short-desc">Multi-layered geometric folding templates to scaffold complex 3D logic.</p>
+                    <div class="product-purchase-footer-row">
+                        <div class="price-container-column">
+                            <span class="price-label">Artisan Value</span>
+                            <span class="price-digits">$19.00</span>
+                        </div>
+
+<style>
+    .catalog-showcase-section {
+    position: relative;
+    width: 100%;
+    padding: 25px 5% 50px 5%; /* Tight padding minimizes space layout gaps completely */
+    overflow: hidden;
+    background-color: #edf3f5;
+}
+
+/* Immersive Section Background Canvas Image Rules */
+.catalog-section-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 2;
+    opacity: 0.48; /* Subtle watermark opacity prevents text layout blending errors */
+    filter: blur(2px) grayscale(30%);
+    pointer-events: none;
+}
+
+/* Off-white masking screen protects pure text contrast visibility lines */
+.catalog-section-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(237, 243, 245, 0.95) 0%, rgba(255, 255, 255, 0.88) 100%);
+    z-index: 2;
+}
+
+.catalog-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 5; /* Lifts product cards securely over mask layers */
+}
+
+.catalog-section-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+}
+
+.catalog-title-group { display: flex; flex-direction: column; }
+.catalog-pretitle { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary-coral); margin-bottom: 4px; }
+.catalog-headline { color: var(--dark-charcoal); font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 900; letter-spacing: -0.5px; }
+
+a.catalog-view-all-link {
+    text-decoration: none;
+    color: var(--dark-charcoal);
+    font-size: 0.92rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    padding-bottom: 3px;
+    transition: color 0.3s ease;
+}
+a.catalog-view-all-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: var(--dark-charcoal); transform: scaleX(1); transform-origin: left; transition: transform 0.3s ease, background-color 0.3s; }
+a.catalog-view-all-link:hover { color: var(--primary-coral); }
+a.catalog-view-all-link:hover::after { background-color: var(--primary-coral); transform: scaleX(1.05); }
+
+/* Standard 3-Column Grid Distribution Array */
+.catalog-products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.2rem;
+    width: 100%;
+}
+
+/* Individual High-Visibility Product Unit Frameworks */
+.catalog-product-card {
+    background-color: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 15px 35px rgba(160, 175, 185, 0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+.product-media-hull {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background-color: #f7fafc;
+}
+
+.product-grid-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.product-glass-glow-aura {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.product-badge-flag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 0.4rem 0.8rem;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #ffffff;
+    z-index: 3;
+}
+.status-cyan { background-color: var(--secondary-teal); box-shadow: 0 4px 10px rgba(78, 205, 196, 0.25); }
+.status-coral { background-color: var(--primary-coral); box-shadow: 0 4px 10px rgba(255, 107, 107, 0.25); }
+.status-amber { background-color: #e6b800; box-shadow: 0 4px 10px rgba(230, 184, 0, 0.25); }
+
+.product-details-hull {
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    transition: background-color 0.3s ease;
+}
+
+.product-name {
+    color: var(--dark-charcoal);
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+}
+
+.product-short-desc {
+    color: #000000; /* Pure black high-contrast visibility description font */
+    font-size: 0.92rem;
+    line-height: 1.55;
+    font-weight: 600; /* Thick anti-aliasing profile bounds protection */
+    margin-bottom: 1.5rem;
+    cursor: default;
+}
+
+.product-purchase-footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.price-container-column { display: flex; flex-direction: column; text-align: left; }
+.price-label { font-size: 0.7rem; font-weight: 700; color: #a0aec0; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.price-digits {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--primary-coral);
+    line-height: 1.1;
+    text-shadow: 0 0 15px rgba(255, 107, 107, 0.04);
+}
+
+a.basket-action-circle {
+    text-decoration: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f1f5f7;
+    color: var(--dark-charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+a.basket-action-circle svg { width: 16px; height: 16px; }
+
+/* --- Hover Highlight Aura Controls --- */
+.catalog-product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 45px rgba(13, 15, 20, 0.12);
+}
+
+.catalog-product-card:hover .product-grid-img { transform: scale(1.05); }
+.catalog-product-card:hover .product-glass-glow-aura { opacity: 1; }
+.catalog-product-card:hover .product-details-hull { background-color: #fffdf9; }
+.catalog-product-card:hover .product-name { color: var(--primary-coral); }
+
+.catalog-product-card:hover a.basket-action-circle {
+    background-color: var(--secondary-teal);
+    color: #ffffff;
+    transform: scale(1.06) rotate(90deg);
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+}
+
+/* --- Responsive Media Viewports Overhaul --- */
+@media (max-width: 992px) {
+    .catalog-products-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+}
+
+@media (max-width: 650px) {
+    .catalog-section-header { flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+    .catalog-products-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; gap: 1.5rem; }
+    .product-media-hull { height: 210px; }
+    .product-details-hull { padding: 1.2rem; }
+}
+</style>
+
+
+
+</body>

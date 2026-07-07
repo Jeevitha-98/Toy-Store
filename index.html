@@ -52,14 +52,17 @@
         </a>
 
         <!-- Central Navigation Hub (Manages Mobile Sliding Drawer Layout) -->
-        <nav class="nav-menu" id="navMenu">
-            <div class="nav-links-wrapper">
-                <a href="index.html" class="nav-link" onclick="handleNavigation404(event, 'Home')">Home</a>
-                <a href="shop.html" class="nav-link" onclick="handleNavigation404(event, 'Shop Toys')">Shop Toys</a>
-                <a href="newarrivals.html" class="nav-link" onclick="handleNavigation404(event, 'New Arrivals')">New Arrivals</a>
-                <a href="offers.html" class="nav-link" onclick="handleNavigation404(event, 'Special Offers')">Offers</a>
-                <a href="contact.html" class="nav-link" onclick="handleNavigation404(event, 'Our Story')">Contact Us</a>
-            </div>
+            <nav class="nav-menu" id="navMenu">
+    <div class="nav-links-wrapper">
+        <!-- Working Pages: Removed onclick so they can actually navigate -->
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="shop.html" class="nav-link ">Shop Toys</a>
+        
+        <!-- Future Modules: Routed directly to your newly created 404.html page -->
+        <a href="404.html" class="nav-link">New Arrivals</a>
+        <a href="404.html" class="nav-link">Offers</a>
+        <a href="404.html" class="nav-link">Contact Us</a>
+    </div>
 
             <!-- Mobile Responsive View Dedicated Auth Actions Menu Footer -->
             <div class="mobile-drawer-auth">

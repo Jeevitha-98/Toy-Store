@@ -138,6 +138,20 @@ body.drawer-open-lock {
     height: var(--nav-scrolled-height);
 }
 
+/* --- Active Navigation State Highlights --- */
+
+/* Changes the text color of the active link to your main coral theme color */
+.nav-menu .nav-link.active {
+    color: var(--primary-coral) !important;
+}
+
+/* Forces the slider underline effect to stay visible under the active link */
+.nav-menu .nav-link.active::after {
+    transform: scaleX(1) !important;
+    transform-origin: left !important;
+    background-color: var(--primary-coral) !important;
+}
+
 .header-container {
     width: 100%;
     max-width: 1400px;
