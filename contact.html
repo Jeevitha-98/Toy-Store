@@ -1,0 +1,1981 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly - Online Toy Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Modern Vector Preloader Screen -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <!-- Vector Blocks Icon Loader -->
+            <svg class="vector-loader-icon" xmlns="http://w3.org" viewBox="0 0 24 24" width="80" height="80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+            <h2 class="preloader-text">Stackly Joy...</h2>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+    const preloader = document.getElementById('preloader');
+    const appContent = document.getElementById('app-content');
+
+    // Automatically transition under the 3 second threshold
+    setTimeout(() => {
+        preloader.style.opacity = '0';
+        preloader.style.visibility = 'hidden';
+        appContent.classList.add('show-content');
+    }, 2500); 
+});
+
+    </script>
+
+
+<!-- Transparent, Floating Sticky Header Component -->
+<!-- Transparent, Floating Sticky Header Component -->
+<header class="floating-header">
+    <div class="header-container">
+        
+        <!-- Brand Image Logo (Refreshes Page on Click) -->
+        <a href="#" class="logo-wrapper" onclick="handleBrandRefresh(event)">
+            <img src="./Assests/toy -logo.webp" alt="Stackly Logo" class="brand-logo">
+        </a>
+
+        <!-- Central Navigation Hub (Manages Mobile Sliding Drawer Layout) -->
+        <nav class="nav-menu" id="navMenu">
+    <div class="nav-links-wrapper">
+        <a href="index.html" class="nav-link">Home</a>
+        <!-- Injected the 'active' class on the Shop Toys link -->
+        <a href="shop.html" class="nav-link ">Shop Toys</a>
+        <a href="newarrivals.html" class="nav-link ">New Arrivals</a>
+        <a href="offers.html" class="nav-link ">Offers</a>
+        <a href="contact.html" class="nav-link active">Contact Us</a>
+    </div>
+
+            <!-- Mobile Responsive View Dedicated Auth Actions Menu Footer -->
+            <div class="mobile-drawer-auth">
+                <button class="auth-btn mobile-nav-login" onclick="handleNavigation404(event, 'Login Prompt')">Log In</button>
+                <button class="auth-btn mobile-nav-signup" onclick="handleNavigation404(event, 'Account Registration')">Sign Up</button>
+            </div>
+        </nav>
+
+        <!-- Right Action Utilities Terminal -->
+       <div class="header-actions">
+    <!-- Wishlist Button Counter Component (Navigates to 404.html) -->
+    <a href="404.html" class="action-btn" title="Wishlist">
+        <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <span class="badge">0</span>
+    </a>
+
+    <!-- Shopping Cart Button Counter Component (Navigates to 404.html) -->
+    <a href="404.html" class="action-btn" title="Cart">
+        <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="badge badge-primary">0</span>
+    </a>
+
+    <!-- Desktop Monitor Wide Exclusive Authentication Buttons Group -->
+    <div class="auth-buttons-group desktop-auth">
+        <!-- Links directly to login.html -->
+        <a href="login.html" class="auth-btn login-btn">Log In</a>
+        <!-- Links directly to signup.html -->
+        <a href="signup.html" class="auth-btn signup-btn">Sign Up</a>
+    </div>
+</div>
+
+
+            <!-- Responsive Hamburger Trigger Menu -->
+            <button class="hamburger-toggle" id="hamburgerBtn" onclick="toggleMobileHeaderDrawer()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+    </div>
+</header>
+
+
+<script>
+    // Monitor vertical scroll window offset value to apply frosted filter effects
+window.addEventListener('scroll', () => {
+    const headerNode = document.querySelector('.floating-header');
+    
+    if (window.scrollY > 30) {
+        headerNode.classList.add('scrolled');
+    } else {
+        headerNode.classList.remove('scrolled');
+    }
+});
+
+// Toggle mobile drawer panel visibility and freeze document background scroll states
+// Toggle mobile responsive navigation drawer display visibility status 
+function toggleMobileHeaderDrawer() {
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    
+    hamburgerBtn.classList.toggle('active');
+    navMenu.classList.toggle('mobile-active');
+    
+    // Evaluate display class state to freeze body window touch scrolling paths
+    if (navMenu.classList.contains('mobile-active')) {
+        document.body.classList.add('drawer-open-lock');
+    } else {
+        document.body.classList.remove('drawer-open-lock');
+    }
+}
+
+// Global Interception handler for unlinked template targets
+function handleNavigation404(event, interfaceSegmentName) {
+    event.preventDefault(); 
+    
+    // Automatically close open menu drawers and unlock background scroll hooks
+    document.getElementById('hamburgerBtn').classList.remove('active');
+    document.getElementById('navMenu').classList.remove('mobile-active');
+    document.body.classList.remove('drawer-open-lock');
+    
+    alert(`🔍 Stackly Route Monitor:\n\n"${interfaceSegmentName}" has been routed into a 404 navigation point safely!`);
+}
+
+// Native page reload reset function mapped onto the brand logo anchor
+function handleBrandRefresh(event) {
+    event.preventDefault();
+    window.location.reload();
+}
+
+
+</script>
+
+<!-- Flat Immersive Centered Full-Width Landing Hero -->
+<section class="flat-canvas-hero">
+    <!-- Immersive Section Background Canvas Image Cover -->
+    <img src="./Assests/early development.webp" alt="Playground Blueprint Backdrop" class="hero-canvas-bg">
+    
+    <!-- Shading wash mask shields typography contrast against any picture coordinates -->
+    <div class="hero-canvas-overlay"></div>
+
+    <div class="hero-canvas-max-container animate-canvas-scale-in">
+        <div class="hero-canvas-text-pillar">
+            
+            <div class="hero-canvas-micro-badge">
+                <span class="canvas-indicator-beacon"></span>
+                <span>Ecosystem Edition // v5.1</span>
+            </div>
+
+            <!-- Full Centered Headline Statement -->
+            <h1 class="hero-canvas-headline">
+                Scaffold Pure <span class="glow-teal-text">Childhood Logic</span>
+            </h1>
+
+            <!-- Enforced Crisp Pure Black Typography Description Rules -->
+            <p class="hero-canvas-paragraph-black">
+                Deconstruct toy rows. Explore certified renewable forest raw timber modules, laser-milled down to sub-millimeter precision limits to inspire infinite gravity-balancing structural loops.
+            </p>
+
+            <!-- Dual Center-Aligned Interactive Action Buttons -->
+            <div class="hero-canvas-actions-hub">
+                <button class="hero-canvas-prime-btn btn-coral" onclick="smoothScrollToCatalogWorkbench()">
+                    <span>Initialize Collection</span>
+                    <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                
+                <a href="404.html" class="hero-canvas-secondary-btn">
+                    <span>Explore Blueprint Labs</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+
+    /* --- FIXED: High-Density Visibility Canvas Landing Hero --- */
+.flat-canvas-hero {
+    position: relative;
+    width: 100%;
+    min-height: auto !important; /* FIXED: Strips hard-coded height minimums to prevent vertical layout voids */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 5% 40px 5% !important; /* FIXED: Slashed top padding from 140px to 70px to snap up right against header */
+    overflow: hidden !important; /* Enforces strict window clipping to kill horizontal scrollers */
+    background-color: #edf3f5;
+}
+
+/* Background Image Layer Settings */
+.hero-canvas-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    opacity: 0.65 !important; /* FIXED: Boosted opacity to make the background child details fully visible */
+    filter: blur(0px) contrast(100%) grayscale(0%) !important; /* Strips all heavy blur/grayscale filters */
+    pointer-events: none;
+    transform: scale(1.01);
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Ultra-translucent gradient mask guarantees pure black text readability without hiding the photo */
+.hero-canvas-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* FIXED: Lowered masking density to a clean 0.35 threshold so the photo background projects clearly */
+    background: radial-gradient(circle at 50% 50%, rgba(237, 243, 245, 0.35) 0%, rgba(237, 243, 245, 0.75) 100%) !important;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Micro adjustments to layout header margins inside your text pillar */
+.hero-canvas-micro-badge {
+    margin-bottom: 0.8rem !important; /* Compresses top gaps between badge and headline text */
+}
+
+.hero-canvas-headline {
+    margin-bottom: 0.8rem !important;
+}
+
+.hero-canvas-paragraph-black {
+    margin-bottom: 1.8rem !important; /* Pulls button rows closer to description lines */
+}
+
+
+    /* --- High-Contrast Flat Canvas Landing Hero Layout --- */
+.flat-canvas-hero {
+    position: relative;
+    width: 100%;
+    min-height: 90vh; /* Controlled height provides deep layout structure without vertical dead spaces */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 140px 5% 70px 5%; /* Upper padding guards floating sticky navigation header lines */
+    overflow: hidden !important; /* Forces strict window bounds to stop side overflow scrollbars */
+    background-color: #edf3f5;
+}
+
+/* Section Background Canvas Image Cover Rules */
+.hero-canvas-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    opacity: 0.45; /* Boosted base opacity ensures the background image lines project clearly */
+    filter: blur(0px) contrast(102%) grayscale(15%);
+    pointer-events: none;
+    transform: scale(1.02);
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.flat-canvas-hero:hover .hero-canvas-bg {
+    transform: scale(1.00); /* Smoothly settles the background graphic into view on hover entry */
+}
+
+/* Translucent vignette shield screen overlay protects text contrast lines over the image */
+.hero-canvas-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(237, 243, 245, 0.65) 0%, rgba(237, 243, 245, 0.92) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-canvas-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 5; /* Lifts your text and button tracks cleanly over overlay mask layers */
+}
+
+/* --- Central Core Typography Pillar --- */
+.hero-canvas-text-pillar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.hero-canvas-micro-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 0.5rem 1.1rem;
+    border-radius: 50px;
+    color: var(--dark-charcoal);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.canvas-indicator-beacon {
+    width: 8px;
+    height: 8px;
+    background-color: var(--secondary-teal);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--secondary-teal);
+    animation: canvasBeaconBlink 1.6s infinite ease-in-out;
+}
+
+.hero-canvas-headline {
+    color: var(--dark-charcoal);
+    font-size: clamp(2.2rem, 5vw, 3.6rem); /* Scaled up completely to draw out high visual command */
+    line-height: 1.15;
+    font-weight: 900;
+    letter-spacing: -1.2px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.glow-teal-text {
+    color: #3bbcb4;
+    text-shadow: 0 0 20px rgba(78, 205, 196, 0.15);
+}
+
+/* Enforced crisp pure black typography description rules */
+.hero-canvas-paragraph-black {
+    color: #000000 !important; /* Pure black high-contrast visibility text profile layer */
+    font-size: 1.05rem;
+    line-height: 1.65;
+    font-weight: 600; /* Protected thickness preserves sharp anti-aliasing text profiles */
+    margin-bottom: 2.8rem;
+    max-width: 720px; /* Restricts the tracking width line to optimize rapid reading paths */
+    text-align: center;
+    cursor: default;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: center;
+}
+
+/* --- Center Aligned Dual Button Row Layout --- */
+.hero-canvas-actions-hub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.hero-canvas-prime-btn {
+    background-color: var(--dark-charcoal);
+    color: #ffffff;
+    border: none;
+    padding: 1.1rem 2.4rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hero-canvas-prime-btn.btn-coral { background-color: var(--primary-coral); box-shadow: 0 6px 18px rgba(255, 107, 107, 0.25); }
+
+.hero-canvas-prime-btn:hover {
+    background-color: var(--dark-charcoal);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+.hero-canvas-prime-btn svg { transition: transform 0.3s ease; }
+.hero-canvas-prime-btn:hover svg { transform: translateX(4px); }
+
+/* Secondary Custom Button Profile */
+a.hero-canvas-secondary-btn {
+    text-decoration: none;
+    background-color: #ffffff;
+    color: var(--dark-charcoal);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 1.1rem 2.4rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+a.hero-canvas-secondary-btn:hover {
+    background-color: #f1f5f7;
+    border-color: rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* --- Hardware Accelerated Content Hover Glow Triggers --- */
+.flat-canvas-hero:hover .hero-canvas-paragraph-black {
+    color: var(--primary-coral) !important; /* Transforms text safely into active primary themes on canvas entering */
+    transform: scale(1.002);
+}
+
+.flat-canvas-hero:hover .hero-canvas-headline {
+    text-shadow: 0 0 35px rgba(78, 205, 196, 0.12);
+}
+
+@keyframes canvasBeaconBlink { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: 0.4; } }
+
+/* Modern Entry Animation */
+.animate-canvas-scale-in {
+    opacity: 0;
+    transform: scale(0.98) translateY(12px);
+    animation: canvasLayoutScaleIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes canvasLayoutScaleIn { 100% { opacity: 1; transform: scale(1) translateY(0); } }
+
+/* --- Responsive Media Viewports Overhaul --- */
+@media (max-width: 768px) {
+    .flat-canvas-hero { padding-top: 130px; padding-bottom: 50px; }
+    .hero-canvas-actions-hub { flex-direction: column; gap: 1rem; width: 100%; } /* Stacks buttons vertically on smartphone touch screens */
+    .hero-canvas-prime-btn, a.hero-canvas-secondary-btn { width: 100%; justify-content: center; } /* Forces components flush edge-to-edge */
+}
+
+</style>
+
+<!-- High-Contrast Interactive Artisan Contact & Blueprint Inquiry Section -->
+<section class="toy-contact-section">
+    <!-- Base Section Background Image Layer -->
+    <img src="./Assests/building blocks.webp" alt="Artisan Woodshop Workbench Backdrop" class="contact-section-bg">
+    <div class="contact-section-overlay"></div>
+
+    <div class="contact-max-container">
+        
+        <!-- Left Wing Pillar: Flagship Workshop Coordinates -->
+        <div class="contact-info-pillar animate-on-scroll">
+            <span class="contact-pretitle">Flagship Woodshop</span>
+            <h2 class="contact-headline">Reach Our <br><span class="glow-teal-text">Toy Architects</span>.</h2>
+            
+            <div class="info-coordinate-deck">
+                
+                <!-- Studio Location -->
+                <div class="coordinate-unit-card">
+                    <div class="card-icon-hull">
+                        <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </div>
+                    <div class="coordinate-details">
+                        <span class="coordinate-label">Visit Our Studio</span>
+                        <p class="coordinate-value">MMR Complex, Periyakollappatty, Chinna Thirupathi, Salem, Tamil Nadu 636008</p>
+                    </div>
+                </div>
+
+                <!-- Direct Hotlines -->
+                <div class="coordinate-unit-card">
+                    <div class="card-icon-hull">
+                        <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    </div>
+                    <div class="coordinate-details">
+                        <span class="coordinate-label">Direct Hotlines</span>
+                        <p class="coordinate-value"><a href="tel:+917010792745" class="phone-tel-link">+91 7010792745</a></p>
+                    </div>
+                </div>
+
+                <!-- Electronic Mail (Outlook Redirect Context Enabled) -->
+                <div class="coordinate-unit-card">
+                    <div class="card-icon-hull">
+                        <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </div>
+                    <div class="coordinate-details">
+                        <span class="coordinate-label">Electronic Mail</span>
+                        <!-- Natively targets system default mail app agent (Outlook) populated with recipient address -->
+                        <p class="coordinate-value"><a href="mailto:design@stacklystudio.com" class="outlook-direct-link" title="Open in Outlook Office Mail">design@stacklystudio.com</a></p>
+                    </div>
+                </div>
+
+                <!-- Availability Hours -->
+                <div class="coordinate-unit-card">
+                    <div class="card-icon-hull">
+                        <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div class="coordinate-details">
+                        <span class="coordinate-label">Atelier Availability</span>
+                        <p class="coordinate-value">Mon - Sun: 9:00 AM - 7:00 PM</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Right Wing Pillar: Interactive Validation Console Chassis -->
+        <div class="contact-form-pillar animate-on-scroll">
+            <div class="form-glass-console-wrapper">
+                
+                <div class="form-console-header">
+                    <h3>Send Us a Message 🪵</h3>
+                    <p>Submit your custom playroom parameters. Form boundaries illuminate on active focus.</p>
+                </div>
+
+                <!-- Validation Status Notification Banner Alert Area -->
+                <div id="validation-status-alert" class="validation-status-banner alert-hidden"></div>
+
+                <!-- Primary Form Base Layout Terminal -->
+                <form id="toy-architect-inquiry-form" onsubmit="executeFormSubmission(event)" novalidate>
+                    
+                    <!-- Input Block 1: Full Name -->
+                    <div class="form-input-node">
+                        <label for="architect-client-name">Your Full Name</label>
+                        <input type="text" id="architect-client-name" placeholder="Your elegant name..." autocomplete="off" oninput="enforceCharacterRestrictions(this)">
+                    </div>
+
+                    <!-- Input Block 2: Email Address -->
+                    <div class="form-input-node">
+                        <label for="architect-client-email">Email Address</label>
+                        <input type="email" id="architect-client-email" placeholder="name@example.com" autocomplete="off">
+                    </div>
+
+                    <!-- Input Block 3: Mobile Number -->
+                    <div class="form-input-node">
+                        <label for="architect-client-phone">10-Digit Mobile Number</label>
+                        <input type="text" id="architect-client-phone" placeholder="10-digit mobile number" maxlength="10" autocomplete="off" oninput="enforceNumberRestrictions(this)">
+                    </div>
+
+                    <!-- Input Block 4: Project Discipline Dropdown Selection -->
+                    <div class="form-input-node">
+                        <label for="architect-project-category">Playroom Discipline Category</label>
+                        <select id="architect-project-category">
+                            <option value="" selected disabled>Select a playroom category...</option>
+                            <option value="architectural-blocks">Custom Architectural Timber Blocks</option>
+                            <option value="kinetic-run">Kinetic Maze &amp; Tracking Balance Run</option>
+                            <option value="organic-sorting">Cognitive Sorting Geometric Toys</option>
+                            <option value="playroom-bulk">Complete Kindergarten Layout Bulk Order</option>
+                        </select>
+                    </div>
+
+                    <!-- Input Block 5: Narrative Description Textarea -->
+                    <div class="form-input-node">
+                        <label for="architect-project-narrative">Your Custom Toy Narrative</label>
+                        <textarea id="architect-project-narrative" rows="4" placeholder="Tell us about your project footprint size, timeline metrics, and timber finish preferences..."></textarea>
+                    </div>
+
+                    <!-- Action Button Submission Trigger Capsule -->
+                    <div class="form-action-trigger-row">
+                        <button type="submit" class="form-submit-capsule-btn">
+                            <span>Reserve Blueprint Consultation</span>
+                            <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- FIXED: Perfectly Balanced Centered Alignment Overhaul --- */
+
+/* Centers both the text cards and the form module together inside the main layout wrapper */
+.toy-contact-section .contact-max-container {
+    align-items: center !important; /* FIXED: Keeps left and right blocks vertically aligned in center */
+    max-width: 1200px !important;  /* Brings both sections inward to look tight and compact */
+}
+
+/* Forces the left coordinates track to stretch and mirror the right form box width boundaries */
+.contact-info-pillar {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important; /* FIXED: Prevents cards from stopping short or dropping unevenly */
+}
+
+/* Restructures the headline alignment spacing to give a clean tracking visual line */
+.contact-headline {
+    margin-bottom: 2.2rem !important;
+    width: 100% !important;
+    text-align: left !important;
+}
+
+/* Stretches the left column cards out to the exact same width as the right form container block */
+.info-coordinate-deck {
+    width: 100% !important;
+    max-width: 100% !important; /* FIXED: Breaks past the old narrow width cap to meet the right card edges */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+}
+
+/* Adds a beautiful subtle outline effect on form focus events to match your active focus concept */
+.form-input-node input:focus,
+.form-input-node select:focus,
+.form-input-node textarea:focus {
+    border-color: var(--secondary-teal, #3bbcb4) !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+
+    /* --- High-Contrast Immersive Artisan Contact Section --- */
+.toy-contact-section {
+    position: relative;
+    width: 100%;
+    padding: 35px 5% 55px 5%; /* Tight padding profile compresses layout gaps completely */
+    background-color: #0d0f14; /* Pure high-contrast dark palette context matches dark workspace mockups */
+    overflow: hidden !important; /* Forces strict browser boundaries to eliminate horizontal scrollbar leakage */
+    display: flex;
+    align-items: center;
+}
+
+/* Background Image Cover Sizing rules matrix mapping layer */
+.contact-section-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 2;
+    opacity: 0.52; /* Low watermark profile protects contrast text block layers */
+    filter: blur(1px) grayscale(40%);
+    pointer-events: none;
+}
+
+/* Dark contrast screen shields visibility loops */
+.contact-section-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(13, 15, 20, 0.95) 0%, rgba(10, 12, 16, 0.98) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.contact-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr; /* Tightens column dimensions to bring components close */
+    gap: 4rem;
+    align-items: flex-start;
+    position: relative;
+    z-index: 5;
+}
+
+/* --- Left Column: Info Coordinates Grid Panel --- */
+.contact-info-pillar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.contact-pretitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--secondary-teal, #3bbcb4);
+    margin-bottom: 6px;
+}
+
+.contact-headline {
+    color: #ffffff;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 2.2rem;
+}
+
+.glow-teal-text {
+    color: var(--secondary-teal, #3bbcb4);
+    text-shadow: 0 0 20px rgba(78, 205, 196, 0.2);
+}
+
+.info-coordinate-deck {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 480px;
+}
+
+.coordinate-unit-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 1.2rem 1.5rem;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.card-icon-hull {
+    width: 24px;
+    height: 24px;
+    color: var(--secondary-teal, #3bbcb4);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.coordinate-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.coordinate-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #718096;
+    margin-bottom: 4px;
+}
+
+.coordinate-value {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.94rem;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Outlook High-Visibility Redirection Direct Links */
+a.outlook-direct-link, a.phone-tel-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    position: relative;
+    transition: color 0.3s ease;
+}
+a.outlook-direct-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background-color: var(--primary-coral, #ff6b6b); transform: scaleX(1); transform-origin: left; transition: transform 0.3s ease; }
+
+a.outlook-direct-link:hover { color: var(--primary-coral, #ff6b6b); }
+a.outlook-direct-link:hover::after { transform: scaleX(1.04); background-color: var(--primary-coral, #ff6b6b); }
+
+/* --- Right Column: Translucent Form Dashboard Console --- */
+.form-glass-console-wrapper {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 28px;
+    padding: 3rem;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+
+.form-console-header {
+    text-align: left;
+    margin-bottom: 1.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding-bottom: 1.2rem;
+}
+
+.form-console-header h3 {
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 0 0 6px 0;
+}
+
+.form-console-header p {
+    color: #a0aec0;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin: 0;
+}
+
+/* Input Fields Node Controls mapping */
+.form-input-node {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+    width: 100%;
+}
+
+.form-input-node label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #a0aec0;
+    margin-bottom: 6px;
+}
+
+.form-input-node input[type="text"],
+.form-input-node input[type="email"],
+.form-input-node select,
+.form-input-node textarea {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px;
+    padding: 0.9rem 1.2rem;
+    color: #ffffff !important;
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.form-input-node select {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://w3.org' viewBox='0 0 24 24' fill='none' stroke='%23a0aec0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/auto%3e");
+    background-repeat: no-repeat;
+    background-position: right 1.2rem center;
+    background-size: 14px;
+    padding-right: 2.5rem;
+}
+
+/* Form Boundaries Illuminate Softly on Active Focus Matrix */
+.form-input-node input:focus,
+.form-input-node select:focus,
+.form-input-node textarea:focus {
+    border-color: var(--secondary-teal, #3bbcb4) !important;
+    box-shadow: 0 0 14px rgba(78, 205, 196, 0.15) !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Custom Status Validation Feedback Alert Ribbon */
+.validation-status-banner {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+.alert-error {
+    background-color: rgba(255, 107, 107, 0.1) !important;
+    border: 1px solid rgba(255, 107, 107, 0.25) !important;
+    color: #ff6b6b !important;
+}
+.alert-success {
+    background-color: rgba(78, 205, 196, 0.1) !important;
+    border: 1px solid rgba(78, 205, 196, 0.25) !important;
+    color: #3bbcb4 !important;
+}
+.alert-hidden { display: none !important; }
+
+/* Interactive Form Submit Button Pass Capsule */
+.form-action-trigger-row { width: 100%; display: flex; margin-top: 1.8rem; }
+
+button.form-submit-capsule-btn {
+    width: 100%;
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 1.1rem 2rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+button.form-submit-capsule-btn svg { width: 14px; height: 14px; transition: transform 0.3s ease; }
+
+button.form-submit-capsule-btn:hover {
+    background-color: var(--primary-coral, #ff6b6b);
+    border-color: var(--primary-coral, #ff6b6b);
+    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.35);
+    transform: translateY(-2px);
+}
+button.form-submit-capsule-btn:hover svg { transform: translateX(4px); }
+
+/* --- Interaction Card Hover Enhancements --- */
+.coordinate-unit-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(78, 205, 196, 0.15);
+}
+
+/* --- Responsive Media Viewports Overhaul --- */
+@media (max-width: 992px) {
+    /* Collapse side horizontal columns down to a simple, centered single track list array mapping */
+    .contact-max-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .contact-info-pillar { align-items: center; text-align: center; }
+    .info-coordinate-deck { max-width: 100%; }
+    .form-glass-console-wrapper { padding: 2.2rem 1.5rem; }
+}
+
+@media (max-width: 550px) {
+    .coordinate-unit-card { flex-direction: column; align-items: center; text-align: center; padding: 1.2rem; }
+    .card-icon-hull { margin-top: 0; margin-bottom: 4px; }
+    .coordinate-details { align-items: center; text-align: center; }
+}
+
+</style>
+
+<script>
+    /**
+ * Strict RegEx Field Guard: Strips out number sequences from the Name entry instantly.
+ */
+function enforceCharacterRestrictions(inputElement) {
+    // Replaces numerical digits instantly with empty space vectors
+    inputElement.value = inputElement.value.replace(/[0-9]/g, '');
+}
+
+/**
+ * Strict RegEx Field Guard: Strips out alpha alphabet text strings from the Mobile field instantly.
+ */
+function enforceNumberRestrictions(inputElement) {
+    // Replaces any character that is not a numeric 0-9 digit instantly
+    inputElement.value = inputElement.value.replace(/[^0-9]/g, '');
+}
+
+/**
+ * Validates, handles error alert flags, and securely fires submission sequences.
+ */
+function executeFormSubmission(event) {
+    event.preventDefault(); // Stifles default form browser flashing page-reloads
+    
+    // Select input values from the workbench console
+    const alertBanner = document.getElementById('validation-status-alert');
+    const clientName = document.getElementById('architect-client-name').value.trim();
+    const clientEmail = document.getElementById('architect-client-email').value.trim();
+    const clientPhone = document.getElementById('architect-client-phone').value.trim();
+    const category = document.getElementById('architect-project-category').value;
+    const narrative = document.getElementById('architect-project-narrative').value.trim();
+
+    // 1. FORCED CRITICAL CHECK: Ensure all 5 template spaces are completely populated
+    if (!clientName || !clientEmail || !clientPhone || !category || !narrative) {
+        alertBanner.innerText = "Error: Please fill all the fields before submitting.";
+        alertBanner.className = "validation-status-banner alert-error";
+        alertBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+    }
+
+    // 2. Strict Phone Length Validation Check Matrix
+    if (clientPhone.length !== 10) {
+        alertBanner.innerText = "Error: Phone number must be exactly 10 digits long.";
+        alertBanner.className = "validation-status-banner alert-error";
+        return;
+    }
+
+    // 3. Simple email format parsing safeguard
+    if (!clientEmail.includes('@') || !clientEmail.includes('.')) {
+        alertBanner.innerText = "Error: Please enter a valid electronic mail address.";
+        alertBanner.className = "validation-status-banner alert-error";
+        return;
+    }
+
+    // Success Sequence: Clear inputs and notify user smoothly
+    alertBanner.innerText = "Success! Your architectural inquiry has been sent to our Toy Architects.";
+    alertBanner.className = "validation-status-banner alert-success";
+    
+    // Clear the form elements cleanly
+    document.getElementById('toy-architect-inquiry-form').reset();
+}
+
+</script>
+
+<!-- Bright Creative Map Navigation Hub Section -->
+<section class="toy-map-section">
+    <!-- Bright grid schematic blueprint pattern background -->
+    <div class="map-bright-grid-mesh"></div>
+
+    <div class="map-max-container">
+        
+        <!-- Center-Aligned Heading Layout Stack -->
+        <div class="map-section-header">
+            <span class="map-pretitle">Spatial Mapping</span>
+            <h2 class="map-headline">Our Salem Atelier <span class="coral-glow-text">Geographic Hub</span></h2>
+        </div>
+
+        <!-- Frame Canvas Container Track -->
+        <div class="map-display-frame animate-on-scroll">
+            
+            <!-- Concrete Local Map Image Graphic Tag Reference -->
+            <img src="./Assests/map.webp" alt="Stackly Toy Studio Salem Atelier Map Coordinates" class="map-canvas-img">
+            
+            <!-- Translucent Vignette Ambient Border Mask -->
+            <div class="map-frame-inner-shadow"></div>
+
+            <!-- Absolute Bottom Centered Intercept Navigation Capsule Button -->
+            <!-- Direct verification link targets Google Maps routing console layout engines natively -->
+            <div class="map-action-capsule-anchor">
+                <a href="https://maps.app.goo.gl/1iUAJLxSuFhmkqeE8" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="map-navigation-capsule-btn" 
+                   title="Launches live Google Maps navigation route tracking">
+                    <div class="capsule-text-stack">
+                        <span class="capsule-title-line">Open Live Navigation</span>
+                        <span class="capsule-sub-line">Launches Google Maps Route</span>
+                    </div>
+                    <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="capsule-arrow-icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- High-Contrast Bright Studio Map Framework --- */
+.toy-map-section {
+    position: relative;
+    width: 100%;
+    background-color: #edf3f5; /* Bright slate-cream foundation base layer */
+    padding: 35px 5% 55px 5%; /* Tight padding profile compresses layout gaps completely */
+    overflow: hidden !important; /* Forces strict window bounds to stop side overflow scrollbars */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Light engineering blueprint schematic grid background pattern generation */
+.map-bright-grid-mesh {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 35px 35px;
+    background-image: linear-gradient(to right, rgba(78, 205, 196, 0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(78, 205, 196, 0.05) 1px, transparent 1px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.map-max-container {
+    width: 100%;
+    max-width: 1200px; /* Aligns side margins exactly to match your contact console boundaries */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 5;
+}
+
+/* --- Heading Block Configuration --- */
+.map-section-header {
+    margin-bottom: 2.2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.map-pretitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--secondary-teal, #3bbcb4);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.map-headline {
+    color: var(--dark-charcoal, #1a202c); /* High-contrast clean dark charcoal font vectors */
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+.coral-glow-text {
+    color: var(--primary-coral, #ff6b6b);
+    text-shadow: 0 0 15px rgba(255, 107, 107, 0.12);
+}
+
+/* --- Map Display Frame Box Layer --- */
+.map-display-frame {
+    position: relative;
+    width: 100%;
+    height: 520px; /* Solid layout landscape workspace depth baseline ratio */
+    border-radius: 28px;
+    overflow: hidden;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 20px 45px rgba(160, 175, 185, 0.15);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+.map-canvas-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Protects map aspect path alignment ratios across display sizes */
+    object-position: center center;
+    z-index: 1;
+    transform: scale(1.01);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Translucent border gradient keeps navigation anchor cleanly defined over graphics */
+.map-frame-inner-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(237, 243, 245, 0.15) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* --- Absolute Floating Capsule Button Component --- */
+.map-action-capsule-anchor {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateZ(0); /* High-performance center-lock tracking coordinates */
+    z-index: 5;
+    width: max-content;
+    max-width: 90%;
+}
+
+a.map-navigation-capsule-btn {
+    text-decoration: none;
+    background-color: #1a202c; /* High-contrast off-black profile guarantees absolute button standout visibility */
+    color: #ffffff;
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 10px 30px rgba(26, 32, 44, 0.35);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.capsule-text-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.capsule-title-line {
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    line-height: 1.2;
+}
+
+.capsule-sub-line {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.45);
+    margin-top: 1px;
+}
+
+.capsule-arrow-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+/* --- Hardware Accelerated Interaction Mechanics Hover States --- */
+.map-display-frame:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 55px rgba(13, 15, 20, 0.18);
+}
+
+.map-display-frame:hover .map-canvas-img {
+    transform: scale(1.03); /* Ambient grid magnification zoom on card focus entry */
+}
+
+a.map-navigation-capsule-btn:hover {
+    background-color: var(--primary-coral, #ff6b6b); /* Switches instantly to primary theme accent glow path */
+    box-shadow: 0 12px 35px rgba(255, 107, 107, 0.45);
+    transform: translateY(-2px);
+}
+
+a.map-navigation-capsule-btn:hover .capsule-sub-line {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+a.map-navigation-capsule-btn:hover .capsule-arrow-icon {
+    transform: translateX(4px);
+}
+
+/* --- Responsive Media Viewports Overhaul --- */
+@media (max-width: 992px) {
+    .map-display-frame { height: 420px; border-radius: 24px; }
+    .map-section-header { margin-bottom: 1.8rem; }
+}
+
+@media (max-width: 650px) {
+    .map-display-frame { height: 320px; border-radius: 18px; }
+    a.map-navigation-capsule-btn { padding: 0.8rem 1.5rem; gap: 10px; width: 100%; justify-content: center; }
+    .capsule-title-line { font-size: 0.88rem; }
+}
+
+</style>
+
+<section class="immersive-cta-section">
+    <!-- Base Background Image Cover Layer -->
+    <img src="./Assests/junior architects.webp" alt="Stackly Craft Workshop" class="cta-bg-backdrop">
+    
+    <!-- Dark Scrim Mask Overlay for Text Readability -->
+    <div class="cta-dark-mask"></div>
+
+    <div class="cta-max-container">
+        <!-- Frosted Glass Action Box Box -->
+        <div class="cta-glass-hull animate-on-scroll">
+            
+            <div class="cta-content-panel">
+                <h2 class="cta-headline">
+                    Design Your Own Custom <span class="cta-glow-text">Heirloom Playset</span>.
+                </h2>
+                <p class="cta-sub-paragraph">
+                    Collaborate with our master woodworkers to engrave customized block modules, specify premium organic dye palettes, and manufacture a completely tailored learning kit unique to your home.
+                </p>
+            </div>
+
+            <!-- 404 Route Intercept Action Buttons Group -->
+            <div class="cta-actions-hub">
+                <button class="cta-btn cta-prime-btn" onclick="handleNavigation404(event, '404.html')">
+                    <span>Enter Craft Studio</span>
+                    <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+                
+                <button class="cta-btn cta-sec-btn" onclick="handleNavigation404(event, '404.html')">
+                    <span>Consult Artisan</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* --- Ultra-Creative Cinematic CTA Framework --- */
+.immersive-cta-section {
+    position: relative;
+    width: 100%;
+    min-height: 45vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 5% 40px 5%; /* Tight 20px padding reduces spacing layout voids */
+    overflow: hidden;
+}
+
+/* Background Image Layer Settings */
+.cta-bg-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    transform: scale(1.02); /* Padding room for smooth hover transformations */
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.immersive-cta-section:hover .cta-bg-backdrop {
+    transform: scale(1.00);
+}
+
+/* Dark masking scrim ensures absolute readability over any background picture */
+.cta-dark-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(13, 15, 20, 0.85) 0%, rgba(20, 24, 33, 0.65) 100%);
+    z-index: 2;
+}
+
+.cta-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 3;
+}
+
+/* The Main Frosted Glass Card Panel Box Wrapper */
+.cta-glass-hull {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 32px;
+    padding: 3.5rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s, background-color 0.4s;
+}
+
+/* --- High-Visibility Section Content Blocks --- */
+.cta-content-panel {
+    max-width: 750px;
+}
+
+.cta-headline {
+    color: #ffffff; /* Crisp white for max contrast on dark images */
+    font-size: clamp(1.8rem, 3.8vw, 2.4rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+/* Bright Coral Text Aura Glow Effect */
+.cta-glow-text {
+    color: var(--primary-coral);
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+    transition: text-shadow 0.3s ease;
+}
+
+/* Exactly 2 lines of description text mapped to crisp visible font rules */
+.cta-sub-paragraph {
+    color: rgba(255, 255, 255, 0.9); /* High contrast white readability layer profile */
+    font-size: clamp(0.98rem, 2vw, 1.12rem);
+    line-height: 1.6;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+    cursor: default;
+}
+
+/* Action Utility Button Links Hub */
+.cta-actions-hub {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-shrink: 0;
+}
+
+.cta-btn {
+    border: none;
+    padding: 1.1rem 2.2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Solid Main Coral CTA Button */
+.cta-prime-btn {
+    background-color: var(--primary-coral);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.25);
+}
+
+.cta-prime-btn:hover {
+    background-color: #ff5252;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(255, 107, 107, 0.4);
+}
+
+.cta-prime-btn svg { transition: transform 0.3s ease; }
+.cta-prime-btn:hover svg { transform: translateX(4px); }
+
+/* Minimalist Clean Secondary Translucent Button */
+.cta-sec-btn {
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}
+
+.cta-sec-btn:hover {
+    background-color: #ffffff;
+    color: var(--dark-charcoal);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+}
+
+/* --- Hardware Accelerated Hover & Aura Glow Effects --- */
+.cta-glass-hull:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.3);
+}
+
+.cta-glass-hull:hover .cta-glow-text {
+    text-shadow: 0 0 25px rgba(255, 107, 107, 0.5);
+}
+
+/* The paragraph content glows out softly and shifts weights on hover */
+.cta-glass-hull:hover .cta-sub-paragraph {
+    color: var(--secondary-teal);
+    transform: scale(1.002);
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 1024px) {
+    /* Collapse side-by-side elements down to a centered vertical profile grid mapping */
+    .cta-glass-hull {
+        flex-direction: column;
+        text-align: center;
+        padding: 3rem 2rem;
+        gap: 2rem;
+    }
+    .cta-actions-hub {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 550px) {
+    .cta-glass-hull {
+        padding: 2.2rem 1.2rem;
+        border-radius: 24px;
+    }
+    .cta-actions-hub {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .cta-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+</style>
+
+<!-- High-Contrast Creative Immersive Footer Deck -->
+<footer class="stackly-footer">
+    <div class="footer-max-container">
+        
+        <!-- Primary Structural Column Array Block Grid -->
+        <div class="footer-columns-grid">
+            
+            <!-- Column 1: Brand Profile Terminal Hub -->
+           <!-- Column 1: Brand Profile Terminal Hub with Integrated Social Vectors -->
+<div class="footer-col brand-pillar">
+    <a href="#" class="footer-logo-link" onclick="executeScrollToTop(event)" title="Back to Top">
+        <img src="./Assests/brand logo - toy.webp" alt="Stackly Logo Footer" class="footer-brand-logo">
+    </a>
+    <p class="footer-brand-bio">
+        Engineering luxury tactile play systems designed to bridge geometric architectural mechanics with childhood curiosity.
+    </p>
+    <div class="company-address-box">
+        <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="addr-vector"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <span>100 Playwright Avenue, Craft Studio 4, Boston, MA</span>
+    </div>
+
+    <!-- New High-Visibility Vector Social Media Icon Row -->
+    <div class="footer-social-row">
+        <!-- Facebook -->
+        <button class="social-circle-btn" onclick="handleNavigation404(event, '404.html')" title="Follow on Facebook">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-4h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+        </button>
+        <!-- Instagram -->
+        <button class="social-circle-btn" onclick="handleNavigation404(event, '404.html')" title="Follow on Instagram">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+        </button>
+        <!-- Pinterest -->
+        <button class="social-circle-btn" onclick="handleNavigation404(event, '404.html')" title="Follow on Pinterest">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        </button>
+        <!-- YouTube -->
+        <button class="social-circle-btn" onclick="handleNavigation404(event, '404.html')" title="Follow on YouTube">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 28 0 0 0 1 11.75a29 28 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 28 0 0 0 .46-5.25 29 28 0 0 0-.46-5.33z"></path>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+            </svg>
+        </button>
+    </div>
+</div>
+
+
+            <!-- Column 2: Quick Menus Collection -->
+            <div class="footer-col links-pillar">
+                <h4 class="footer-heading">Quick Links</h4>
+                <div class="footer-links-list">
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Track Order Link')">Track Your Order</a>
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Store Locator Link')">Find a Retailer</a>
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Wholesale Partner Program')">Wholesale Program</a>
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Safe Materials Certification')">Safety Labs Reports</a>
+                </div>
+            </div>
+
+            <!-- Column 3: Corporate Profile Menus -->
+            <div class="footer-col links-pillar">
+                <h4 class="footer-heading">Support Hub</h4>
+                <div class="footer-links-list">
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Extended Warranties')">Artisan Warranty</a>
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Returns Guidelines')">Easy Exchange Portal</a>
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Help FAQs Matrix')">Help &amp; FAQ Center</a>
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Media Contact Portal')">Press Resources</a>
+                </div>
+            </div>
+
+            <!-- Column 4: Newsletter Subscriber Actions Console -->
+            <div class="footer-col subscribe-pillar">
+                <h4 class="footer-heading">The Playground Dispatch</h4>
+                <p class="subscribe-caption">Subscribe to unlock premium custom blueprint designs and private product launches.</p>
+                
+                <form class="footer-newsletter-form" onsubmit="handleNewsletterRouting(event)">
+    <div class="input-bezel-hull">
+        <!-- Input field with class hook for the validator script -->
+        <input type="email" placeholder="Enter your email..." class="newsletter-input">
+        <button type="submit" class="newsletter-submit-btn" title="Subscribe Now">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        </button>
+    </div>
+</form>
+
+            </div>
+
+        </div>
+
+        <!-- Secondary Bottom Regulatory Ledger Bar -->
+        <div class="footer-ledger-base">
+            <div class="ledger-left-copyright">
+                &copy; <span id="currentYear">2026</span> Stackly Industries. All rights reserved.
+            </div>
+            
+            <!-- Privacy Legal Links Stacks -->
+            <div class="ledger-center-legal">
+                <a href="404.html" class="legal-link" onclick="handleNavigation404(event, 'Footer Privacy Declaration Context')">Privacy Policy</a>
+                <a href="404.html" class="legal-link" onclick="handleNavigation404(event, 'Footer Terms of Service Alignment')">Terms of Service</a>
+                <a href="404.html" class="legal-link" onclick="handleNavigation404(event, 'Footer Cookies Settings Hub')">Cookie Management</a>
+            </div>
+
+            <!-- Right-Side Floating Back to Top Control Anchor Button -->
+            <button class="footer-top-arrow-btn" onclick="executeScrollToTop(event)" title="Back to Top">
+                <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="up-arrow-vector"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+            </button>
+        </div>
+
+    </div>
+</footer>
+<script>
+    // Validates newsletter fields and handles page routing adjustments
+function handleNewsletterRouting(event) {
+    event.preventDefault(); // Halt default form reloading loops
+    
+    const inputNode = event.target.querySelector('.newsletter-input');
+    
+    // Check if input node is missing, completely blank, or filled with spaces
+    if (!inputNode || inputNode.value.trim() === "") {
+        alert("⚠️ Please fill in the fields before subscribing!");
+        if (inputNode) inputNode.focus(); // Snap user focus helper back onto input box
+        return;
+    }
+    
+    // If field contains content, clear input and execute a clean 404 page redirect jump
+    inputNode.value = ""; 
+    window.location.href = "404.html";
+}
+
+</script>
+
+<style>
+    /* --- Brand Pillar Social Icons Hub Layout --- */
+.footer-social-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1.5rem; /* Forces a safe, clear gap directly below the address text box */
+    width: 100%;
+}
+
+/* --- Brand Pillar Social Icons Hub Layout --- */
+.footer-social-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1.5rem; 
+    width: 100%;
+}
+
+.social-circle-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.65);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.social-circle-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* --- Uniform Hover and Glow Effects (Removes Red Override) --- */
+.social-circle-btn:hover {
+    background-color: var(--secondary-teal);
+    color: #ffffff;
+    border-color: var(--secondary-teal);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+}
+
+
+    /* --- High-Contrast Immersive Footer Framework --- */
+.stackly-footer {
+    position: relative;
+    width: 100%;
+    background-color: #0d0f14; /* Deep premium canvas backdrop matching header transparency tones */
+    padding: 50px 5% 25px 5%; /* Tight space configuration prevents dead empty whitespace gaps */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+}
+
+/* Master Grid Grid Mapping Columns Ratios */
+.footer-columns-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr 0.8fr 1.1fr;
+    gap: 3rem;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* --- Column 1: Brand Profile Alignment --- */
+.footer-logo-link {
+    display: inline-block;
+    margin-bottom: 1.2rem;
+    transition: transform 0.3s ease;
+}
+.footer-logo-link:hover { transform: scale(1.03); }
+.footer-brand-logo { height: 40px; width: auto; object-fit: contain; border-radius: 6px; }
+
+.footer-brand-bio {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.company-address-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.88rem;
+    line-height: 1.4;
+    font-weight: 500;
+}
+.addr-vector { width: 18px; height: 18px; color: var(--secondary-teal); flex-shrink: 0; margin-top: 2px; }
+
+/* --- Columns 2 & 3: Quick Navigation Link Stacks --- */
+.footer-heading {
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 6px;
+}
+/* Micro neon underscore line below headings */
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--primary-coral);
+    border-radius: 2px;
+}
+
+.footer-links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    width: 100%;
+}
+
+.footer-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    display: inline-block;
+    width: max-content;
+    transform-origin: left center;
+}
+
+/* Link Hover Highlight Shimmer Actions */
+.footer-link:hover {
+    color: var(--secondary-teal);
+    transform: translateX(4px) scale(1.02);
+    text-shadow: 0 0 15px rgba(78, 205, 196, 0.4);
+}
+
+/* --- Column 4: Newsletter Module Settings --- */
+.subscribe-caption {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+}
+
+.footer-newsletter-form {
+    width: 100%;
+}
+
+.input-bezel-hull {
+    position: relative;
+    width: 100%;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.newsletter-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0.6rem 1rem;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.newsletter-input::placeholder { color: rgba(255, 255, 255, 0.4); }
+
+.newsletter-submit-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-coral);
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.2s;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+}
+.newsletter-submit-btn svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+
+/* Focus and hover reactions for input field box elements */
+.input-bezel-hull:focus-within {
+    border-color: var(--secondary-teal);
+    box-shadow: 0 0 15px rgba(78, 205, 196, 0.15);
+}
+.newsletter-submit-btn:hover {
+    background-color: #ff5252;
+    transform: scale(1.05);
+}
+.newsletter-submit-btn:hover svg {
+    transform: scale(1.1) translate(1px, -1px);
+}
+
+/* --- Secondary Bottom Regulatory Ledger Bar --- */
+.footer-ledger-base {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 1.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.ledger-left-copyright {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.ledger-center-legal {
+    display: flex;
+    gap: 2rem;
+}
+
+.legal-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+.legal-link:hover { color: #ffffff; }
+
+/* Right aligned circular Back-to-Top trigger button */
+.footer-top-arrow-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.up-arrow-vector { width: 16px; height: 16px; }
+
+.footer-top-arrow-btn:hover {
+    background-color: var(--secondary-teal);
+    color: #ffffff;
+    border-color: var(--secondary-teal);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.3);
+}
+.footer-top-arrow-btn:hover .up-arrow-vector {
+    animation: upwardBounceArrow 0.8s infinite alternate ease-in-out;
+}
+
+/* --- High Performance Keyframe Arrow Loops --- */
+@keyframes upwardBounceArrow {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-4px); }
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 1024px) {
+    /* Pivot columns to form a balanced 2x2 grid map on tablet monitors */
+    .footer-columns-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 2.5rem;
+    }
+    .brand-pillar, .subscribe-pillar { grid-column: span 1; }
+}
+
+@media (max-width: 768px) {
+    /* Collapse the base layout items into a vertically aligned structural listing */
+    .footer-columns-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .footer-ledger-base {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    .ledger-center-legal {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.2rem;
+    }
+    .footer-heading { margin-bottom: 1rem; }
+}
+
+</style>
+
+<script>
+    // Native smooth page scroller linked to brand log link and right floating button
+function executeScrollToTop(event) {
+    event.preventDefault(); // Stop standard hash window anchor jumps
+    
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' /* Dispatches native hardware accelerated animation frame easing curves */
+    });
+}
+
+// Simulated automated dispatcher notification layout for subscription form fields
+function simulateNewsletterSubmit(event) {
+    event.preventDefault(); // Hold form processing data loops
+    
+    const inputNode = event.target.querySelector('.newsletter-input');
+    const subscriberEmail = inputNode ? inputNode.value : '';
+    
+    alert(`🎉 Stackly Club Monitor:\n\nThank you for choosing creative curiosity!\n"${subscriberEmail}" has been registered inside our premium blueprint drop dispatch network successfully.`);
+    
+    if (inputNode) inputNode.value = ''; // Reset the input layout
+}
+
+// Automatically update structural footer copyright parameters live 
+window.addEventListener('DOMContentLoaded', () => {
+    const yearNode = document.getElementById('currentYear');
+    if (yearNode) yearNode.innerText = new Date().getFullYear();
+});
+
+</script>
+
+</body>

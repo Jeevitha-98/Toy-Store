@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Builder Atelier Registration // Stackly Toy Studio</title>
+    
+    <!-- Premium Google Fonts Stack for Toy Store Architecture -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,900;1,700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Bright Immersive Toy Store Registration Section -->
+<!-- Bright Immersive Toy Store Registration Section -->
+<section class="atelier-auth-section">
+    <!-- NEW: Base Section Background Image Layer -->
+    <img src="./Assests/train.webp" alt="Artisan Woodshop Toy Crafting Workbench Backdrop" class="auth-canvas-bg">
+    
+    <!-- Translucent gradient off-white wash protects text contrast reading lines -->
+    <div class="auth-canvas-overlay"></div>
+
+    <div class="auth-max-container">
+        <!-- Main Form Glass Console Chassis Wrapper -->
+        <div class="auth-glass-console-wrapper animate-scale-up-entry">
+            <!-- (Rest of your form elements remain exactly the same) -->
+
+                
+                <!-- Top Navigation & Brand Logo Context Row Header -->
+                <div class="auth-console-top-row">
+                    <!-- FIXED: Replaced plain text header with a concrete, responsive brand logo image layer -->
+                    <div class="auth-brand-logo-holder">
+                        <img src="./Assests/toy -logo.webp" alt="Stackly Toy Studio Logo" class="auth-brand-logo-img">
+                    </div>
+                    
+                    <a href="login.html" class="auth-back-home-btn">
+                        <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        <span>BACK TO LOG IN</span>
+                    </a>
+                </div>
+
+                <!-- Welcome Statement Header -->
+                <div class="auth-console-header">
+                    <h1 class="auth-headline">Create <span class="coral-glow-text">Account</span></h1>
+                    <p class="auth-paragraph-black">
+                        Register your artisan profile to open your customized sandbox project registry dashboard and track order milestones.
+                    </p>
+                </div>
+
+                <!-- Validation Status Notification Banner Alert Area -->
+                <div id="auth-validation-alert" class="validation-status-banner alert-hidden"></div>
+
+                <!-- Core Sign-Up Input Form System -->
+                <form id="toy-framework-signup-system" onsubmit="executeSignUpProcess(event)" novalidate>
+                    
+                    <!-- Input Block 1: Full Name -->
+                    <div class="auth-input-node">
+                        <label for="signup-client-name">Your Full Name</label>
+                        <input type="text" id="signup-client-name" placeholder="Enter your full name..." autocomplete="off" oninput="enforceCharacterRestrictions(this)">
+                    </div>
+
+                    <!-- Input Block 2: Email Address -->
+                    <div class="auth-input-node">
+                        <label for="signup-client-email">Email Address</label>
+                        <input type="email" id="signup-client-email" placeholder="you@example.com" autocomplete="off">
+                    </div>
+
+                    <!-- Input Block 3: Mobile Number -->
+                    <div class="auth-input-node">
+                        <label for="signup-client-phone">10-Digit Mobile Number</label>
+                        <input type="text" id="signup-client-phone" placeholder="10-digit mobile number" maxlength="10" autocomplete="off" oninput="enforceNumberRestrictions(this)">
+                    </div>
+
+                    <!-- Input Block 4: Password Key -->
+                    <div class="auth-input-node">
+                        <label for="signup-client-password">Password Key</label>
+                        <div class="password-field-wrapper">
+                            <input type="password" id="signup-client-password" placeholder="••••••••">
+                            <!-- FIXED: Embedded professional inline SVG vector eye button -->
+                            <button type="button" class="password-toggle-eye-btn" onclick="togglePasswordVisibilityField('signup-client-password', this)" aria-label="Toggle password visibility">
+                                <svg class="eye-icon-svg eye-open" xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 8 8 8 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                <svg class="eye-icon-svg eye-slashed display-hidden" xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.48 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Input Block 5: Confirm Password Key -->
+                    <div class="auth-input-node">
+                        <label for="signup-client-confirm">Confirm Password Key</label>
+                        <div class="password-field-wrapper">
+                            <input type="password" id="signup-client-confirm" placeholder="••••••••">
+                            <!-- FIXED: Embedded professional inline SVG vector eye button -->
+                            <button type="button" class="password-toggle-eye-btn" onclick="togglePasswordVisibilityField('signup-client-confirm', this)" aria-label="Toggle password visibility">
+                                <svg class="eye-icon-svg eye-open" xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 8 8 8 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                <svg class="eye-icon-svg eye-slashed display-hidden" xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.48 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Action Button Submission Trigger Capsule -->
+                    <div class="auth-action-trigger-row">
+                        <button type="submit" class="auth-submit-capsule-btn">
+                            <span>SIGN UP</span>
+                            <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- Bottom Registration Intercept Callout Link Footer Line -->
+                <div class="auth-console-footer">
+                    <p>Already have an account? <a href="login.html" class="create-account-link">Log In</a></p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        /**
+ * Strict RegEx Field Guard: Strips out numbers from the Name field immediately.
+ */
+function enforceCharacterRestrictions(inputElement) {
+    inputElement.value = inputElement.value.replace(/[0-9]/g, '');
+}
+
+/**
+ * Strict RegEx Field Guard: Strips out letters from the Mobile field immediately.
+ */
+function enforceNumberRestrictions(inputElement) {
+    inputElement.value = inputElement.value.replace(/[^0-9]/g, '');
+}
+
+/**
+ * FIXED: Professional Vector Eye Toggle Router Module
+ * Controls the visibility toggle state and updates the struck-out diagonal line vector state smoothly.
+ */
+function togglePasswordVisibilityField(inputId, buttonElement) {
+    const passwordInput = document.getElementById(inputId);
+    const eyeOpenIcon = buttonElement.querySelector('.eye-open');
+    const eyeSlashedIcon = buttonElement.querySelector('.eye-slashed');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        // Hide the open eye vector, reveal the struck-out slashed vector overlay path
+        eyeOpenIcon.classList.add('display-hidden');
+        eyeSlashedIcon.classList.remove('display-hidden');
+    } else {
+        passwordInput.type = 'password';
+        // Reveal the open eye vector, hide the struck-out slashed vector overlay path
+        eyeOpenIcon.classList.remove('display-hidden');
+        eyeSlashedIcon.classList.add('display-hidden');
+    }
+}
+
+/**
+ * Validates signup credentials, tracks errors, and logs in with dynamic redirection.
+ */
+function executeSignUpProcess(event) {
+    event.preventDefault(); 
+    
+    const alertBanner = document.getElementById('auth-validation-alert');
+    const nameValue = document.getElementById('signup-client-name').value.trim();
+    const emailValue = document.getElementById('signup-client-email').value.trim();
+    const phoneValue = document.getElementById('signup-client-phone').value.trim();
+    const passwordValue = document.getElementById('signup-client-password').value.trim();
+    const confirmValue = document.getElementById('signup-client-confirm').value.trim();
+
+    if (!nameValue || !emailValue || !phoneValue || !passwordValue || !confirmValue) {
+        alertBanner.innerText = "Please fill all fields before signing up.";
+        alertBanner.className = "validation-status-banner alert-error";
+        return;
+    }
+
+    if (!emailValue.includes('@') || !emailValue.includes('.')) {
+        alertBanner.innerText = "Please enter a valid electronic mail address.";
+        alertBanner.className = "validation-status-banner alert-error";
+        return;
+    }
+
+    if (phoneValue.length !== 10) {
+        alertBanner.innerText = "Please enter a valid 10-digit mobile number.";
+        alertBanner.className = "validation-status-banner alert-error";
+        return;
+    }
+
+    if (passwordValue !== confirmValue) {
+        alertBanner.innerText = "Error: Passwords do not match. Re-enter keys.";
+        alertBanner.className = "validation-status-banner alert-error";
+        return;
+    }
+
+    alertBanner.innerText = "Successfully logged in! Use these credentials to login.";
+    alertBanner.className = "validation-status-banner alert-success";
+
+    setTimeout(() => {
+        window.location.href = "login.html";
+    }, 2000);
+}
+
+    </script>
+
+    <style>
+
+        /* --- FIXED: Absolute Background Visibility & Z-Index Layering Override --- */
+
+/* Targets the core section backdrop image and forces absolute placement boundaries */
+.auth-canvas-bg {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* Protects graphic layout scaling proportions across display monitors */
+    object-position: center !important;
+    z-index: 1 !important; /* Locks image to the absolute back floor layer */
+    opacity: 0.35 !important; /* Blends nicely with the bright off-white vignette mask */
+    display: block !important; /* Prevents hidden visibility rendering bugs */
+    pointer-events: none !important;
+}
+
+/* Keeps the translucent vignette wash sandwiched between the image and the front text panel */
+.auth-canvas-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: radial-gradient(circle at 50% 50%, rgba(237, 243, 245, 0.4) 0%, rgba(255, 255, 255, 0.85) 100%) !important;
+    z-index: 2 !important; /* Higher than the image, lower than the text container */
+    pointer-events: none !important;
+}
+
+/* Lifts your central glass console panel cleanly to the top tier layer */
+.auth-max-container {
+    position: relative !important;
+    z-index: 5 !important; /* Forces the entire white form card to float on top of all masks */
+}
+
+
+        /* =======================================================================
+   1. GLOBAL RECOVERY RESET & VIEWPORT SCROLLER TRACK OVERRIDE
+   ======================================================================= */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important; /* HARD RESET: Destroys horizontal side scrollbars permanently */
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #edf3f5;
+    color: #1a202c;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Base custom brand design design token references */
+:root {
+    --dark-charcoal: #1a202c;
+    --primary-coral: #ff6b6b;
+    --secondary-teal: #3bbcb4;
+    --text-pure-black: #000000;
+}
+
+a, button, select, input {
+    font-family: inherit;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* =======================================================================
+   2. IMMERSIVE AUTH CORE BACKGROUND MASK INTERFACE
+   ======================================================================= */
+.atelier-auth-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 4% 50px 4%; /* Clearances protect sticky navigation headers from overlap */
+    overflow: hidden !important;
+}
+
+/* Background image base configuration specs */
+.auth-canvas-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    opacity: 0.35; /* Bright crisp template layer visibility filter values mapping */
+    filter: blur(0px) contrast(100%) grayscale(10%);
+    pointer-events: none;
+}
+
+/* Translucent gradient off-white wash screen protects text reading contrast layers */
+.auth-canvas-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(237, 243, 245, 0.4) 0%, rgba(255, 255, 255, 0.85) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.auth-max-container {
+    width: 100%;
+    max-width: 540px; /* High-density limits pinch elements closely together */
+    margin: 0 auto;
+    position: relative;
+    z-index: 5;
+}
+
+/* =======================================================================
+   3. FLEX CONSOLE CHASSIS WRAPPER (ELIMINATES STR0W SCATTERING)
+   ======================================================================= */
+.auth-glass-console-wrapper {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 32px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 30px 65px rgba(160, 175, 185, 0.18);
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important; /* Forces vertical natural block layout stack cascade */
+    box-sizing: border-box !important;
+}
+
+/* Top Navigation Header Row Items */
+.auth-console-top-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* BRAND LOGO: Responsive workspace structural container image alignments */
+.auth-brand-logo-holder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 130px; /* Proportional cap blocks size bloating */
+    height: auto;
+}
+
+.auth-brand-logo-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.auth-pretitle {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #718096;
+}
+
+a.auth-back-home-btn {
+    text-decoration: none;
+    color: var(--dark-charcoal);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+    padding: 0.4rem 0.9rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+a.auth-back-home-btn:hover {
+    background-color: var(--dark-charcoal);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* Headline titles typography profile layer mapping configuration */
+.auth-console-header {
+    width: 100% !important;
+    text-align: left !important;
+    margin-bottom: 1.8rem !important;
+}
+
+.auth-headline {
+    font-family: 'Playfair Display', serif;
+    color: var(--dark-charcoal);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin: 0 0 6px 0;
+}
+
+.coral-glow-text {
+    color: var(--primary-coral);
+    text-shadow: 0 0 15px rgba(255, 107, 107, 0.12);
+}
+
+.auth-paragraph-black {
+    color: var(--text-pure-black) !important;
+    font-size: 0.94rem;
+    line-height: 1.55;
+    font-weight: 600;
+    margin: 0;
+    text-align: left;
+}
+
+/* =======================================================================
+   4. COMPACT FIELD NODE CONTROLS & SVG VECTOR EYE TOGGLE BUTTON
+   ======================================================================= */
+.auth-input-node {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    margin-bottom: 1.2rem !important;
+    width: 100% !important;
+}
+
+.auth-input-node label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #718096;
+    margin-bottom: 6px;
+}
+
+.auth-input-node input[type="text"],
+.auth-input-node input[type="email"],
+.auth-input-node input[type="password"] {
+    width: 100% !important;
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 0.85rem 1.2rem !important;
+    color: var(--dark-charcoal) !important;
+    font-size: 0.95rem;
+    outline: none !important;
+    box-sizing: border-box !important;
+}
+
+.auth-input-node input:focus {
+    border-color: var(--secondary-teal) !important;
+    box-shadow: 0 0 14px rgba(78, 205, 196, 0.15) !important;
+}
+
+/* Extra padding clearance allocates space for the inline vector button curves */
+.auth-input-node input[type="password"] {
+    padding-right: 2.8rem !important;
+}
+
+.password-field-wrapper {
+    position: relative !important;
+    width: 100% !important;
+}
+
+/* PROFESSIONAL VECTOR EYE: Custom micro-reset button layer mapping */
+.password-toggle-eye-btn {
+    position: absolute !important;
+    right: 1.2rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    width: 22px !important;
+    height: 22px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #a0aec0 !important; /* Matte carbon default icon color */
+    outline: none !important;
+    z-index: 5;
+}
+
+.password-toggle-eye-btn:hover {
+    color: var(--primary-coral) !important; /* Dynamic color shift path highlight on focus triggers */
+}
+
+.eye-icon-svg {
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important; /* Shield click target coordinates tracking collisions */
+    display: block !important;
+}
+
+/* Visibility state toggle switch rules */
+.display-hidden {
+    display: none !important;
+}
+
+/* Utilities lines row alignments */
+.auth-utilities-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-bottom: 1.8rem !important;
+    font-size: 0.88rem !important;
+}
+
+.remember-me-checkbox-label { display: flex; align-items: center; gap: 8px; font-weight: 700; color: #5a6578; cursor: pointer; }
+.remember-me-checkbox-label input { width: 15px; height: 15px; cursor: pointer; accent-color: var(--secondary-teal); }
+a.forgot-password-link { text-decoration: none; font-weight: 700; color: #718096; }
+a.forgot-password-link:hover { color: var(--primary-coral); }
+
+/* =======================================================================
+   5. VALIDATION ALERTS & SYSTEM REGULAR CAPSULE ACTION SUBMIT BUTTON
+   ======================================================================= */
+.validation-status-banner {
+    width: 100% !important;
+    padding: 0.9rem 1.2rem !important;
+    border-radius: 12px !important;
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+}
+.alert-error {
+    background-color: rgba(255, 107, 107, 0.1) !important;
+    border: 1px solid rgba(255, 107, 107, 0.25) !important;
+    color: #ff6b6b !important;
+}
+.alert-success {
+    background-color: rgba(78, 205, 196, 0.1) !important;
+    border: 1px solid rgba(78, 205, 196, 0.25) !important;
+    color: #3bbcb4 !important;
+}
+.alert-hidden { display: none !important; }
+
+#toy-framework-signup-system {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+}
+
+.auth-action-trigger-row {
+    width: 100% !important;
+    display: flex !important;
+    margin-top: 1rem !important;
+}
+
+button.auth-submit-capsule-btn {
+    width: 100% !important;
+    background-color: var(--dark-charcoal) !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 1.1rem 2rem !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+}
+button.auth-submit-capsule-btn svg { width: 14px; height: 14px; transition: transform 0.3s ease; }
+
+button.auth-submit-capsule-btn:hover {background-color: var(--primary-coral) !important;box-shadow: 0 10px 25px rgba(255, 107, 107, 0.35) !important;transform: translateY(-2px) !important;}button.auth-submit-capsule-btn:hover svg { transform: translateX(4px); }.auth-console-footer {width: 100% !important;text-align: center !important;margin-top: 1.5rem !important;}.auth-console-footer p { font-size: 0.88rem !important; font-weight: 700; color: #718096; margin: 0 !important; }a.create-account-link { text-decoration: none; color: var(--dark-charcoal); border-bottom: 2px solid var(--primary-coral); padding-bottom: 1px; font-weight: 700; }a.create-account-link:hover { color: var(--primary-coral); }/* Hardware-accelerated entry animation engine scale vectors */.animate-scale-up-entry { opacity: 0; transform: scale(0.98) translateY(12px); animation: authConsoleScaleUpIn 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards; }@keyframes authConsoleScaleUpIn { 100% { opacity: 1; transform: scale(1) translateY(0); } }/* =======================================================================6. RESPONSIVE VIEWP0RTS OVERHAUL MEDIA BREAKPOINTS TRACK======================================================================= */@media (max-width: 600px) {.atelier-auth-section { padding: 90px 4% 40px 4% !important; }.auth-glass-console-wrapper { padding: 2.2rem 1.2rem !important; border-radius: 24px !important; }}
+    </style>
+</body>
+</html>
