@@ -503,3 +503,182 @@ body.drawer-open-lock {
         background-color: var(--primary-coral);
     }
 }
+/* =======================================================================
+   SAFE OVERFLOW FIX + COMPACT TESTIMONIAL CARDS
+   ======================================================================= */
+
+/* ---------- Global Overflow Fix ---------- */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ---------- ONLY New Arrivals Section ---------- */
+
+.arrivals-split-hero,
+.arrivals-split-container,
+.arrivals-split-col,
+.media-deck,
+.arrivals-sandbox-section,
+.sandbox-deck-grid {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* Prevent images from causing overflow */
+
+.arrivals-sandbox-section img,
+.media-deck img,
+.arrivals-split-col img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Prevent cards from exceeding container */
+
+.arrivals-card,
+.media-card,
+.arrivals-product-card {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* =======================================================================
+   TESTIMONIAL SECTION
+   ======================================================================= */
+
+.feedback-shimmer-flex-deck {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Compact Equal Height Cards */
+
+.feedback-unit-card {
+
+    background: #fff;
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(0,0,0,.05);
+
+    box-shadow: 0 15px 35px rgba(160,175,185,.06);
+
+    padding: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    min-height: 310px;
+
+    max-height: 310px;
+
+    overflow: hidden;
+}
+
+/* Profile */
+
+.feedback-user-profile-header{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:4px;
+
+    margin-bottom:10px;
+}
+
+.user-avatar-bezel{
+
+    width:44px;
+
+    height:44px;
+
+    flex-shrink:0;
+}
+
+.user-identity-meta h3{
+
+    margin:0;
+
+    font-size:1rem;
+
+    line-height:1.2;
+}
+
+.user-identity-meta span{
+
+    font-size:.75rem;
+}
+
+.star-rating-row-vector{
+
+    margin-bottom:8px;
+
+    font-size:.85rem;
+}
+
+/* Review */
+
+.feedback-paragraph-black{
+
+    display:-webkit-box;
+
+    -webkit-box-orient:vertical;
+
+    -webkit-line-clamp:4;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    font-size:.88rem;
+
+    line-height:1.5;
+
+    flex:1;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.feedback-shimmer-flex-deck{
+
+grid-template-columns:1fr;
+
+}
+
+.feedback-unit-card{
+
+min-height:290px;
+
+max-height:290px;
+
+}
+
+}
