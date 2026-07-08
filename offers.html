@@ -1,0 +1,2990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly - Online Toy Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Modern Vector Preloader Screen -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <!-- Vector Blocks Icon Loader -->
+            <svg class="vector-loader-icon" xmlns="http://w3.org" viewBox="0 0 24 24" width="80" height="80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+            <h2 class="preloader-text">Stackly Joy...</h2>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+    const preloader = document.getElementById('preloader');
+    const appContent = document.getElementById('app-content');
+
+    // Automatically transition under the 3 second threshold
+    setTimeout(() => {
+        preloader.style.opacity = '0';
+        preloader.style.visibility = 'hidden';
+        appContent.classList.add('show-content');
+    }, 2500); 
+});
+
+    </script>
+
+
+<!-- Transparent, Floating Sticky Header Component -->
+<!-- Transparent, Floating Sticky Header Component -->
+<header class="floating-header">
+    <div class="header-container">
+        
+        <!-- Brand Image Logo (Refreshes Page on Click) -->
+        <a href="#" class="logo-wrapper" onclick="handleBrandRefresh(event)">
+            <img src="./Assests/toy -logo.webp" alt="Stackly Logo" class="brand-logo">
+        </a>
+
+        <!-- Central Navigation Hub (Manages Mobile Sliding Drawer Layout) -->
+        <nav class="nav-menu" id="navMenu">
+    <div class="nav-links-wrapper">
+        <a href="index.html" class="nav-link">Home</a>
+        <!-- Injected the 'active' class on the Shop Toys link -->
+        <a href="shop.html" class="nav-link ">Shop Toys</a>
+        <a href="newarrivals.html" class="nav-link ">New Arrivals</a>
+        <a href="offers.html" class="nav-link active">Offers</a>
+        <a href="contact.html" class="nav-link">Contact Us</a>
+    </div>
+
+            <!-- Mobile Responsive View Dedicated Auth Actions Menu Footer -->
+            <div class="mobile-drawer-auth">
+                <button class="auth-btn mobile-nav-login" onclick="handleNavigation404(event, 'Login Prompt')">Log In</button>
+                <button class="auth-btn mobile-nav-signup" onclick="handleNavigation404(event, 'Account Registration')">Sign Up</button>
+            </div>
+        </nav>
+
+        <!-- Right Action Utilities Terminal -->
+       <div class="header-actions">
+    <!-- Wishlist Button Counter Component (Navigates to 404.html) -->
+    <a href="404.html" class="action-btn" title="Wishlist">
+        <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <span class="badge">0</span>
+    </a>
+
+    <!-- Shopping Cart Button Counter Component (Navigates to 404.html) -->
+    <a href="404.html" class="action-btn" title="Cart">
+        <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="badge badge-primary">0</span>
+    </a>
+
+    <!-- Desktop Monitor Wide Exclusive Authentication Buttons Group -->
+    <div class="auth-buttons-group desktop-auth">
+        <!-- Links directly to login.html -->
+        <a href="login.html" class="auth-btn login-btn">Log In</a>
+        <!-- Links directly to signup.html -->
+        <a href="signup.html" class="auth-btn signup-btn">Sign Up</a>
+    </div>
+</div>
+
+
+            <!-- Responsive Hamburger Trigger Menu -->
+            <button class="hamburger-toggle" id="hamburgerBtn" onclick="toggleMobileHeaderDrawer()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+    </div>
+</header>
+
+
+<script>
+    // Monitor vertical scroll window offset value to apply frosted filter effects
+window.addEventListener('scroll', () => {
+    const headerNode = document.querySelector('.floating-header');
+    
+    if (window.scrollY > 30) {
+        headerNode.classList.add('scrolled');
+    } else {
+        headerNode.classList.remove('scrolled');
+    }
+});
+
+// Toggle mobile drawer panel visibility and freeze document background scroll states
+// Toggle mobile responsive navigation drawer display visibility status 
+function toggleMobileHeaderDrawer() {
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    
+    hamburgerBtn.classList.toggle('active');
+    navMenu.classList.toggle('mobile-active');
+    
+    // Evaluate display class state to freeze body window touch scrolling paths
+    if (navMenu.classList.contains('mobile-active')) {
+        document.body.classList.add('drawer-open-lock');
+    } else {
+        document.body.classList.remove('drawer-open-lock');
+    }
+}
+
+// Global Interception handler for unlinked template targets
+function handleNavigation404(event, interfaceSegmentName) {
+    event.preventDefault(); 
+    
+    // Automatically close open menu drawers and unlock background scroll hooks
+    document.getElementById('hamburgerBtn').classList.remove('active');
+    document.getElementById('navMenu').classList.remove('mobile-active');
+    document.body.classList.remove('drawer-open-lock');
+    
+    alert(`🔍 Stackly Route Monitor:\n\n"${interfaceSegmentName}" has been routed into a 404 navigation point safely!`);
+}
+
+// Native page reload reset function mapped onto the brand logo anchor
+function handleBrandRefresh(event) {
+    event.preventDefault();
+    window.location.reload();
+}
+
+
+</script>
+
+<!-- High-Contrast Creative Unified Offers Hero -->
+<section class="offers-kinetic-hero tightened-hero">
+    <!-- Technical Drafting Room Line Matrix Canvas Background Pattern -->
+    <div class="offers-radial-blueprint-mesh"></div>
+
+    <div class="kinetic-max-container">
+        
+        <!-- Central Unified High-Density Grid Console Chassis -->
+        <div class="kinetic-core-control-center unified-deck-chassis animate-scale-in">
+            
+            <!-- Left Wing: Integrated Satellite Offer Card 1 -->
+            <div class="kinetic-staggered-card card-left-wing">
+                <div class="satellite-image-wrapper">
+                    <img src="./Assests/architecter.webp" alt="Architect Pro Grid Bundle Promotion" class="satellite-img">
+                </div>
+                <div class="satellite-details">
+                    <h3>Architect Bundle</h3>
+                    <span class="satellite-discount-badge">Save 20%</span>
+                </div>
+            </div>
+
+            <!-- Central Hub Core: Typography Terminal & Action Area -->
+            <div class="kinetic-core-text-pillar">
+                <div class="kinetic-micro-badge">
+                    <span class="laser-indicator-core"></span>
+                    <span>Active Privilege Sandbox v3.0</span>
+                </div>
+
+                <!-- Headline exactly 2 lines long for optimal scannability -->
+                <h1 class="kinetic-headline">
+                    The Sandbox <br>
+                    <span class="glow-coral-text">Privilege Logs</span>.
+                </h1>
+
+                <!-- Enforced crisp pure black typography paragraph controls -->
+                <p class="kinetic-paragraph-black">
+                    Deconstruct pricing models. Unlock exclusive sandbox drop access keys, limited-edition timber bundle discounts, and complimentary custom engraving passes tailored for your playroom setups.
+                </p>
+
+                <div class="kinetic-actions-hub">
+                    <button class="kinetic-prime-btn" onclick="smoothScrollToOffersGrid()">
+                        <span>Initialize Vault Keys</span>
+                        <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Wing: Integrated Satellite Offer Card 2 -->
+            <div class="kinetic-staggered-card card-right-wing">
+                <div class="satellite-image-wrapper">
+                    <img src="./Assests/train.webp" alt="Eco-Freight Express Bundle Promotion" class="satellite-img">
+                    <div class="satellite-micro-tag">Bonus Pass</div>
+                </div>
+                <div class="satellite-details">
+                    <h3>Eco-Freight Express</h3>
+                    <span class="satellite-discount-badge teal-tag">Free Engraving</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- High-Contrast Compact Offers Dashboard Hero --- */
+.offers-kinetic-hero.tightened-hero {
+    position: relative;
+    width: 100%;
+    min-height: 80vh; /* FIXED: Compressed min-height constraints eliminate vast vertical gaps */
+    background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f4f8f9 60%, #edf3f5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 110px 4% 40px 4%; /* Clean top clearances protect transparent header elements */
+    overflow: hidden !important; /* Forces strict window bounds to stop side overflow scrollbars */
+}
+
+/* Technical grid blueprint background layer lines */
+.offers-radial-blueprint-mesh {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 35px 35px;
+    background-image: linear-gradient(to right, rgba(255, 107, 107, 0.02) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 107, 107, 0.02) 1px, transparent 1px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.kinetic-max-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* FIXED: Reconfigured into a unified 3-column layout chassis to completely pull empty elements close together */
+.unified-deck-chassis {
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 36px;
+    padding: 3rem 2.5rem; /* Tightened padding closes internal spacing gaps */
+    box-shadow: 0 30px 70px rgba(160, 175, 185, 0.18);
+    width: 100%;
+    
+    display: grid;
+    grid-template-columns: 0.52fr 1fr 0.52fr; /* Squeezes side cards tight against text column blocks */
+    gap: 2rem;
+    align-items: center;
+    z-index: 5;
+}
+
+/* --- Central Core Typography Pillar --- */
+.kinetic-core-text-pillar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.kinetic-micro-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 0.5rem 1.1rem;
+    border-radius: 50px;
+    color: var(--dark-charcoal);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.laser-indicator-core {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-coral);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary-coral);
+    animation: kineticCoreBlink 1.6s infinite ease-in-out;
+}
+
+.kinetic-headline {
+    color: var(--dark-charcoal);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 0.8rem;
+}
+
+.glow-coral-text {
+    color: var(--primary-coral);
+    text-shadow: 0 0 15px rgba(255, 107, 107, 0.15);
+}
+
+/* Enforced crisp pure black typography description rules */
+.kinetic-paragraph-black {
+    color: #000000; /* Pure black high-contrast visibility text profile layer */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 600; /* Protected thickness preserves sharp anti-aliasing text profiles */
+    margin-bottom: 1.5rem;
+    max-width: 540px;
+    cursor: default;
+    transition: color 0.3s ease;
+}
+
+.kinetic-prime-btn {
+    background-color: var(--dark-charcoal);
+    color: #ffffff;
+    border: none;
+    padding: 1rem 2.2rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.kinetic-prime-btn:hover {
+    background-color: var(--primary-coral);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(255, 107, 107, 0.35);
+}
+.kinetic-prime-btn svg { transition: transform 0.3s ease; }
+.kinetic-prime-btn:hover svg { transform: translateX(4px); }
+
+/* --- Integrated Sidebar Cards (Asymmetrical Floating Pairs) --- */
+.kinetic-staggered-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 20px;
+    padding: 8px;
+    width: 100%;
+    box-shadow: 0 15px 35px rgba(13, 15, 20, 0.08);
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+/* Separate floating keyframe loops bob side cards smoothly */
+.card-left-wing {
+    transform: rotate(-3deg);
+    animation: leftCardBob 4.5s infinite ease-in-out alternate;
+}
+
+.card-right-wing {
+    transform: rotate(3deg);
+    animation: rightCardBob 5s infinite ease-in-out alternate;
+}
+
+.satellite-image-wrapper { width: 100%; height: 140px; border-radius: 12px; overflow: hidden; position: relative; }
+.satellite-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+.satellite-details { padding: 0.6rem 0.2rem 0.2rem 0.2rem; text-align: left; }
+.satellite-details h3 { color: #000000; font-size: 0.85rem; font-weight: 800; margin-bottom: 2px; }
+.satellite-discount-badge { font-size: 0.82rem; font-weight: 700; color: var(--primary-coral); }
+.satellite-discount-badge.teal-tag { color: #2da19a; }
+.satellite-micro-tag { position: absolute; top: 8px; right: 8px; background-color: var(--dark-charcoal); color: white; font-size: 0.58rem; font-weight: 800; padding: 0.2rem 0.5rem; border-radius: 20px; text-transform: uppercase; z-index: 2; }
+
+/* --- Hardware Accelerated Interaction Mechanics --- */
+.unified-deck-chassis:hover .kinetic-paragraph-black {
+    color: var(--primary-coral);
+}
+
+.kinetic-staggered-card:hover {
+    animation-play-state: paused !important; /* Freezes ambient float bobbing on hover entry tracking */
+    z-index: 10 !important;
+    box-shadow: 0 25px 50px rgba(78, 205, 196, 0.25);
+}
+
+.card-left-wing:hover { transform: scale(1.05) rotate(-1deg) !important; }
+.card-right-wing:hover { transform: scale(1.05) rotate(1deg) !important; }
+.kinetic-staggered-card:hover .satellite-img { transform: scale(1.04); }
+.kinetic-staggered-card:hover h3 { color: var(--primary-coral); }
+
+/* --- High Performance Keyframe Physics --- */
+@keyframes leftCardBob { 0% { transform: rotate(-3deg) translateY(0px); } 100% { transform: rotate(-2deg) translateY(-8px) translateX(2px); } }
+@keyframes rightCardBob { 0% { transform: rotate(3deg) translateY(0px); } 100% { transform: rotate(4deg) translateY(-10px) translateX(-2px); } }
+@keyframes kineticCoreBlink { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: 0.4; } }
+
+/* --- Responsive Media Viewports Overhaul --- */
+@media (max-width: 900px) {
+    /* Collapse the split horizontal columns framework down into a single vertical timeline flow track */
+    .unified-deck-chassis {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+        gap: 2rem;
+        padding: 2.5rem 1.5rem;
+    }
+    .kinetic-staggered-card { transform: none !important; animation: none !important; max-width: 320px; margin: 0 auto; }
+    .kinetic-staggered-card:hover { transform: translateY(-4px) scale(1.02) !important; }
+    .satellite-image-wrapper { height: 165px; }
+    .kinetic-core-text-pillar { order: -1; padding: 0; } /* Forces text blocks to maintain the top reading position */
+}
+
+@media (max-width: 550px) {
+    .offers-kinetic-hero.tightened-hero { padding-top: 100px; }
+    .unified-deck-chassis { border-radius: 24px; }
+}
+
+</style>
+
+<!-- High-Contrast Creative Reward Terminal Section with Scanner Effect -->
+<section class="offers-terminal-matrix-section">
+    <div class="terminal-max-container">
+        
+        <!-- FIX 1: MANDATORY CREATIVE SECTION TITLE HUB -->
+        <div class="terminal-section-title-block">
+            <span class="terminal-pretitle">The Sandbox Vault Drop</span>
+            <h2 class="terminal-headline">Active Privilege Sandboxes</h2>
+        </div>
+
+        <!-- Strict 2-Column Split Console Framework Grid -->
+        <div class="terminal-display-chassis">
+            
+            <!-- Left Wing: Immersive Live Coupon Decoder Terminal with Laser Scan Animation -->
+            <div class="terminal-core-card terminal-card-glow animate-on-scroll">
+                <!-- NEW: Creative Hardware-Accelerated Neon Laser Scanner Line -->
+                <div class="terminal-laser-scanner-line"></div>
+                <div class="terminal-blueprint-grid"></div>
+                
+                <div class="terminal-content-hull">
+                    <span class="terminal-pill-badge badge-teal">Active Voucher Code</span>
+                    <h3 class="terminal-title-white">The Sandbox Creator Pass</h3>
+                    
+                    <p class="terminal-paragraph-white">
+                        Unlock a universal priority authorization pass on custom workshop commissions. Copy the live code matrix string below and input it at checkout to claim complimentary custom initials hand-carved across your blocks.
+                    </p>
+
+                    <!-- Interactive Code Copier Box -->
+                    <div class="terminal-code-copier-box" onclick="copyPromoCode(this)">
+                        <code class="promo-code-string">PLAYMATRIX2026</code>
+                        <div class="copy-glow-indicator">Copy Code</div>
+                    </div>
+
+                    <div class="terminal-footer-metrics">
+                        <div class="metric-node">
+                            <span class="metric-digit">150 Left</span>
+                            <span class="metric-label">Remaining Keys</span>
+                        </div>
+                        <div class="metric-divider"></div>
+                        <div class="metric-node">
+                            <span class="metric-digit">Expires</span>
+                            <span class="metric-label">End of Wave</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Wing: Dual Stacked Coupon Vouchers -->
+            <div class="terminal-right-stack">
+                
+                <!-- Coupon Drop 1: Tier 1 Builder Bundle -->
+                <div class="terminal-core-card coupon-light-card animate-on-scroll">
+                    <div class="coupon-content-hull">
+                        <div class="coupon-headline-row">
+                            <span class="matrix-pill-badge badge-coral">Bundle Drop</span>
+                            <span class="coupon-discount-digits">Save $25</span>
+                        </div>
+                        <h4 class="coupon-title-dark">Architect Pro Vault Kit</h4>
+                        <p class="coupon-paragraph-black">
+                            Secure instant value deductions when bundling 3 or more premium structural maple pillar modules inside a single log setup.
+                        </p>
+                        <!-- FIX 2: High-Visibility Coral Button Capsule instead of faint link text -->
+                        <a href="404.html" class="coupon-action-capsule-btn">
+                            <span>Initialize Voucher Key</span>
+                            <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Coupon Drop 2: Tier 2 Free Freight Pass -->
+                <div class="terminal-core-card coupon-light-card animate-on-scroll">
+                    <div class="coupon-content-hull">
+                        <div class="coupon-headline-row">
+                            <span class="matrix-pill-badge badge-amber">Shipping Key</span>
+                            <span class="coupon-discount-digits">Free Delivery</span>
+                        </div>
+                        <h4 class="coupon-title-dark">Global Ecosystem Freight</h4>
+                        <p class="coupon-paragraph-black">
+                            Claim a complimentary zero-cost transit voucher pass applied to heavy premium raw modular block sandbox shipments.
+                        </p>
+                        <!-- FIX 2: High-Visibility Coral Button Capsule instead of faint link text -->
+                        <a href="404.html" class="coupon-action-capsule-btn">
+                            <span>Initialize Voucher Key</span>
+                            <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- High-Contrast Creative Reward Terminal Framework --- */
+.offers-terminal-matrix-section {
+    position: relative;
+    width: 100%;
+    background-color: #edf3f5;
+    padding: 20px 5% 45px 5%; /* Tight padding fields compress heights to completely close whitespace voids */
+    overflow: hidden !important; /* Enforces strict window clipping to kill horizontal scrollers */
+}
+
+.terminal-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- FIX 1: Structural Section Title Block Styling --- */
+.terminal-section-title-block {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.terminal-pretitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary-coral);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.terminal-headline {
+    color: var(--dark-charcoal);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+}
+
+/* 2-Column Framework Chassis */
+.terminal-display-chassis {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* Asymmetrical grid split forces elements close together tightly */
+    gap: 2.5rem;
+    width: 100%;
+}
+
+.terminal-right-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* --- Core Card Structures with Hardware Acceleration --- */
+.terminal-core-card {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 15px 35px rgba(160, 175, 185, 0.08);
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s;
+    will-change: transform;
+}
+
+/* Left Column: Live Terminal Voucher Card Size Settings */
+.terminal-card-glow {
+    background-color: #0d0f14; /* Deep premium charcoal matches dark web header transparency tones */
+    border-color: rgba(255, 255, 255, 0.05);
+    min-height: 540px;
+    align-items: flex-end; /* Anchors content cleanly to the card floor horizon */
+}
+
+/* NEW NEW NEW: Animated Laser Beam Scanning Node Mesh Layer */
+.terminal-laser-scanner-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--primary-coral), transparent);
+    box-shadow: 0 0 12px var(--primary-coral);
+    z-index: 4;
+    pointer-events: none;
+    animation: liveConsoleLaserSweep 4s infinite linear;
+}
+
+@keyframes liveConsoleLaserSweep {
+    0% { top: 0%; opacity: 0; }
+    5% { opacity: 1; }
+    95% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+/* Internal Technical Neon Grid Generator Pattern */
+.terminal-blueprint-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 25px 25px;
+    background-image: linear-gradient(to right, rgba(255, 107, 107, 0.04) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 107, 107, 0.04) 1px, transparent 1px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.terminal-content-hull {
+    position: relative;
+    z-index: 3;
+    padding: 3.5rem;
+    width: 100%;
+    text-align: left;
+}
+
+/* Interactive Code Copier Box Engine */
+.terminal-code-copier-box {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(255, 107, 107, 0.3);
+    border-radius: 16px;
+    padding: 1.2rem 2rem;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.promo-code-string {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--primary-coral);
+    letter-spacing: 2px;
+}
+
+.copy-glow-indicator {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 0.4rem 0.8rem;
+    border-radius: 30px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.terminal-code-copier-box:hover {
+    background-color: rgba(255, 107, 107, 0.08);
+    border-color: var(--primary-coral);
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.15);
+}
+.terminal-code-copier-box:hover .copy-glow-indicator {
+    background-color: var(--primary-coral);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+/* Right Column: Translucent Coupon Cards Size Settings */
+.coupon-light-card {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    min-height: 254px;
+    align-items: center;
+}
+
+.coupon-content-hull {
+    padding: 2.2rem 2.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    width: 100%;
+}
+
+.coupon-headline-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.8rem;
+}
+
+.coupon-discount-digits {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--primary-coral);
+}
+
+/* --- High Visibility Section Typography Mappings --- */
+.terminal-pill-badge, .matrix-pill-badge {
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.4rem 0.9rem;
+    border-radius: 30px;
+    display: inline-block;
+}
+.badge-teal { background-color: var(--secondary-teal); box-shadow: 0 4px 12px rgba(78, 205, 196, 0.25); }
+.badge-coral { background-color: var(--primary-coral); box-shadow: 0 4px 12px rgba(255, 107, 107, 0.25); }
+.badge-amber { background-color: #e6b800; box-shadow: 0 4px 12px rgba(230, 184, 0, 0.25); }
+
+.terminal-title-white {
+    color: #ffffff;
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.8rem;
+}
+
+.coupon-title-dark {
+    color: var(--dark-charcoal);
+    font-size: 1.35rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.terminal-paragraph-white {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.98rem;
+    line-height: 1.65;
+    max-width: 580px;
+}
+
+/* Enforced strict pure black description text details visibility layers */
+.coupon-paragraph-black {
+    color: #000000; /* Pure black readable text layers profile mapping configuration */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 600; /* Protected thickness shields anti-aliasing text profiles blurring */
+    margin-bottom: 1.5rem;
+    cursor: default;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+}
+
+/* --- FIX 2: Modern High-Visibility Button Capsules --- */
+a.coupon-action-capsule-btn {
+    text-decoration: none;
+    background-color: var(--dark-charcoal);
+    color: #ffffff;
+    padding: 0.65rem 1.4rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-top: auto; /* Locks button cleanly down to baseline limits */
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+a.coupon-action-capsule-btn svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+}
+
+/* --- Hardware Accelerated Hover & Aura Glow Effects --- */
+.terminal-core-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(13, 15, 20, 0.12);
+}
+
+.terminal-card-glow:hover {
+    border-color: rgba(255, 107, 107, 0.25);
+    box-shadow: 0 25px 50px rgba(255, 107, 107, 0.15);
+}
+
+.coupon-light-card:hover {
+    background: #ffffff;
+    border-color: rgba(255, 107, 107, 0.15);
+}
+
+/* Title and button color transitions on mouse triggers */
+.coupon-light-card:hover .coupon-title-dark { color: var(--primary-coral); }
+
+.coupon-light-card:hover a.coupon-action-capsule-btn {
+    background-color: var(--primary-coral);
+    box-shadow: 0 6px 15px rgba(255, 107, 107, 0.35);
+}
+.coupon-light-card:hover a.coupon-action-capsule-btn svg { transform: translateX(4px); }
+
+/* Pure black descriptions glow gracefully into sharp coral text weights */
+.coupon-light-card:hover .coupon-paragraph-black {
+    color: var(--primary-coral);
+    transform: scale(1.002);
+}
+
+/* Footer Metrics row items */
+.terminal-footer-metrics {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1.5rem;
+    margin-top: 1.8rem;
+}
+
+.metric-node { display: flex; flex-direction: column; text-align: left; }
+.metric-digit { font-size: 1.5rem; font-weight: 900; color: var(--secondary-teal); text-shadow: 0 0 15px rgba(78, 205, 196, 0.2); line-height: 1.1; }
+.metric-label { font-size: 0.72rem; font-weight: 700; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+.metric-divider { width: 1px; height: 35px; background-color: rgba(255, 255, 255, 0.08); }
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 992px) {
+    .terminal-display-chassis { grid-template-columns: 1fr; gap: 1.5rem; }
+    .terminal-right-stack { gap: 1.5rem; }
+    .terminal-card-glow { min-height: 360px; }
+    .terminal-content-hull, .coupon-content-hull { padding: 2.2rem 1.5rem !important; }
+}
+
+@media (max-width: 550px) {
+    .terminal-section-title-block { text-align: center; }
+    .terminal-core-card { border-radius: 20px; }
+    .terminal-footer-metrics { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+    .metric-divider { display: none; }
+    .terminal-code-copier-box { padding: 1rem; flex-direction: column; gap: 10px; text-align: center; }
+    a.coupon-action-capsule-btn { width: 100%; justify-content: center; }
+}
+
+</style>
+
+<!-- High-Contrast Compact Offers Timeline Section -->
+<section class="offers-blueprint-timeline-section">
+    <div class="timeline-max-container">
+        
+        <!-- MANDATORY DISTINCT SECTION HEADING BLOCK -->
+        <div class="timeline-section-header">
+            <span class="timeline-pretitle">Limited Activation Waves</span>
+            <h2 class="timeline-headline">The Active Privilege Ledger</h2>
+        </div>
+
+        <!-- Strict Horizontal 3-Column Grid Deck — Removes wide gaps completely -->
+        <div class="timeline-deck-grid">
+            
+            <!-- Timeline Unit 1 -->
+            <div class="timeline-unit-card animate-on-scroll">
+                <div class="timeline-media-hull">
+                    <img src="./Assests/architecter.webp" alt="Architect Pro Grid Modular Block Set" class="timeline-grid-img">
+                    <div class="timeline-wash-glow"></div>
+                    <span class="timeline-pill-tag status-cyan">Tier 01 // 20% Off</span>
+                </div>
+                <div class="timeline-body-hull">
+                    <h3 class="timeline-name">Architect Pro Vault</h3>
+                    <!-- Enforced Pure Black High-Contrast Readability Paragraph -->
+                    <p class="timeline-short-desc">Unlock instant value deductions on our signature laser-milled timber block ecosystems designed to test complex gravity trajectories.</p>
+                    
+                    <div class="timeline-footer-action-row">
+                        <a href="404.html" class="timeline-capsule-link" title="Initialize Sandbox Blueprint">
+                            <span>Initialize Key</span>
+                            <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Unit 2 -->
+            <div class="timeline-unit-card animate-on-scroll">
+                <div class="timeline-media-hull">
+                    <img src="./Assests/Cube.webp" alt="Early Tactile Balance Geometric Cubes" class="timeline-grid-img">
+                    <div class="timeline-wash-glow"></div>
+                    <span class="timeline-pill-tag status-coral">Tier 02 // Bonus</span>
+                </div>
+                <div class="timeline-body-hull">
+                    <h3 class="timeline-name">Silk-Touch Polish Pass</h3>
+                    <p class="timeline-short-desc">Every order finalized during this wave secures a complimentary organic beeswax finish pass to safeguard pristine wood grain surfaces.</p>
+                    
+                    <div class="timeline-footer-action-row">
+                        <a href="404.html" class="timeline-capsule-link" title="Initialize Sandbox Blueprint">
+                            <span>Initialize Key</span>
+                            <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Unit 3 -->
+            <div class="timeline-unit-card animate-on-scroll">
+                <div class="timeline-media-hull">
+                    <img src="./Assests/train.webp" alt="Eco Kinetic Train Assembly Tracks" class="timeline-grid-img">
+                    <div class="timeline-wash-glow"></div>
+                    <span class="timeline-pill-tag status-amber">Tier 03 // Engrave</span>
+                </div>
+                <div class="timeline-body-hull">
+                    <h3 class="timeline-name">Studio Customization</h3>
+                    <p class="timeline-short-desc">Claim a digital voucher key to hand-carve custom family name coordinates directly across your structural layout timber beams.</p>
+                    
+                    <div class="timeline-footer-action-row">
+                        <a href="404.html" class="timeline-capsule-link" title="Initialize Sandbox Blueprint">
+                            <span>Initialize Key</span>
+                            <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- High-Contrast Compact Offers Timeline --- */
+.offers-blueprint-timeline-section {
+    position: relative;
+    width: 100%;
+    background-color: #edf3f5; 
+    padding: 20px 5% 45px 5%; /* Tight padding fields compress layout heights to eliminate voids */
+    overflow: hidden !important; /* Hard global boundary constraint strips out horizontal scrollbar tracks */
+}
+
+.timeline-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* --- Section Heading Block Mapping --- */
+.timeline-section-header {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.timeline-pretitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--primary-coral);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.timeline-headline {
+    color: var(--dark-charcoal);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+}
+
+/* Tight Horizontal 3-Column Row Framework Grid */
+.timeline-deck-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Fits 3 items side-by-side with zero horizontal leakages */
+    gap: 2.2rem;
+    width: 100%;
+}
+
+/* Individual High-Visibility Product Unit Frameworks */
+.timeline-unit-card {
+    background-color: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 15px 35px rgba(160, 175, 185, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+.timeline-media-hull {
+    position: relative;
+    width: 100%;
+    height: 220px; /* Sized down compactly to pack layouts close */
+    overflow: hidden;
+    background-color: #f7fafc;
+}
+
+.timeline-grid-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Surface neon wash overlay activates on parent card hover entry */
+.timeline-wash-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2.5) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* In-image label indicators flags mapping */
+.timeline-pill-tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 0.4rem 0.8rem;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #ffffff;
+    z-index: 3;
+}
+.status-cyan { background-color: var(--secondary-teal); box-shadow: 0 4px 10px rgba(78, 205, 196, 0.2); }
+.status-coral { background-color: var(--primary-coral); box-shadow: 0 4px 10px rgba(255, 107, 107, 0.2); }
+.status-amber { background-color: #e6b800; box-shadow: 0 4px 10px rgba(230, 184, 0, 0.2); }
+
+/* --- White Details Card Body Box layout --- */
+.timeline-body-hull {
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    transition: background-color 0.3s ease;
+}
+
+.timeline-name {
+    color: var(--dark-charcoal);
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+    text-align: left;
+}
+
+/* Enforced strict pure black description text details visibility typography layer */
+.timeline-short-desc {
+    color: #000000; /* Deep pure black contrast readability layer profile mapping configuration */
+    font-size: 0.92rem;
+    line-height: 1.55;
+    font-weight: 600; /* Protected thickness preserves anti-aliasing text bounds sharpness */
+    margin-bottom: 1.5rem;
+    text-align: left;
+    cursor: default;
+}
+
+/* Footer Action Checkout Hub Row alignment */
+.timeline-footer-action-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: auto; /* Ground link items tight to card floor horizon */
+}
+
+/* Capsule navigation link recovery button specs */
+a.timeline-capsule-link {
+    text-decoration: none;
+    background-color: #f1f5f7;
+    color: var(--dark-charcoal);
+    padding: 0.55rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+a.timeline-capsule-link svg {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.3s ease;
+}
+
+/* --- Hardware Accelerated Hover Animations Matrix --- */
+.timeline-unit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(13, 15, 20, 0.1);
+}
+
+.timeline-unit-card:hover .timeline-grid-img { transform: scale(1.04); }
+.timeline-unit-card:hover .timeline-wash-glow { opacity: 1; }
+.timeline-unit-card:hover .timeline-body-hull { background-color: #fffdf9; } /* Infuses warmth into active card hulls */
+.timeline-unit-card:hover .timeline-name { color: var(--primary-coral); }
+
+a.timeline-capsule-link:hover {
+    background-color: var(--secondary-teal);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+}
+a.timeline-capsule-link:hover svg { transform: translateX(3px); }
+
+/* Pure black descriptions glow gracefully into sharp coral text weights */
+.timeline-unit-card:hover .timeline-short-desc {
+    color: var(--primary-coral);
+    transform: scale(1.002);
+    transform-origin: left center;
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 992px) {
+    /* Collapse down to 2 columns on tablet screening monitors */
+    .timeline-deck-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+}
+
+@media (max-width: 650px) {
+    .timeline-section-header { text-align: center; }
+    /* Collapse down to pure centered vertical line list layout on mobile form factors */
+    .timeline-deck-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; gap: 1.5rem; }
+    .timeline-media-hull { height: 200px; }
+    .timeline-body-hull { padding: 1.2rem; }
+}
+
+</style>
+
+<!-- High-Contrast Modern Design Leaders Spotlight Section -->
+<section class="studio-leaders-section">
+    <div class="leaders-max-container">
+        
+        <!-- MANDATORY DISTINCT SECTION HEADING BLOCK -->
+        <div class="leaders-section-header">
+            <span class="leaders-pretitle">The Master Minds Behind the Wood</span>
+            <h2 class="leaders-headline">Artisan Design Leaders</h2>
+        </div>
+
+        <!-- Stable Horizontal 3-Column Profile Row Grid -->
+        <div class="leaders-deck-grid">
+            
+            <!-- Leader Unit 1 - Staggered Kinetic Float Alpha -->
+            <div class="leader-profile-card motion-float-alpha animate-on-scroll">
+                <div class="leader-media-hull">
+                    <img src="./Assests/Leader 1.webp" alt="Marcus Vance - Chief Geometric Calibrator" class="leader-grid-img">
+                    <div class="leader-wash-glow"></div>
+                    <span class="leader-pill-tag tag-cyan">Chief Calibrator</span>
+                </div>
+                <div class="leader-body-hull">
+                    <h3 class="leader-name">Marcus Vance</h3>
+                    <span class="leader-subtitle">Sub-Millimeter Logic Labs</span>
+                    <!-- Enforced Strict Pure Black Visibility Description Typography -->
+                    <p class="leader-short-desc">
+                        Marcus leads our laser-guided milling arrays, checking edge grain alignments down to micron levels to protect your structures from splits.
+                    </p>
+                    <div class="leader-footer-social">
+                        <a href="404.html" class="leader-profile-link">View Portfolio Keys →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leader Unit 2 - Staggered Kinetic Float Beta -->
+            <div class="leader-profile-card motion-float-beta animate-on-scroll">
+                <div class="leader-media-hull">
+                    <img src="./Assests/Leader 2.webp" alt="Sarah Jenkins - Play Balance Architect" class="leader-grid-img">
+                    <div class="leader-wash-glow"></div>
+                    <span class="leader-pill-tag tag-coral">Lead Designer</span>
+                </div>
+                <div class="leader-body-hull">
+                    <h3 class="leader-name">Sarah Jenkins</h3>
+                    <span class="leader-subtitle">Cognitive Matrix Framing</span>
+                    <p class="leader-short-desc">
+                        Sarah designs our modular interlocking layouts, mapping geometric coordinates to empower early-childhood trajectory problem solving.
+                    </p>
+                    <div class="leader-footer-social">
+                        <a href="404.html" class="leader-profile-link">View Portfolio Keys →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leader Unit 3 - Staggered Kinetic Float Alpha -->
+            <div class="leader-profile-card motion-float-alpha animate-on-scroll">
+                <div class="leader-media-hull">
+                    <img src="./Assests/Leader 3.webp" alt="Julian Rostova - Master Tumbler Artisan" class="leader-grid-img">
+                    <div class="leader-wash-glow"></div>
+                    <span class="leader-pill-tag tag-amber">Master Artisan</span>
+                </div>
+                <div class="leader-body-hull">
+                    <h3 class="leader-name">David Rostova</h3>
+                    <span class="leader-subtitle">Silk-Touch Finish Hub</span>
+                    <p class="leader-short-desc">
+                        David supervises our 12-hour walnut shell polishing baths, hand-applying local organic beeswax layers to lock in deep wooden scents.
+                    </p>
+                    <div class="leader-footer-social">
+                        <a href="404.html" class="leader-profile-link">View Portfolio Keys →</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* =======================================================================
+   UNIFIED FIXED RESOLUTION MATRIX: FULL PORTRAIT VISIBILITY + NEON GLOW
+   ======================================================================= */
+
+/* 1. Force the image hulls into a strict vertical portrait ratio (Handles headshots and full-body images perfectly) */
+.leader-media-hull {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    /* FIXED: Changes aspect ratio to a vertical 3:4 profile to show full-body assets perfectly without cropping */
+    aspect-ratio: 3 / 4 !important; 
+    overflow: hidden !important;
+    background-color: #f7fafc !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.02) !important;
+}
+
+/* 2. Scale images cleanly, keeping faces tightly tracked at the top center */
+.leader-grid-img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* Locks scaling layout ratios inside the portrait window container */
+    object-position: top center !important; /* FIXED: Prevents cutting off craftspeople's faces on any device */
+    display: block !important;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* 3. Re-lock cards into a tightly unified column baseline layout */
+.leader-profile-card {
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    border-radius: 28px !important;
+    height: auto !important;
+    min-height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transform: translateY(0) !important;
+    /* Pre-allocates hardware smooth spaces for your new neon hover glow systems */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* 4. CREATIVE GLOW: Modern Hardware-Accelerated Neon Border Reflection Effects */
+.leader-profile-card:hover {
+    transform: translateY(-8px) !important; /* Smoothly pops card up on mouse enter track */
+    border-color: rgba(255, 107, 107, 0.25) !important; /* Infuses coral tint line border edge overlays */
+    /* Generates an intense layered coral aura light reflection beneath the card footprint */
+    box-shadow: 0 20px 40px rgba(255, 107, 107, 0.15), 
+                0 0 30px rgba(255, 107, 107, 0.08) !important;
+}
+
+/* Smooth zoom transition maps over embedded image tags on focus */
+.leader-profile-card:hover .leader-grid-img {
+    transform: scale(1.03) !important;
+}
+
+    /* --- High-Contrast Creative Studio Leaders Section --- */
+.studio-leaders-section {
+    position: relative;
+    width: 100%;
+    background-color: #edf3f5; 
+    padding: 20px 5% 45px 5%; /* Tight padding fields compress section heights to eliminate layout voids */
+    overflow: hidden !important; /* Locks layout boundaries to prevent horizontal scroll bars */
+}
+
+.leaders-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* --- Section Heading Block Mapping --- */
+.leaders-section-header {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.leaders-pretitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--primary-coral);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.leaders-headline {
+    color: var(--dark-charcoal);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+}
+
+/* Tight Horizontal 3-Column Profile Row Framework Grid */
+.leaders-deck-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Fits 3 profile items side-by-side with zero horizontal leakages */
+    gap: 2.2rem;
+    width: 100%;
+}
+
+/* Individual High-Visibility Product Unit Frameworks */
+.leader-profile-card {
+    background-color: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 15px 35px rgba(160, 175, 185, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+    will-change: transform;
+}
+
+.leader-media-hull {
+    position: relative;
+    width: 100%;
+    height: 250px; /* Compact image framing packs layouts tight */
+    overflow: hidden;
+    background-color: #f7fafc;
+}
+
+.leader-grid-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Surface neon wash overlay activates on parent card hover entry */
+.leader-wash-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.25) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* In-image status flags label indicator mapping */
+.leader-pill-tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 0.4rem 0.8rem;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #ffffff;
+    z-index: 3;
+}
+.tag-cyan { background-color: var(--secondary-teal); box-shadow: 0 4px 10px rgba(78, 205, 196, 0.2); }
+.tag-coral { background-color: var(--primary-coral); box-shadow: 0 4px 10px rgba(255, 107, 107, 0.2); }
+.tag-amber { background-color: #e6b800; box-shadow: 0 4px 10px rgba(230, 184, 0, 0.2); }
+
+/* --- White Details Card Body Box layout --- */
+.leader-body-hull {
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    transition: background-color 0.3s ease;
+}
+
+.leader-name {
+    color: var(--dark-charcoal);
+    font-size: 1.25rem;
+    font-weight: 850;
+    margin-bottom: 2px;
+    transition: color 0.3s ease;
+    text-align: left;
+}
+
+.leader-subtitle {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+/* Enforced strict pure black description text details visibility typography layer */
+.leader-short-desc {
+    color: #000000; /* Deep pure black contrast readability layer profile mapping configuration */
+    font-size: 0.92rem;
+    line-height: 1.55;
+    font-weight: 600; /* Protected thickness preserves anti-aliasing text bounds sharpness */
+    margin-bottom: 1.5rem;
+    text-align: left;
+    cursor: default;
+}
+
+/* Footer Action Hub alignment line */
+.leader-footer-social {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: auto; /* Ground link items tight to card floor horizon */
+}
+
+a.leader-profile-link {
+    text-decoration: none;
+    color: #a0aec0;
+    font-size: 0.88rem;
+    font-weight: 800;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- Hardware-Accelerated 3D Fluid Floating Engine Keys --- */
+.motion-float-alpha { animation: leaderFloatX 5s infinite ease-in-out alternate; }
+.motion-float-beta  { animation: leaderFloatY 5.5s infinite ease-in-out alternate; }
+
+@keyframes leaderFloatX { 0% { transform: translateY(0px); } 100% { transform: translateY(-8px) translateX(2px); } }
+@keyframes leaderFloatY { 0% { transform: translateY(0px); } 100% { transform: translateY(-10px) translateX(-2px); } }
+
+/* --- Hardware Accelerated Hover Animations Matrix --- */
+.leader-profile-card:hover {
+    animation-play-state: paused !important; /* Freezes ambient float bobbing on hover entry tracking */
+    transform: translateY(-5px) !important;
+    box-shadow: 0 20px 45px rgba(13, 15, 20, 0.1);
+}
+
+.leader-profile-card:hover .leader-grid-img { transform: scale(1.04); }
+.leader-profile-card:hover .leader-wash-glow { opacity: 1; }
+.leader-profile-card:hover .leader-body-hull { background-color: #fffdf9; } /* Infuses warmth into active card hulls */
+.leader-profile-card:hover .leader-name { color: var(--primary-coral); }
+.leader-profile-card:hover a.leader-profile-link { color: var(--primary-coral); padding-left: 4px; }
+
+/* Pure black descriptions glow gracefully into sharp coral text weights */
+.leader-profile-card:hover .leader-short-desc {
+    color: var(--primary-coral);
+    transform: scale(1.002);
+    transform-origin: left center;
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 992px) {
+    /* Collapse down to 2 columns on tablet screening monitors */
+    .leaders-deck-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+}
+
+@media (max-width: 650px) {
+    .leaders-section-header { text-align: center; }
+    /* Collapse down to pure centered vertical line list layout on mobile form factors */
+    .leaders-deck-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; gap: 1.5rem; }
+    .leader-media-hull { height: 210px; }
+    .leader-body-hull { padding: 1.2rem; }
+}
+
+</style>
+
+<!-- Space-Efficient Creative Offers Bundle Drops Showcase Grid with Background -->
+<section class="offers-blueprint-deck-section">
+    <!-- NEW: Base Section Background Image Layer -->
+    <img src="./Assests/early development.webp" alt="Artisan Blueprint Canvas Backing" class="offers-deck-section-bg">
+    
+    <!-- NEW: Transparent off-white overlay protects text reading contrast lines -->
+    <div class="offers-deck-section-overlay"></div>
+
+    <div class="offers-deck-max-container">
+        
+        <!-- Left Column: Massive Immersive Frosted Glass Manifesto Card -->
+       <!-- Left Column: Massive Immersive Frosted Card with Internal Background Image -->
+<div class="offers-deck-card card-manifesto-glass animate-on-scroll">
+    <!-- NEW: Internal Card Background Image Cover Layer -->
+    <img src="./Assests/brain dev.webp" alt="Cognitive Matrix Workspace" class="manifesto-card-bg-img">
+    
+    <!-- NEW: Soft dark mix layer ensures 100% white text contrast visibility -->
+    <div class="manifesto-card-dark-scrim"></div>
+    
+    <div class="manifesto-inner-hull">
+        <span class="offers-deck-pretitle">The Master Quality Shield</span>
+        <!-- CHANGED: Color shifted to high-contrast white for dark backdrop readability -->
+        <h3 class="offers-deck-headline color-white-override">Pure Solid Hardwoods, <span class="teal-glow-text">Zero Synthetic Substitutes</span></h3>
+        
+        <!-- CHANGED: Color shifted to highly visible translucent white profile -->
+        <p class="offers-deck-paragraph-white-override">
+            We reject cheap chemical composites and low-density plastic matrix layers. Every newly arrived item inside our workspace drop log is squared from certified maple logs, giving your future architects a heavy, stable foundation to engineer structural grids safely.
+        </p>
+
+        <div class="offers-deck-badge-row">
+            <div class="micro-cert-badge badge-white-override">
+                <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="badge-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <span>100% Non-Toxic Beeswax Finish Pass</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Right Column: Dual Stacked Curated Promotion Cards Panel -->
+        <div class="offers-deck-right-stack">
+            
+            <!-- Promotion Unit 1 -->
+            <div class="offers-deck-card card-inline-row animate-on-scroll">
+                <div class="card-media-bezel">
+                    <img src="./Assests/architecter.webp" alt="Premium Limited Edition Master Architectural Bundle" class="offers-deck-img">
+                </div>
+                <div class="offers-deck-content-hull inline-pad">
+                    <span class="offers-deck-pill-badge badge-teal">Flash Bundle Drop</span>
+                    <h4 class="offers-deck-title-dark">Architect Pro <span class="teal-glow-text">Vault Kit</span></h4>
+                    <p class="offers-deck-paragraph-black">
+                        Secure instant value deductions when bundling 3 or more premium structural maple pillar modules inside a single workbench log.
+                    </p>
+                    <div class="offers-deck-purchase-footer">
+                        <span class="offers-deck-price-digits">Save 20%</span>
+                        <a href="404.html" class="offers-deck-basket-circle" title="Claim Offer Pass">
+                            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promotion Unit 2 -->
+            <div class="offers-deck-card card-inline-row animate-on-scroll">
+                <div class="card-media-bezel">
+                    <img src="./Assests/train.webp" alt="Eco Kinetic Train Assembly Tracks" class="offers-deck-img">
+                </div>
+                <div class="offers-deck-content-hull inline-pad">
+                    <span class="offers-deck-pill-badge badge-coral">Complimentary Pass</span>
+                    <h4 class="offers-deck-title-dark">Global Ecosystem <span class="coral-glow-text">Freight Keys</span></h4>
+                    <p class="offers-deck-paragraph-black">
+                        Claim a complimentary zero-cost transit voucher pass applied to heavy premium raw modular block sandbox shipments.
+                    </p>
+                    <div class="offers-deck-purchase-footer">
+                        <span class="offers-deck-price-digits">Free Delivery</span>
+                        <a href="404.html" class="offers-deck-basket-circle" title="Claim Offer Pass">
+                            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+
+    /* --- FIXED: Left Frosted Card Internal Image Custom Layering --- */
+
+.card-manifesto-glass {
+    position: relative !important; /* Forces absolute child components to lock inside boundaries */
+    background-color: #0d0f14 !important; /* Deep dark contrast background baseline */
+    padding: 3.5rem !important; /* Restores your rich internal clearance space coordinates */
+    height: auto !important; /* Safely fills up the vertical grid height parameters completely */
+}
+
+/* Background Image Layer Settings */
+.manifesto-card-bg-img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    z-index: 1 !important; /* Pins image behind internal layout elements */
+    transform: scale(1.02) !important;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* Soft dark masking scrim guarantees white font shapes stay completely readable */
+.manifesto-card-dark-scrim {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(to top, rgba(13, 15, 20, 0.95) 0%, rgba(13, 15, 20, 0.65) 100%) !important;
+    z-index: 2 !important; /* Layers over the picture but beneath typography */
+    pointer-events: none !important;
+}
+
+/* Elevates your text terminal hull clean over background image planes */
+.manifesto-inner-hull {
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* --- High-Contrast Typography Color Overrides --- */
+.color-white-override {
+    color: #ffffff !important;
+}
+
+.offers-deck-paragraph-white-override {
+    color: rgba(255, 255, 255, 0.82) !important; /* Crisp high-contrast readable profile mapping */
+    font-size: 0.96rem !important;
+    line-height: 1.65 !important;
+    font-weight: 500 !important;
+    margin-bottom: 2rem !important;
+    text-align: left !important;
+    cursor: default;
+}
+
+.badge-white-override span {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* --- Hardware Accelerated Card Activation Transitions --- */
+.card-manifesto-glass:hover .manifesto-card-bg-img {
+    transform: scale(1.00) !important; /* Smooth background zoom settling action */
+}
+
+/* Shifts paragraph highlights dynamically into deep glowing teal on box entries */
+.card-manifesto-glass:hover .offers-deck-paragraph-white-override {
+    color: #ffffff !important;
+}
+
+    /* --- FIXED: Complete Section Backdrop Image Visibility Matrix --- */
+
+/* 1. Lowers color thickness parameter loops to make your backdrop image fully visible */
+.offers-deck-section-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    /* FIXED: Switched color screens down to an absolute translucent vignette shield so your image projects cleanly */
+    background: radial-gradient(circle at 50% 50%, rgba(237, 243, 245, 0.55) 0%, rgba(237, 243, 245, 0.88) 100%) !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
+
+/* 2. Increases graphic profile thickness to draw out deep watermark line balances */
+.offers-deck-section-bg {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    z-index: 1 !important;
+    opacity: 0.55 !important; /* FIXED: Boosted opacity layer guarantees your watermark image details are visible */
+    filter: blur(0px) contrast(105%) grayscale(10%) !important; /* Strips heavy image blurs to preserve sharp lines */
+    pointer-events: none !important;
+    transform: scale(1.01) !important;
+}
+
+
+    /* --- High-Contrast Interactive Offers Privilege Deck with Backdrop Image --- */
+.offers-blueprint-deck-section {
+    position: relative;
+    width: 100%;
+    padding: 20px 5% 45px 5%; /* Tight padding fields compress section heights to eliminate layout voids */
+    overflow: hidden !important; /* Forces strict window clipping to kill horizontal scrollers */
+    background-color: #edf3f5;
+}
+
+/* NEW: Immersive Section Background Canvas Image Rules */
+.offers-deck-section-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    opacity: 0.15; /* Subtle watermark opacity prevents text layout blending errors */
+    filter: blur(1px) grayscale(20%);
+    pointer-events: none;
+    transform: scale(1.01);
+    transition: transform 1s ease;
+}
+
+.offers-blueprint-deck-section:hover .offers-deck-section-bg {
+    transform: scale(1.00); /* Delivers an organic ambient background settling transition */
+}
+
+/* NEW: Off-white masking screen protects pure text contrast visibility lines */
+.offers-deck-section-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(237, 243, 245, 0.96) 0%, rgba(255, 255, 255, 0.88) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.offers-deck-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr; /* Controls inner column weights to squeeze elements close together */
+    gap: 2.5rem;
+    align-items: stretch;
+    position: relative;
+    z-index: 5; /* Lifts content modules cleanly over background layout matrices */
+}
+
+.offers-deck-right-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* --- Core Card Structures with Hardware Acceleration --- */
+.offers-deck-card {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 15px 35px rgba(160, 175, 185, 0.12);
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s;
+    will-change: transform;
+}
+
+/* Left Column: Frosted Glass Panel Specifications Layout */
+.card-manifesto-glass {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 3.5rem;
+}
+
+/* Soft Internal Backlight Ambient Aura */
+.offers-deck-backlight-orb {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background-color: var(--secondary-teal);
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.12;
+    top: -50px;
+    left: -50px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.manifesto-inner-hull {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Right Column: Horizontal Spotlight Cards Size Dimensions */
+.card-inline-row {
+    min-height: 250px;
+    flex-direction: row !important; /* Rows media elements left and text content blocks right side */
+    align-items: center;
+}
+
+.card-media-bezel {
+    position: relative;
+    width: 200px;
+    height: 100%;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+/* Base Image Cover Rules */
+.offers-deck-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.offers-deck-content-hull.inline-pad {
+    padding: 2rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+/* --- High Visibility Section Typography Mappings --- */
+.offers-deck-pretitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary-coral);
+    margin-bottom: 6px;
+    display: block;
+}
+
+.offers-deck-headline {
+    color: var(--dark-charcoal);
+    font-size: clamp(1.6rem, 3.8vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+    margin-bottom: 1.2rem;
+    text-align: left;
+}
+
+.offers-deck-pill-badge {
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.35rem 0.8rem;
+    border-radius: 30px;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+}
+.badge-teal { background-color: var(--secondary-teal); box-shadow: 0 4px 10px rgba(78, 205, 196, 0.2); }
+.badge-coral { background-color: var(--primary-coral); box-shadow: 0 4px 10px rgba(255, 107, 107, 0.2); }
+
+.offers-deck-title-dark {
+    color: var(--dark-charcoal);
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+    text-align: left;
+}
+
+/* Localized text aura glow parameters */
+.teal-glow-text { color: #3bbcb4; text-shadow: 0 0 15px rgba(78, 205, 196, 0.15); }
+.coral-glow-text { color: var(--primary-coral); text-shadow: 0 0 15px rgba(255, 107, 107, 0.15); }
+
+/* Enforced strict pure black description text rules layers */
+.offers-deck-paragraph-black {
+    color: #000000; /* Pure black readable text layers profile mapping configuration */
+    font-size: 0.94rem;
+    line-height: 1.55;
+    font-weight: 600; /* Protected thickness preserves sharp anti-aliasing text profiles blurring */
+    margin-bottom: 1.2rem;
+    text-align: left;
+    cursor: default;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+}
+
+/* Pricing and Checkout Circle Elements Alignment Row */
+.offers-deck-purchase-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: auto; /* Grounds parameters neatly to baseline limits */
+}
+
+.offers-deck-price-digits {
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: var(--primary-coral);
+    line-height: 1;
+}
+
+a.offers-deck-basket-circle {
+    text-decoration: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #f1f5f7;
+    color: var(--dark-charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+a.offers-deck-basket-circle svg { width: 16px; height: 16px; }
+
+/* Micro Badge Layout elements */
+.offers-deck-badge-row { display: flex; width: 100%; }
+.micro-cert-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700; color: #5a6578; }
+.badge-icon { width: 16px; height: 16px; color: var(--secondary-teal); flex-shrink: 0; }
+
+/* --- Advanced Hover Card Activation Physics --- */
+.offers-blueprint-deck-section .offers-deck-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(13, 15, 20, 0.12);
+}
+
+/* Zoom transitions activate on background nested image tags on focus */
+.offers-blueprint-deck-section .offers-deck-card:hover .offers-deck-img {
+    transform: scale(1.05);
+}
+
+/* Title colors shift to brand highlight palettes on layout entry triggers */
+.card-inline-row:hover .offers-deck-title-dark {
+    color: var(--primary-coral);
+}
+
+/* Left panel text contents glow out cleanly on card focus */
+.card-manifesto-glass:hover .offers-deck-headline {
+    color: var(--primary-coral);
+}
+
+/* Pure black descriptions glow gracefully into sharp coral text weights */
+.offers-blueprint-deck-section .offers-deck-card:hover .offers-deck-paragraph-black {
+    color: var(--primary-coral);
+    transform: scale(1.002);
+}
+
+.card-inline-row:hover a.offers-deck-basket-circle {
+    background-color: var(--secondary-teal);
+    color: #ffffff;
+    transform: scale(1.06) rotate(90deg);
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 992px) {
+    /* Collapse split parameters down to a vertical single column layout track */
+    .offers-deck-max-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .offers-deck-right-stack { gap: 2rem; }
+    .card-manifesto-glass { padding: 2.5rem 1.5rem; }
+}
+
+@media (max-width: 650px) {
+    .card-inline-row {
+        flex-direction: column !important; /* Switches horizontal rows to vertical stack cards on small touch screens */
+        align-items: flex-start;
+    }
+    .card-media-bezel {
+        width: 100%;
+        height: 200px;
+    }
+    .offers-deck-content-hull.inline-pad {
+        padding: 1.5rem !important;
+    }
+}
+
+</style>
+<section class="testimonial-scroller-section">
+    <div class="testimonial-max-container">
+        
+        <div class="testimonial-section-header">
+            <span class="testimonial-pretitle">The Stackly Family</span>
+            <h2 class="testimonial-headline">Praise From Master Builders</h2>
+        </div>
+        
+        <!-- Continuous Auto-Scrolling Slider Core Window -->
+        <div class="testimonial-viewport">
+            <div class="testimonial-track">
+                
+                <!-- [CARD 1] -->
+                <div class="testimonial-glass-card">
+                    <div class="client-upper-row">
+                        <div class="client-avatar-frame">
+                            <img src="./Assests/testimonial 1.webp" alt="Sarah Jenkins" class="client-avatar-img">
+                        </div>
+                        <div class="client-meta-hull">
+                            <span class="client-name">Sarah Jenkins</span>
+                            <span class="client-status">Verified Parent</span>
+                        </div>
+                    </div>
+                    <div class="stars-vector-bar">★★★★★</div>
+                    <p class="testimonial-quote-black">"The mathematical precision engineering behind each block feels incredibly premium. They fit together effortlessly, inspiring structural layouts that push problem-solving way past screens."</p>
+                </div>
+
+                <!-- [CARD 2] -->
+                <div class="testimonial-glass-card">
+                    <div class="client-upper-row">
+                        <div class="client-avatar-frame">
+                            <img src="./Assests/testimonial 2.webp" alt="David Miller" class="client-avatar-img">
+                        </div>
+                        <div class="client-meta-hull">
+                            <span class="client-name">David Miller</span>
+                            <span class="client-status">Junior Architect Mentor</span>
+                        </div>
+                    </div>
+                    <div class="stars-vector-bar">★★★★★</div>
+                    <p class="testimonial-quote-black">"An exceptional resource for open-ended childhood engineering development. The structural weight allows multi-level complex scaffolding structures to lock without collapsing."</p>
+                </div>
+
+                <!-- [CARD 3] -->
+                <div class="testimonial-glass-card">
+                    <div class="client-upper-row">
+                        <div class="client-avatar-frame">
+                            <img src="./Assests/testimonial 3.webp" alt="Elena Rostova" class="client-avatar-img">
+                        </div>
+                        <div class="client-meta-hull">
+                            <span class="client-name">Elena Rostova</span>
+                            <span class="client-status">Kindergarten Director</span>
+                        </div>
+                    </div>
+                    <div class="stars-vector-bar">★★★★★</div>
+                    <p class="testimonial-quote-black">"Stackly sets survive heavy classroom workloads day in and day out. The timber grain finishes look clean, feel amazing, and hold clean geometric color tones under rigorous use."</p>
+                </div>
+
+                <!-- =======================================================================
+                     CRITICAL MULTI-CLONES: Required to achieve seamless infinite scrolling. 
+                     Do not skip any of these cards!
+                     ======================================================================= -->
+                
+                <!-- [CLONE OF CARD 1] -->
+                <div class="testimonial-glass-card">
+                    <div class="client-upper-row">
+                        <div class="client-avatar-frame">
+                            <img src="./Assests/testimonial 1.webp" alt="Sarah Jenkins" class="client-avatar-img">
+                        </div>
+                        <div class="client-meta-hull">
+                            <span class="client-name">Sarah Jenkins</span>
+                            <span class="client-status">Verified Parent</span>
+                        </div>
+                    </div>
+                    <div class="stars-vector-bar">★★★★★</div>
+                    <p class="testimonial-quote-black">"The mathematical precision engineering behind each block feels incredibly premium. They fit together effortlessly, inspiring structural layouts that push problem-solving way past screens."</p>
+                </div>
+
+                <!-- [CLONE OF CARD 2] -->
+                <div class="testimonial-glass-card">
+                    <div class="client-upper-row">
+                        <div class="client-avatar-frame">
+                            <img src="./Assests/testimonial 2.webp" alt="David Miller" class="client-avatar-img">
+                        </div>
+                        <div class="client-meta-hull">
+                            <span class="client-name">David Miller</span>
+                            <span class="client-status">Junior Architect Mentor</span>
+                        </div>
+                    </div>
+                    <div class="stars-vector-bar">★★★★★</div>
+                    <p class="testimonial-quote-black">"An exceptional resource for open-ended childhood engineering development. The structural weight allows multi-level complex scaffolding structures to lock without collapsing."</p>
+                </div>
+
+                <!-- [CLONE OF CARD 3] -->
+                <div class="testimonial-glass-card">
+                    <div class="client-upper-row">
+                        <div class="client-avatar-frame">
+                            <img src="./Assests/testimonial 3.webp" alt="Elena Rostova" class="client-avatar-img">
+                        </div>
+                        <div class="client-meta-hull">
+                            <span class="client-name">Elena Rostova</span>
+                            <span class="client-status">Kindergarten Director</span>
+                        </div>
+                    </div>
+                    <div class="stars-vector-bar">★★★★★</div>
+                    <p class="testimonial-quote-black">"Stackly sets survive heavy classroom workloads day in and day out. The timber grain finishes look clean, feel amazing, and hold clean geometric color tones under rigorous use."</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- High-Contrast Seamless Responsive Testimonials --- */
+.testimonial-scroller-section {
+    position: relative;
+    width: 100%;
+    background-color: #edf3f5; 
+    padding: 20px 5% 40px 5%; /* Minimized top spacing removes gap voids completely */
+    overflow: hidden;
+}
+
+.testimonial-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.testimonial-section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.testimonial-pretitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary-coral);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.testimonial-headline {
+    color: var(--dark-charcoal);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+}
+
+/* Linear Masking Viewport Box Framework */
+.testimonial-viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    /* Softly fades out the scrolling edge boundaries left and right side seamlessly */
+    mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    padding: 15px 0;
+}
+
+/* Automated Endless CSS Scroll Animation Rail Track Container */
+.testimonial-track {
+    display: flex;
+    width: max-content; /* Enforces track extension up to absolute pixel width threshold sums */
+    gap: 2rem; /* Uniform spacing track gap */
+    align-items: center;
+    animation: automatedSlideLoop 28s linear infinite; /* Silky-smooth loop crawling speed */
+}
+
+/* Pauses movement actions entirely when mouse cursor hovers over card container elements */
+.testimonial-viewport:hover .testimonial-track {
+    animation-play-state: paused;
+}
+
+/* --- Pristine High-Visibility Card Components --- */
+.testimonial-glass-card {
+    width: clamp(290px, 35vw, 420px); /* Responsive fluid box width mapping dimensions */
+    background-color: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 15px 35px rgba(160, 175, 185, 0.08);
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s;
+}
+
+/* Client Identity Row Setup */
+.client-upper-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0.8rem;
+}
+
+.client-avatar-frame {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    border: 2px solid white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.client-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.client-meta-hull { display: flex; flex-direction: column; }
+.client-name { font-size: 1.05rem; font-weight: 800; color: var(--dark-charcoal); }
+.client-status { font-size: 0.78rem; font-weight: 700; color: #718096; }
+
+/* Uniform Star Rating styling layout */
+.stars-vector-bar {
+    color: var(--yellow-color);
+    letter-spacing: 3px;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Enforced strict pure black description text content rules layers */
+.testimonial-quote-black {
+    color: #000000; /* Deep high-contrast pure black visibility font mapping */
+    font-size: 0.95rem;
+    line-height: 1.65;
+    font-weight: 600; /* Protected thickness shields anti-aliasing text blurs */
+    cursor: default;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+}
+
+/* --- Hardware Accelerated Hover & Aura Glow Effects --- */
+.testimonial-glass-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(78, 205, 196, 0.25);
+    box-shadow: 0 25px 50px rgba(13, 15, 20, 0.12);
+}
+
+.testimonial-glass-card:hover .client-avatar-frame {
+    transform: scale(1.05);
+    border-color: var(--secondary-teal);
+}
+
+/* Text glow color-shift effect activates cleanly */
+.testimonial-glass-card:hover .testimonial-quote-black {
+    color: var(--primary-coral);
+    transform: scale(1.002);
+}
+
+/* --- THE LOOP FIX KEYFRAME MAP ---
+   Translates exactly negative half width parameters (-50% track offset) because clones 
+   perfectly mirror the base spacing metrics, guaranteeing infinite playback. */
+@keyframes automatedSlideLoop {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-50% - 1rem)); 
+    }
+}
+
+/* --- Mobile Breakpoints Adaptive Framework --- */
+@media (max-width: 650px) {
+    .testimonial-scroller-section { padding-top: 15px; }
+    .testimonial-glass-card {
+        width: 290px; /* Secure compact width sizing configuration for smartphone monitors */
+        padding: 1.5rem;
+        border-radius: 18px;
+    }
+    .testimonial-quote-black { font-size: 0.9rem; }
+}
+
+</style>
+
+<!-- Immersive Cinematic CTA Banner with New Strategic Content -->
+<section class="immersive-cta-section">
+    <!-- Base Background Image Cover Layer -->
+    <img src="./Assests/junior architects.webp" alt="Stackly Craft Workshop" class="cta-bg-backdrop">
+    
+    <!-- Dark Scrim Mask Overlay for Text Readability -->
+    <div class="cta-dark-mask"></div>
+
+    <div class="cta-max-container">
+        <!-- Frosted Glass Action Box Box -->
+        <div class="cta-glass-hull animate-on-scroll">
+            
+            <div class="cta-content-panel">
+                <h2 class="cta-headline">
+                    Design Your Own Custom <span class="cta-glow-text">Heirloom Playset</span>.
+                </h2>
+                <p class="cta-sub-paragraph">
+                    Collaborate with our master woodworkers to engrave customized block modules, specify premium organic dye palettes, and manufacture a completely tailored learning kit unique to your home.
+                </p>
+            </div>
+
+            <!-- 404 Route Intercept Action Buttons Group -->
+            <div class="cta-actions-hub">
+                <button class="cta-btn cta-prime-btn" onclick="handleNavigation404(event, '404.html')">
+                    <span>Enter Craft Studio</span>
+                    <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+                
+                <button class="cta-btn cta-sec-btn" onclick="handleNavigation404(event, '404.html')">
+                    <span>Consult Artisan</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* --- Ultra-Creative Cinematic CTA Framework --- */
+.immersive-cta-section {
+    position: relative;
+    width: 100%;
+    min-height: 45vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 5% 40px 5%; /* Tight 20px padding reduces spacing layout voids */
+    overflow: hidden;
+}
+
+/* Background Image Layer Settings */
+.cta-bg-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    transform: scale(1.02); /* Padding room for smooth hover transformations */
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.immersive-cta-section:hover .cta-bg-backdrop {
+    transform: scale(1.00);
+}
+
+/* Dark masking scrim ensures absolute readability over any background picture */
+.cta-dark-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(13, 15, 20, 0.85) 0%, rgba(20, 24, 33, 0.65) 100%);
+    z-index: 2;
+}
+
+.cta-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 3;
+}
+
+/* The Main Frosted Glass Card Panel Box Wrapper */
+.cta-glass-hull {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 32px;
+    padding: 3.5rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s, background-color 0.4s;
+}
+
+/* --- High-Visibility Section Content Blocks --- */
+.cta-content-panel {
+    max-width: 750px;
+}
+
+.cta-headline {
+    color: #ffffff; /* Crisp white for max contrast on dark images */
+    font-size: clamp(1.8rem, 3.8vw, 2.4rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+/* Bright Coral Text Aura Glow Effect */
+.cta-glow-text {
+    color: var(--primary-coral);
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+    transition: text-shadow 0.3s ease;
+}
+
+/* Exactly 2 lines of description text mapped to crisp visible font rules */
+.cta-sub-paragraph {
+    color: rgba(255, 255, 255, 0.9); /* High contrast white readability layer profile */
+    font-size: clamp(0.98rem, 2vw, 1.12rem);
+    line-height: 1.6;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+    cursor: default;
+}
+
+/* Action Utility Button Links Hub */
+.cta-actions-hub {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-shrink: 0;
+}
+
+.cta-btn {
+    border: none;
+    padding: 1.1rem 2.2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Solid Main Coral CTA Button */
+.cta-prime-btn {
+    background-color: var(--primary-coral);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.25);
+}
+
+.cta-prime-btn:hover {
+    background-color: #ff5252;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(255, 107, 107, 0.4);
+}
+
+.cta-prime-btn svg { transition: transform 0.3s ease; }
+.cta-prime-btn:hover svg { transform: translateX(4px); }
+
+/* Minimalist Clean Secondary Translucent Button */
+.cta-sec-btn {
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}
+
+.cta-sec-btn:hover {
+    background-color: #ffffff;
+    color: var(--dark-charcoal);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+}
+
+/* --- Hardware Accelerated Hover & Aura Glow Effects --- */
+.cta-glass-hull:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.3);
+}
+
+.cta-glass-hull:hover .cta-glow-text {
+    text-shadow: 0 0 25px rgba(255, 107, 107, 0.5);
+}
+
+/* The paragraph content glows out softly and shifts weights on hover */
+.cta-glass-hull:hover .cta-sub-paragraph {
+    color: var(--secondary-teal);
+    transform: scale(1.002);
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 1024px) {
+    /* Collapse side-by-side elements down to a centered vertical profile grid mapping */
+    .cta-glass-hull {
+        flex-direction: column;
+        text-align: center;
+        padding: 3rem 2rem;
+        gap: 2rem;
+    }
+    .cta-actions-hub {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 550px) {
+    .cta-glass-hull {
+        padding: 2.2rem 1.2rem;
+        border-radius: 24px;
+    }
+    .cta-actions-hub {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .cta-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+</style>
+
+<!-- High-Contrast Creative Immersive Footer Deck -->
+<footer class="stackly-footer">
+    <div class="footer-max-container">
+        
+        <!-- Primary Structural Column Array Block Grid -->
+        <div class="footer-columns-grid">
+            
+            <!-- Column 1: Brand Profile Terminal Hub -->
+           <!-- Column 1: Brand Profile Terminal Hub with Integrated Social Vectors -->
+<div class="footer-col brand-pillar">
+    <a href="#" class="footer-logo-link" onclick="executeScrollToTop(event)" title="Back to Top">
+        <img src="./Assests/brand logo - toy.webp" alt="Stackly Logo Footer" class="footer-brand-logo">
+    </a>
+    <p class="footer-brand-bio">
+        Engineering luxury tactile play systems designed to bridge geometric architectural mechanics with childhood curiosity.
+    </p>
+    <div class="company-address-box">
+        <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="addr-vector"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <span>100 Playwright Avenue, Craft Studio 4, Boston, MA</span>
+    </div>
+
+    <!-- New High-Visibility Vector Social Media Icon Row -->
+    <div class="footer-social-row">
+        <!-- Facebook -->
+        <button class="social-circle-btn" onclick="handleNavigation404(event, '404.html')" title="Follow on Facebook">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-4h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+        </button>
+        <!-- Instagram -->
+        <button class="social-circle-btn" onclick="handleNavigation404(event, '404.html')" title="Follow on Instagram">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+        </button>
+        <!-- Pinterest -->
+        <button class="social-circle-btn" onclick="handleNavigation404(event, '404.html')" title="Follow on Pinterest">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        </button>
+        <!-- YouTube -->
+        <button class="social-circle-btn" onclick="handleNavigation404(event, '404.html')" title="Follow on YouTube">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 28 0 0 0 1 11.75a29 28 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 28 0 0 0 .46-5.25 29 28 0 0 0-.46-5.33z"></path>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+            </svg>
+        </button>
+    </div>
+</div>
+
+
+            <!-- Column 2: Quick Menus Collection -->
+            <div class="footer-col links-pillar">
+                <h4 class="footer-heading">Quick Links</h4>
+                <div class="footer-links-list">
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Track Order Link')">Track Your Order</a>
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Store Locator Link')">Find a Retailer</a>
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Wholesale Partner Program')">Wholesale Program</a>
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Safe Materials Certification')">Safety Labs Reports</a>
+                </div>
+            </div>
+
+            <!-- Column 3: Corporate Profile Menus -->
+            <div class="footer-col links-pillar">
+                <h4 class="footer-heading">Support Hub</h4>
+                <div class="footer-links-list">
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Extended Warranties')">Artisan Warranty</a>
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Returns Guidelines')">Easy Exchange Portal</a>
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Help FAQs Matrix')">Help &amp; FAQ Center</a>
+                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Media Contact Portal')">Press Resources</a>
+                </div>
+            </div>
+
+            <!-- Column 4: Newsletter Subscriber Actions Console -->
+            <div class="footer-col subscribe-pillar">
+                <h4 class="footer-heading">The Playground Dispatch</h4>
+                <p class="subscribe-caption">Subscribe to unlock premium custom blueprint designs and private product launches.</p>
+                
+                <form class="footer-newsletter-form" onsubmit="handleNewsletterRouting(event)">
+    <div class="input-bezel-hull">
+        <!-- Input field with class hook for the validator script -->
+        <input type="email" placeholder="Enter your email..." class="newsletter-input">
+        <button type="submit" class="newsletter-submit-btn" title="Subscribe Now">
+            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        </button>
+    </div>
+</form>
+
+            </div>
+
+        </div>
+
+        <!-- Secondary Bottom Regulatory Ledger Bar -->
+        <div class="footer-ledger-base">
+            <div class="ledger-left-copyright">
+                &copy; <span id="currentYear">2026</span> Stackly Industries. All rights reserved.
+            </div>
+            
+            <!-- Privacy Legal Links Stacks -->
+            <div class="ledger-center-legal">
+                <a href="404.html" class="legal-link" onclick="handleNavigation404(event, 'Footer Privacy Declaration Context')">Privacy Policy</a>
+                <a href="404.html" class="legal-link" onclick="handleNavigation404(event, 'Footer Terms of Service Alignment')">Terms of Service</a>
+                <a href="404.html" class="legal-link" onclick="handleNavigation404(event, 'Footer Cookies Settings Hub')">Cookie Management</a>
+            </div>
+
+            <!-- Right-Side Floating Back to Top Control Anchor Button -->
+            <button class="footer-top-arrow-btn" onclick="executeScrollToTop(event)" title="Back to Top">
+                <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="up-arrow-vector"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+            </button>
+        </div>
+
+    </div>
+</footer>
+<script>
+    // Validates newsletter fields and handles page routing adjustments
+function handleNewsletterRouting(event) {
+    event.preventDefault(); // Halt default form reloading loops
+    
+    const inputNode = event.target.querySelector('.newsletter-input');
+    
+    // Check if input node is missing, completely blank, or filled with spaces
+    if (!inputNode || inputNode.value.trim() === "") {
+        alert("⚠️ Please fill in the fields before subscribing!");
+        if (inputNode) inputNode.focus(); // Snap user focus helper back onto input box
+        return;
+    }
+    
+    // If field contains content, clear input and execute a clean 404 page redirect jump
+    inputNode.value = ""; 
+    window.location.href = "404.html";
+}
+
+</script>
+
+<style>
+    /* --- Brand Pillar Social Icons Hub Layout --- */
+.footer-social-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1.5rem; /* Forces a safe, clear gap directly below the address text box */
+    width: 100%;
+}
+
+/* --- Brand Pillar Social Icons Hub Layout --- */
+.footer-social-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1.5rem; 
+    width: 100%;
+}
+
+.social-circle-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.65);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.social-circle-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* --- Uniform Hover and Glow Effects (Removes Red Override) --- */
+.social-circle-btn:hover {
+    background-color: var(--secondary-teal);
+    color: #ffffff;
+    border-color: var(--secondary-teal);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+}
+
+
+    /* --- High-Contrast Immersive Footer Framework --- */
+.stackly-footer {
+    position: relative;
+    width: 100%;
+    background-color: #0d0f14; /* Deep premium canvas backdrop matching header transparency tones */
+    padding: 50px 5% 25px 5%; /* Tight space configuration prevents dead empty whitespace gaps */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-max-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+}
+
+/* Master Grid Grid Mapping Columns Ratios */
+.footer-columns-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr 0.8fr 1.1fr;
+    gap: 3rem;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* --- Column 1: Brand Profile Alignment --- */
+.footer-logo-link {
+    display: inline-block;
+    margin-bottom: 1.2rem;
+    transition: transform 0.3s ease;
+}
+.footer-logo-link:hover { transform: scale(1.03); }
+.footer-brand-logo { height: 40px; width: auto; object-fit: contain; border-radius: 6px; }
+
+.footer-brand-bio {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.company-address-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.88rem;
+    line-height: 1.4;
+    font-weight: 500;
+}
+.addr-vector { width: 18px; height: 18px; color: var(--secondary-teal); flex-shrink: 0; margin-top: 2px; }
+
+/* --- Columns 2 & 3: Quick Navigation Link Stacks --- */
+.footer-heading {
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 6px;
+}
+/* Micro neon underscore line below headings */
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--primary-coral);
+    border-radius: 2px;
+}
+
+.footer-links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    width: 100%;
+}
+
+.footer-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    display: inline-block;
+    width: max-content;
+    transform-origin: left center;
+}
+
+/* Link Hover Highlight Shimmer Actions */
+.footer-link:hover {
+    color: var(--secondary-teal);
+    transform: translateX(4px) scale(1.02);
+    text-shadow: 0 0 15px rgba(78, 205, 196, 0.4);
+}
+
+/* --- Column 4: Newsletter Module Settings --- */
+.subscribe-caption {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+}
+
+.footer-newsletter-form {
+    width: 100%;
+}
+
+.input-bezel-hull {
+    position: relative;
+    width: 100%;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.newsletter-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0.6rem 1rem;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.newsletter-input::placeholder { color: rgba(255, 255, 255, 0.4); }
+
+.newsletter-submit-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-coral);
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.2s;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+}
+.newsletter-submit-btn svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+
+/* Focus and hover reactions for input field box elements */
+.input-bezel-hull:focus-within {
+    border-color: var(--secondary-teal);
+    box-shadow: 0 0 15px rgba(78, 205, 196, 0.15);
+}
+.newsletter-submit-btn:hover {
+    background-color: #ff5252;
+    transform: scale(1.05);
+}
+.newsletter-submit-btn:hover svg {
+    transform: scale(1.1) translate(1px, -1px);
+}
+
+/* --- Secondary Bottom Regulatory Ledger Bar --- */
+.footer-ledger-base {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 1.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.ledger-left-copyright {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.ledger-center-legal {
+    display: flex;
+    gap: 2rem;
+}
+
+.legal-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+.legal-link:hover { color: #ffffff; }
+
+/* Right aligned circular Back-to-Top trigger button */
+.footer-top-arrow-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.up-arrow-vector { width: 16px; height: 16px; }
+
+.footer-top-arrow-btn:hover {
+    background-color: var(--secondary-teal);
+    color: #ffffff;
+    border-color: var(--secondary-teal);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.3);
+}
+.footer-top-arrow-btn:hover .up-arrow-vector {
+    animation: upwardBounceArrow 0.8s infinite alternate ease-in-out;
+}
+
+/* --- High Performance Keyframe Arrow Loops --- */
+@keyframes upwardBounceArrow {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-4px); }
+}
+
+/* --- Responsive Layout Parameters --- */
+@media (max-width: 1024px) {
+    /* Pivot columns to form a balanced 2x2 grid map on tablet monitors */
+    .footer-columns-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 2.5rem;
+    }
+    .brand-pillar, .subscribe-pillar { grid-column: span 1; }
+}
+
+@media (max-width: 768px) {
+    /* Collapse the base layout items into a vertically aligned structural listing */
+    .footer-columns-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .footer-ledger-base {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    .ledger-center-legal {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.2rem;
+    }
+    .footer-heading { margin-bottom: 1rem; }
+}
+
+</style>
+
+<script>
+    // Native smooth page scroller linked to brand log link and right floating button
+function executeScrollToTop(event) {
+    event.preventDefault(); // Stop standard hash window anchor jumps
+    
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' /* Dispatches native hardware accelerated animation frame easing curves */
+    });
+}
+
+// Simulated automated dispatcher notification layout for subscription form fields
+function simulateNewsletterSubmit(event) {
+    event.preventDefault(); // Hold form processing data loops
+    
+    const inputNode = event.target.querySelector('.newsletter-input');
+    const subscriberEmail = inputNode ? inputNode.value : '';
+    
+    alert(`🎉 Stackly Club Monitor:\n\nThank you for choosing creative curiosity!\n"${subscriberEmail}" has been registered inside our premium blueprint drop dispatch network successfully.`);
+    
+    if (inputNode) inputNode.value = ''; // Reset the input layout
+}
+
+// Automatically update structural footer copyright parameters live 
+window.addEventListener('DOMContentLoaded', () => {
+    const yearNode = document.getElementById('currentYear');
+    if (yearNode) yearNode.innerText = new Date().getFullYear();
+});
+
+</script>
+</body>
+</html>
