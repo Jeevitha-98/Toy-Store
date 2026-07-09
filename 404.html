@@ -269,17 +269,35 @@
     </style>
 
     <script>
-        // Step backwards into browser session timeline records natively
+/**
+ * FIXED 404 HISTORY BACK CONTROLLER:
+ * Checks session memory tracks to see if the user came from a specific dashboard tab section.
+ * Routes them back seamlessly to that exact panel layout instead of resetting to page one.
+ */
 function executeHistoryBack(event) {
-    event.preventDefault(); // Stop standard hash jumping actions
-    
+    event.preventDefault(); // Stop standard default layout hash jumping actions
+
+    // 1. Pull the last viewed dashboard unique ID token from session memory cache track
+    const lastActiveDashboardSection = sessionStorage.getItem("lastViewedDashboardSectionId");
+
+    if (lastActiveDashboardSection) {
+        // 2. Clear out the variable token so it doesn't get stuck permanently
+        sessionStorage.removeItem("lastViewedDashboardSectionId");
+        
+        // 3. Force the window location path straight back into the main dashboard file deck
+        // This will allow your dashboard's DOM initializer to auto-load that exact section panel card
+        window.location.href = "dashboard.html";
+        return;
+    }
+
+    // 4. Standard Fallback Track: If the user didn't come from an internal dashboard tab section
     if (window.history.length > 1) {
-        window.history.back(); // Step back into the user session history loop safely
+        window.history.back(); // Safely step back into native browser timeline records
     } else {
-        // Fallback redirection path if page is opened inside a fresh browser tab session
-        window.location.href = 'index.html'; 
+        window.location.href = 'index.html'; // Fallback redirect if page opened inside a fresh browser tab session
     }
 }
+
 
     </script>
 </body>

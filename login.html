@@ -252,6 +252,68 @@
         .auth-unified-centered-card { padding: 2rem 1.2rem !important; border-radius: 24px !important; }
         .auth-role-selector-row, .auth-social-actions-deck { grid-template-columns: 1fr !important; gap: 0.8rem !important; }
     }
+
+    /* =======================================================================
+   UNIVERSAL SOCIAL AUTHENTICATION ACTION CAPSULES VECTOR STYLES
+   ======================================================================= */
+
+.auth-social-actions-deck {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* Splits Google and Facebook options side-by-side evenly */
+    gap: 1rem !important;
+    width: 100% !important;
+    margin-top: 1.2rem !important;
+    margin-bottom: 1.5rem !important;
+    box-sizing: border-box !important;
+}
+
+/* HIGH-VISIBILITY GRAY-BORDERED CAPSULES ELEMENTS */
+a.social-auth-btn {
+    background-color: #ffffff !important; /* Pure white backing layer guarantees clear visibility */
+    border: 1px solid #cbd5e0 !important; /* CRISP DARK GREY INPUT BORDER ENFORCES CONTAINER BOUNDS */
+    color: #1a202c !important; /* Deep charcoal black readable text contrast */
+    padding: 0.8rem 1.2rem !important;
+    border-radius: 12px !important;
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    cursor: pointer !important;
+    box-sizing: border-box !important;
+}
+
+/* Premium micro hover focus inversion behavior tracks */
+a.social-auth-btn:hover {
+    background-color: #f8fafc !important;
+    border-color: #1a202c !important; /* Border snaps to solid charcoal focus track on entry mouse sweeps */
+    box-shadow: 0 4px 12px rgba(160, 175, 185, 0.12) !important;
+}
+
+.social-icon-hull {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 18px !important;
+    height: 18px !important;
+    flex-shrink: 0 !important;
+}
+.social-icon-hull svg { width: 100% !important; height: 100% !important; display: block !important; }
+
+/* Dynamic Brand Asset Vector Coloring Overlays Mappings */
+.icon-google { color: #ea4335 !important; } /* Authentic high-contrast branded Google red token fill */
+.icon-facebook { color: #1877f2 !important; } /* Authentic high-contrast branded Facebook blue token fill */
+
+/* Responsive media collapse tracker adjustments for smaller phone views */
+@media (max-width: 480px) {
+    .auth-social-actions-deck {
+        grid-template-columns: 1fr !important; /* Collapses horizontal columns layout down to vertical stack flow lines */
+        gap: 0.75rem !important;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -357,10 +419,31 @@
                 </div>
 
                 <!-- 7. High-Visibility Social Buttons Deck -->
-                <div class="auth-social-actions-deck">
-                    <button class="social-auth-btn" onclick="triggerSocialAuth()">G Google</button>
-                    <button class="social-auth-btn" onclick="triggerSocialAuth()">F Facebook</button>
-                </div>
+             <!-- High-Visibility Social Actions Deck with Professional Vector Icons Stack -->
+<div class="auth-social-actions-deck">
+    
+    
+    <a href="404.html" class="social-auth-btn" style="text-decoration: none !important;">
+        <span class="social-icon-hull icon-google">
+            <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.24 10.285V13.4h6.887c-.275 1.565-1.88 4.604-6.887 4.604-4.33 0-7.866-3.577-7.866-8s3.536-8 7.866-8c2.46 0 4.105 1.025 5.047 1.926l2.427-2.334C17.955 2.192 15.34 1 12.24 1 5.48 1 0 6.48 0 13.24s5.48 12.24 12.24 12.24c7.05 0 11.75-4.945 11.75-11.915 0-.805-.085-1.42-.19-1.925H12.24z"/>
+            </svg>
+        </span>
+        <span>Google</span>
+    </a>
+
+    
+    <a href="404.html" class="social-auth-btn" style="text-decoration: none !important;">
+        <span class="social-icon-hull icon-facebook">
+            <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+        </span>
+        <span>Facebook</span>
+    </a>
+
+</div>
+
 
                 <!-- 8. Create Account Footer Line Callout -->
                 <div class="auth-console-footer">

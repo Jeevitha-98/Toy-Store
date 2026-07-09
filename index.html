@@ -187,7 +187,7 @@ function handleBrandRefresh(event) {
             
            <div class="hero-cta-group">
     <!-- Explore Catalog Button (Navigates to 404.html) -->
-    <button class="hero-prime-btn" onclick="handleNavigation404(event, '404.html')">
+    <button class="hero-prime-btn" onclick="handleNavigation404(event, 'shop.html')">
         <span>Explore Catalog</span>
         <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -2758,7 +2758,7 @@ function handleNavigation404(event, targetPage) {
     </p>
     <div class="company-address-box">
         <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="addr-vector"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-        <span>100 Playwright Avenue, Craft Studio 4, Boston, MA</span>
+        <span>MMR Complex, Periyakollappatty, Chinna Thirupathi, Salem, Tamil Nadu 636008</span>
     </div>
 
     <!-- New High-Visibility Vector Social Media Icon Row -->
@@ -2796,26 +2796,29 @@ function handleNavigation404(event, targetPage) {
 
 
             <!-- Column 2: Quick Menus Collection -->
-            <div class="footer-col links-pillar">
-                <h4 class="footer-heading">Quick Links</h4>
-                <div class="footer-links-list">
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Track Order Link')">Track Your Order</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Store Locator Link')">Find a Retailer</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Wholesale Partner Program')">Wholesale Program</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Safe Materials Certification')">Safety Labs Reports</a>
-                </div>
-            </div>
+          <div class="footer-col links-pillar">
+    <h4 class="footer-heading">Quick Links</h4>
+    <div class="footer-links-list">
+        <!-- FIXED: Removed the 404 tracking intercept so these links navigate to their real pages instantly -->
+        <a href="shop.html" class="footer-link">Shop Toys</a>
+        <a href="newarrivals.html" class="footer-link">New Arrivals</a>
+        <a href="offers.html" class="footer-link">Offers</a>
+        <a href="contact.html" class="footer-link">Contact Us</a>
+    </div>
+</div>
 
-            <!-- Column 3: Corporate Profile Menus -->
-            <div class="footer-col links-pillar">
-                <h4 class="footer-heading">Support Hub</h4>
-                <div class="footer-links-list">
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Extended Warranties')">Artisan Warranty</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Returns Guidelines')">Easy Exchange Portal</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Help FAQs Matrix')">Help &amp; FAQ Center</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Media Contact Portal')">Press Resources</a>
-                </div>
-            </div>
+
+<!-- Column 3: Corporate Profile Menus -->
+<div class="footer-col links-pillar">
+<h4 class="footer-heading">Support Hub</h4>
+<div class="footer-links-list">
+    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Extended Warranties')">Artisan Warranty</a>
+    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Returns Guidelines')">Easy Exchange Portal</a>
+    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Help FAQs Matrix')">Help &amp; FAQ Center</a>
+    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Media Contact Portal')">Press Resources</a>
+</div>
+</div>
+
 
             <!-- Column 4: Newsletter Subscriber Actions Console -->
             <div class="footer-col subscribe-pillar">
@@ -2879,9 +2882,25 @@ function handleNewsletterRouting(event) {
     window.location.href = "404.html";
 }
 
+/**
+ * REIFIED FOOTER NAVIGATION INTERCEPTOR:
+ * Halts default browser page transitions and forwards users to the standard 404 views.
+ */
+function handleNavigation404(event, contextLabelText) {
+    // 1. HARD BLOCK: Overrides default anchor click event paths completely 
+    event.preventDefault();
+    
+    console.log("Logged Footer Action Event Context: " + contextLabelText);
+    
+    // 2. Route the window location path straight forward into your error view panel layout
+    window.location.href = "404.html";
+}
+
 </script>
 
 <style>
+
+    
     /* --- Brand Pillar Social Icons Hub Layout --- */
 .footer-social-row {
     display: flex;
@@ -2948,10 +2967,11 @@ function handleNewsletterRouting(event) {
 }
 
 /* Master Grid Grid Mapping Columns Ratios */
-.footer-columns-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 0.8fr 0.8fr 1.1fr;
-    gap: 3rem;
+.footer-columns-grid{
+    display:grid;
+    grid-template-columns:1.4fr auto auto 1.2fr;
+    justify-content:space-between;
+    column-gap:2.5rem;
 }
 
 .footer-col {

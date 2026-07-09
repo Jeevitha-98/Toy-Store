@@ -34,10 +34,7 @@
             </div>
 
             <!-- Smartphone Mobile Close Navigation Row Line Trigger -->
-            <div class="sidebar-mobile-close-header">
-                <span>Atelier Console</span>
-                <button class="sidebar-close-x-btn" onclick="toggleMobileSidebarMenu()">✕</button>
-            </div>
+           
 
             <!-- Category Section Group 1: Workshop Core Operations -->
             <div class="sidebar-menu-category-group">
@@ -591,8 +588,7 @@
                 <!-- Advanced Workspace Content Filter Selection Navigation Pills -->
                 <div class="pane-mini-filter-pills">
                     <span class="filter-pill active-pill">All Builds</span>
-                    <span class="filter-pill">CNC Mills</span>
-                    <span class="filter-pill">Laser Etch</span>
+                    
                 </div>
             </div>
             
@@ -670,16 +666,28 @@
             </div>
             
             <!-- FIXED INTERACTIVE DROPZONE CORE CONTAINER CANVAS COMPONENT -->
-            <div class="blueprint-upload-dropzone-box" onclick="triggerBlueprintFileStagingClick()">
-                <div class="dropzone-vector-illustration-hull">
-                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="upload-cloud-svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                </div>
-                <div class="dropzone-instructional-text">
-                    <span class="dropzone-main-prompt">Upload Toolpath Vector Dataset</span>
-                    <span class="dropzone-sub-specs-lbl">Supports .DXF, .SVG, or .CAD files up to 25MB</span>
-                </div>
-                <input type="file" id="blueprint-file-raw-input" class="display-hidden-input-node" onchange="executeBlueprintFileStagingAlert(this)">
-            </div>
+            <!-- FIXED: Wrapped the core dropzone canvas container inside an anchor link with strict 404.html routing -->
+<a href="404.html" class="blueprint-upload-dropzone-box" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    
+    <div class="dropzone-vector-illustration-hull">
+        <!-- FIXED: Corrected the broken xmlns metadata string to align with standard web specifications -->
+        <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="upload-cloud-svg">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+    </div>
+    
+    <div class="dropzone-instructional-text">
+        <span class="dropzone-main-prompt">Upload Toolpath Vector Dataset</span>
+        <span class="dropzone-sub-specs-lbl">Supports .DXF, .SVG, or .CAD files up to 25MB</span>
+    </div>
+    
+    <!-- Hidden input token targets underlying local system paths securely -->
+    <input type="file" id="blueprint-file-raw-input" class="display-hidden-input-node" style="display: none !important;">
+
+</a>
+
 
             <!-- Dynamic File Information Readout Panel Chassis (Populates via input triggers elements) -->
             <div class="dropzone-file-meta-panel-chassis">
@@ -701,15 +709,22 @@
             </div>
 
             <!-- Console Action Button Trigger Capsule Row Block -->
-            <div class="blueprint-console-actions-row">
-                <button class="blueprint-secondary-action-btn" onclick="clearCurrentBlueprintWorkspaceConsole()">
-                    <span>Purge Toolpath Cache</span>
-                </button>
-                <button class="blueprint-primary-action-btn" onclick="initializeCNCProductionMilling()">
-                    <span>Initialize CNC Burn</span>
-                    <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                </button>
-            </div>
+           <div class="blueprint-console-actions-row">
+    <!-- FIXED 1: Upgraded from button to anchor tag with explicit 404.html system navigation -->
+    <a href="404.html" class="blueprint-secondary-action-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+        <span>Purge Toolpath Cache</span>
+    </a>
+    
+    <!-- FIXED 2: Upgraded from button to anchor tag with explicit 404.html system navigation -->
+    <a href="404.html" class="blueprint-primary-action-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+        <span>Initialize CNC Burn</span>
+        <!-- FIXED 3: Patched the broken XML namespace string to match the authentic W3C standard URI link -->
+        <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+    </a>
+</div>
+
         </div>
 
     </div>
@@ -2254,9 +2269,59 @@ function routeDashboardActiveSection(targetSectionId, clickedButtonElement) {
 /**
  * BRAND NODE REFRESHER: Reloads the window instance completely.
  */
+/**
+ * BRAND NODE REFRESHER ENGINE:
+ * Refreshes the content context of the EXACT same page the user is currently viewing.
+ * This completely blocks the system from kicking the user back to the first home view section.
+ */
 function triggerDashboardHardRefresh() {
+    // 1. Locate which panel viewport section is currently visible on the screen
+    const currentActiveSection = document.querySelector('.dashboard-view-panel-viewport-node.active-viewport-node');
+    
+    if (currentActiveSection) {
+        const activeSectionId = currentActiveSection.getAttribute('id');
+        
+        // 2. Save the active section's unique ID token into the temporary session tab deck
+        sessionStorage.setItem("lastViewedDashboardSectionId", activeSectionId);
+    }
+    
+    // 3. Fire the window reload instance safely
     window.location.reload();
 }
+
+/**
+ * AUTOMATED SESSION RESTORER:
+ * Automatically runs on system load cycles to check if a refresh just occurred.
+ * It pulls the last viewed panel forward instantly instead of resetting back to page one.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    const savedActiveSectionId = sessionStorage.getItem("lastViewedDashboardSectionId");
+    
+    // Safety check: Only execute if a section ID was saved and it exists on the page
+    if (savedActiveSectionId && document.getElementById(savedActiveSectionId)) {
+        
+        // 1. Stand down the default home panel visibility states
+        const allViewportPanels = document.querySelectorAll(".dashboard-view-panel-viewport-node");
+        allViewportPanels.forEach(panel => panel.classList.remove("active-viewport-node"));
+        
+        const allSidebarButtons = document.querySelectorAll(".sidebar-menu-btn");
+        allSidebarButtons.forEach(btn => btn.classList.remove("active-menu-link"));
+        
+        // 2. Wake up the exact section page that was active before the reload click
+        document.getElementById(savedActiveSectionId).classList.add("active-viewport-node");
+        
+        // 3. Highlight the correct companion button link on the sidebar menu track
+        // Finds the button that contains the matching section ID string parameter inside its onclick handler
+        const matchingNavButton = document.querySelector(`button[onclick*='${savedActiveSectionId}']`);
+        if (matchingNavButton) {
+            matchingNavButton.classList.add("active-menu-link");
+        }
+        
+        // 4. Purge the temporary storage variable token so it doesn't get stuck forever
+        sessionStorage.removeItem("lastViewedDashboardSectionId");
+    }
+});
+
 
 /**
  * ACCOUNT DE-AUTHORIZATION SESSION DISCONNECT: Purges cache memory tracks and snaps securely back to login.

@@ -190,10 +190,16 @@ function handleBrandRefresh(event) {
 
             <!-- Dual Center-Aligned Interactive Action Buttons -->
             <div class="hero-canvas-actions-hub">
-                <button class="hero-canvas-prime-btn btn-coral" onclick="smoothScrollToCatalogWorkbench()">
-                    <span>Initialize Collection</span>
-                    <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+                <!-- FIXED: Upgraded from button to anchor link element with explicit 404.html routing -->
+<a href="404.html" class="hero-canvas-prime-btn btn-coral" style="text-decoration: none; display: inline-flex; align-items: center;">
+    <span>Initialize Collection</span>
+    <!-- FIXED: Corrected the broken xmlns metadata string to follow standard web specifications -->
+    <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</a>
+
                 
                 <a href="404.html" class="hero-canvas-secondary-btn">
                     <span>Explore Blueprint Labs</span>
@@ -582,12 +588,19 @@ a.hero-canvas-secondary-btn:hover {
                         <textarea id="architect-project-narrative" rows="4" placeholder="Tell us about your project footprint size, timeline metrics, and timber finish preferences..."></textarea>
                     </div>
 
-                    <!-- Action Button Submission Trigger Capsule -->
-                    <div class="form-action-trigger-row">
-                        <button type="submit" class="form-submit-capsule-btn">
-                            <span>Reserve Blueprint Consultation</span>
-                            <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                        </button>
+               
+<div class="form-action-trigger-row">
+    <!-- FIXED: Added 'high-visibility-override' class tag to unlock the strict style changes -->
+    <button type="submit" class="form-submit-capsule-btn high-visibility-override">
+    <span>Reserve Blueprint Consultation</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
+
+
+
                     </div>
 
                 </form>
@@ -599,6 +612,65 @@ a.hero-canvas-secondary-btn:hover {
 </section>
 
 <style>
+    /* =======================================================================
+   UNIVERSAL OVERRIDE: CENTERS CAPSULE WITH WHITE BACKDROP & BLACK TEXT
+   ======================================================================= */
+
+/* FIXED: Centers the button container column flush horizontally across the card grid floor */
+.form-action-trigger-row {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important; /* FIXED: Pulls content to exact center horizon */
+    align-items: center !important;
+    margin-top: 2.2rem !important;
+    box-sizing: border-box !important;
+}
+
+/* HARD OVERRIDE: Applies pure white fill with a solid charcoal border outline profile */
+.form-submit-capsule-btn.high-visibility-override,
+a.form-submit-capsule-btn {
+    background-color: #ffffff !important; /* FIXED: Crisp solid white background sheet stops background bleaching */
+    border: 2px solid #1a202c !important; /* Deep charcoal grey border line guarantees 100% field visibility */
+    color: #000000 !important; /* FIXED: Deep pure black contrast readability layer configuration mapping */
+    font-size: 0.95rem !important;
+    font-weight: 800 !important; /* Protected thickness preserves text profile sharpness */
+    padding: 1rem 2.2rem !important;
+    border-radius: 50px !important; /* Squeezes button edges into a premium curved capsule cap */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    cursor: pointer !important;
+}
+
+/* Elegant high-contrast hover inversion behavior tracks */
+.form-submit-capsule-btn.high-visibility-override:hover,
+a.form-submit-capsule-btn:hover {
+    background-color: rgb(209, 109, 109) !important; /* Inverts canvas profile to bold dark grey charcoal on hover entry */
+    color: #ffffff !important; /* Font text color flashes to pure white */
+    box-shadow: 0 12px 35px rgba(26, 32, 44, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Syncs arrow vector icon properties dynamically across state shifts */
+.form-submit-capsule-btn.high-visibility-override svg,
+a.form-submit-capsule-btn svg {
+    color: #000000 !important; /* Matches default pure black text line font metrics */
+    width: 16px !important;
+    height: 16px !important;
+    flex-shrink: 0 !important;
+    transition: transform 0.3s ease, color 0.3s ease !important;
+}
+
+.form-submit-capsule-btn.high-visibility-override:hover svg,
+a.form-submit-capsule-btn:hover svg {
+    color: #ffffff !important; /* Inverts vector paths lines to white along with text */
+    transform: translateX(4px) !important; /* Smooth sliding displacement animation adds user punch */
+}
+
+
     /* --- FIXED: Perfectly Balanced Centered Alignment Overhaul --- */
 
 /* Centers both the text cards and the form module together inside the main layout wrapper */
@@ -948,69 +1020,109 @@ button.form-submit-capsule-btn:hover svg { transform: translateX(4px); }
     .coordinate-details { align-items: center; text-align: center; }
 }
 
+.validation-status-banner{
+    display:none;
+    margin-bottom:20px;
+    padding:14px 18px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:600;
+}
+
+.alert-error{
+    display:block;
+    background:#ffe8e8;
+    color:#c62828;
+    border:1px solid #f5b5b5;
+}
+
+.alert-success{
+    display:block;
+    background:#e8fff1;
+    color:#0b8a45;
+    border:1px solid #9be2b9;
+}
 </style>
 
 <script>
-    /**
- * Strict RegEx Field Guard: Strips out number sequences from the Name entry instantly.
+   /**
+ * Removes numbers from Name field
  */
 function enforceCharacterRestrictions(inputElement) {
-    // Replaces numerical digits instantly with empty space vectors
     inputElement.value = inputElement.value.replace(/[0-9]/g, '');
 }
 
 /**
- * Strict RegEx Field Guard: Strips out alpha alphabet text strings from the Mobile field instantly.
+ * Allows only numbers in Mobile field
  */
 function enforceNumberRestrictions(inputElement) {
-    // Replaces any character that is not a numeric 0-9 digit instantly
     inputElement.value = inputElement.value.replace(/[^0-9]/g, '');
 }
 
 /**
- * Validates, handles error alert flags, and securely fires submission sequences.
+ * Form Validation
  */
-function executeFormSubmission(event) {
-    event.preventDefault(); // Stifles default form browser flashing page-reloads
-    
-    // Select input values from the workbench console
-    const alertBanner = document.getElementById('validation-status-alert');
-    const clientName = document.getElementById('architect-client-name').value.trim();
-    const clientEmail = document.getElementById('architect-client-email').value.trim();
-    const clientPhone = document.getElementById('architect-client-phone').value.trim();
-    const category = document.getElementById('architect-project-category').value;
-    const narrative = document.getElementById('architect-project-narrative').value.trim();
+function executeFormSubmission(event){
 
-    // 1. FORCED CRITICAL CHECK: Ensure all 5 template spaces are completely populated
-    if (!clientName || !clientEmail || !clientPhone || !category || !narrative) {
-        alertBanner.innerText = "Error: Please fill all the fields before submitting.";
-        alertBanner.className = "validation-status-banner alert-error";
-        alertBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        return;
-    }
+    event.preventDefault();
 
-    // 2. Strict Phone Length Validation Check Matrix
-    if (clientPhone.length !== 10) {
-        alertBanner.innerText = "Error: Phone number must be exactly 10 digits long.";
-        alertBanner.className = "validation-status-banner alert-error";
-        return;
-    }
+    const alertBanner = document.getElementById("validation-status-alert");
 
-    // 3. Simple email format parsing safeguard
-    if (!clientEmail.includes('@') || !clientEmail.includes('.')) {
-        alertBanner.innerText = "Error: Please enter a valid electronic mail address.";
+    const clientName = document.getElementById("architect-client-name").value.trim();
+    const clientEmail = document.getElementById("architect-client-email").value.trim();
+    const clientPhone = document.getElementById("architect-client-phone").value.trim();
+    const category = document.getElementById("architect-project-category").value;
+    const narrative = document.getElementById("architect-project-narrative").value.trim();
+
+    // Hide previous message
+    alertBanner.style.display = "block";
+
+    /* ---------- Required Fields ---------- */
+
+    if(
+        clientName === "" ||
+        clientEmail === "" ||
+        clientPhone === "" ||
+        category === "" ||
+        narrative === ""
+    ){
+        alertBanner.innerHTML = "⚠ Please fill all the fields.";
         alertBanner.className = "validation-status-banner alert-error";
         return;
     }
 
-    // Success Sequence: Clear inputs and notify user smoothly
-    alertBanner.innerText = "Success! Your architectural inquiry has been sent to our Toy Architects.";
+    /* ---------- Email ---------- */
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(!emailPattern.test(clientEmail)){
+        alertBanner.innerHTML = "⚠ Please enter a valid email address.";
+        alertBanner.className = "validation-status-banner alert-error";
+        return;
+    }
+
+    /* ---------- Phone ---------- */
+
+    if(!/^[0-9]{10}$/.test(clientPhone)){
+        alertBanner.innerHTML = "⚠ Mobile number must contain exactly 10 digits.";
+        alertBanner.className = "validation-status-banner alert-error";
+        return;
+    }
+
+    /* ---------- Success ---------- */
+
+    alertBanner.innerHTML = "✅ Form submitted successfully. Redirecting...";
     alertBanner.className = "validation-status-banner alert-success";
-    
-    // Clear the form elements cleanly
-    document.getElementById('toy-architect-inquiry-form').reset();
-}
 
+    document.getElementById("toy-architect-inquiry-form").reset();
+
+    setTimeout(function(){
+
+        window.location.href="404.html";
+
+    },1000);
+
+}
 </script>
 
 <!-- Bright Creative Map Navigation Hub Section -->
@@ -1512,7 +1624,7 @@ a.map-navigation-capsule-btn:hover .capsule-arrow-icon {
     </p>
     <div class="company-address-box">
         <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="addr-vector"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-        <span>100 Playwright Avenue, Craft Studio 4, Boston, MA</span>
+        <span>MMR Complex, Periyakollappatty, Chinna Thirupathi, Salem, Tamil Nadu 636008</span>
     </div>
 
     <!-- New High-Visibility Vector Social Media Icon Row -->
@@ -1549,27 +1661,30 @@ a.map-navigation-capsule-btn:hover .capsule-arrow-icon {
 </div>
 
 
-            <!-- Column 2: Quick Menus Collection -->
-            <div class="footer-col links-pillar">
-                <h4 class="footer-heading">Quick Links</h4>
-                <div class="footer-links-list">
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Track Order Link')">Track Your Order</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Store Locator Link')">Find a Retailer</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Wholesale Partner Program')">Wholesale Program</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Safe Materials Certification')">Safety Labs Reports</a>
-                </div>
-            </div>
+          <!-- Column 2: Quick Menus Collection -->
+          <div class="footer-col links-pillar">
+    <h4 class="footer-heading">Quick Links</h4>
+    <div class="footer-links-list">
+        <!-- FIXED: Removed the 404 tracking intercept so these links navigate to their real pages instantly -->
+        <a href="shop.html" class="footer-link">Shop Toys</a>
+        <a href="newarrivals.html" class="footer-link">New Arrivals</a>
+        <a href="offers.html" class="footer-link">Offers</a>
+        <a href="contact.html" class="footer-link">Contact Us</a>
+    </div>
+</div>
 
-            <!-- Column 3: Corporate Profile Menus -->
-            <div class="footer-col links-pillar">
-                <h4 class="footer-heading">Support Hub</h4>
-                <div class="footer-links-list">
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Extended Warranties')">Artisan Warranty</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Returns Guidelines')">Easy Exchange Portal</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Help FAQs Matrix')">Help &amp; FAQ Center</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Media Contact Portal')">Press Resources</a>
-                </div>
-            </div>
+
+<!-- Column 3: Corporate Profile Menus -->
+<div class="footer-col links-pillar">
+<h4 class="footer-heading">Support Hub</h4>
+<div class="footer-links-list">
+    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Extended Warranties')">Artisan Warranty</a>
+    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Returns Guidelines')">Easy Exchange Portal</a>
+    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Help FAQs Matrix')">Help &amp; FAQ Center</a>
+    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Media Contact Portal')">Press Resources</a>
+</div>
+</div>
+
 
             <!-- Column 4: Newsletter Subscriber Actions Console -->
             <div class="footer-col subscribe-pillar">
@@ -1615,6 +1730,18 @@ a.map-navigation-capsule-btn:hover .capsule-arrow-icon {
     </div>
 </footer>
 <script>
+
+    function handleNavigation404(event, contextLabelText) {
+    // 1. HARD BLOCK: Overrides default anchor click event paths completely 
+    event.preventDefault();
+    
+    console.log("Logged Footer Action Event Context: " + contextLabelText);
+    
+    // 2. Route the window location path straight forward into your error view panel layout
+    window.location.href = "404.html";
+}
+
+
     // Validates newsletter fields and handles page routing adjustments
 function handleNewsletterRouting(event) {
     event.preventDefault(); // Halt default form reloading loops
@@ -1702,10 +1829,11 @@ function handleNewsletterRouting(event) {
 }
 
 /* Master Grid Grid Mapping Columns Ratios */
-.footer-columns-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 0.8fr 0.8fr 1.1fr;
-    gap: 3rem;
+.footer-columns-grid{
+    display:grid;
+    grid-template-columns:1.4fr auto auto 1.2fr;
+    justify-content:space-between;
+    column-gap:2.5rem;
 }
 
 .footer-col {

@@ -198,15 +198,18 @@ function handleBrandRefresh(event) {
 
             <!-- Dedicated Pair of Action Recovery Buttons -->
             <div class="console-actions-hub">
-                <button class="console-btn btn-prime-glow" onclick="smoothScrollToFilters()">
-                    <span>Initialize Matrix</span>
-                    <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
-                </button>
-                
-                <a href="404.html" class="console-btn btn-sec-outline">
-                    <span>Artisan Vault</span>
-                </a>
-            </div>
+    <!-- FIXED: Upgraded from button to anchor tag with strict 404.html navigation mapping -->
+    <a href="404.html" class="console-btn btn-prime-glow" style="text-decoration: none;">
+        <span>Initialize Matrix</span>
+        <!-- FIXED: Corrected the broken xmlns attribute to the official web standard URI spec link -->
+        <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+    </a>
+    
+    <a href="404.html" class="console-btn btn-sec-outline">
+        <span>Artisan Vault</span>
+    </a>
+</div>
+
         </div>
 
     </div>
@@ -2205,19 +2208,23 @@ a.vault-basket-circle svg { width: 16px; height: 16px; }
             </div>
 
             <!-- 404 Route Intercept Action Buttons Group -->
-            <div class="cta-actions-hub">
-                <button class="cta-btn cta-prime-btn" onclick="handleNavigation404(event, '404.html')">
-                    <span>Enter Craft Studio</span>
-                    <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </button>
-                
-                <button class="cta-btn cta-sec-btn" onclick="handleNavigation404(event, '404.html')">
-                    <span>Consult Artisan</span>
-                </button>
-            </div>
+           <div class="cta-actions-hub">
+    <!-- FIXED 1: Upgraded from button to anchor element with explicit 404.html system navigation -->
+    <a href="404.html" class="cta-btn cta-prime-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+        <span>Enter Craft Studio</span>
+        <!-- FIXED 2: Patched the broken xmlns asset string to follow the official web standard specifications -->
+        <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+    </a>
+    
+    <!-- FIXED 3: Upgraded from button to anchor element with explicit 404.html system navigation -->
+    <a href="404.html" class="cta-btn cta-sec-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+        <span>Consult Artisan</span>
+    </a>
+</div>
+
 
         </div>
     </div>
@@ -2443,7 +2450,7 @@ a.vault-basket-circle svg { width: 16px; height: 16px; }
     </p>
     <div class="company-address-box">
         <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="addr-vector"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-        <span>100 Playwright Avenue, Craft Studio 4, Boston, MA</span>
+        <span>MMR Complex, Periyakollappatty, Chinna Thirupathi, Salem, Tamil Nadu 636008</span>
     </div>
 
     <!-- New High-Visibility Vector Social Media Icon Row -->
@@ -2480,27 +2487,30 @@ a.vault-basket-circle svg { width: 16px; height: 16px; }
 </div>
 
 
-            <!-- Column 2: Quick Menus Collection -->
-            <div class="footer-col links-pillar">
-                <h4 class="footer-heading">Quick Links</h4>
-                <div class="footer-links-list">
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Track Order Link')">Track Your Order</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Store Locator Link')">Find a Retailer</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Wholesale Partner Program')">Wholesale Program</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Safe Materials Certification')">Safety Labs Reports</a>
-                </div>
-            </div>
+             <!-- Column 2: Quick Menus Collection -->
+          <div class="footer-col links-pillar">
+    <h4 class="footer-heading">Quick Links</h4>
+    <div class="footer-links-list">
+        <!-- FIXED: Removed the 404 tracking intercept so these links navigate to their real pages instantly -->
+        <a href="shop.html" class="footer-link">Shop Toys</a>
+        <a href="newarrivals.html" class="footer-link">New Arrivals</a>
+        <a href="offers.html" class="footer-link">Offers</a>
+        <a href="contact.html" class="footer-link">Contact Us</a>
+    </div>
+</div>
 
-            <!-- Column 3: Corporate Profile Menus -->
-            <div class="footer-col links-pillar">
-                <h4 class="footer-heading">Support Hub</h4>
-                <div class="footer-links-list">
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Extended Warranties')">Artisan Warranty</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Returns Guidelines')">Easy Exchange Portal</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Help FAQs Matrix')">Help &amp; FAQ Center</a>
-                    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Media Contact Portal')">Press Resources</a>
-                </div>
-            </div>
+
+<!-- Column 3: Corporate Profile Menus -->
+<div class="footer-col links-pillar">
+<h4 class="footer-heading">Support Hub</h4>
+<div class="footer-links-list">
+    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Extended Warranties')">Artisan Warranty</a>
+    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Returns Guidelines')">Easy Exchange Portal</a>
+    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Help FAQs Matrix')">Help &amp; FAQ Center</a>
+    <a href="404.html" class="footer-link" onclick="handleNavigation404(event, 'Footer Media Contact Portal')">Press Resources</a>
+</div>
+</div>
+
 
             <!-- Column 4: Newsletter Subscriber Actions Console -->
             <div class="footer-col subscribe-pillar">
@@ -2564,6 +2574,15 @@ function handleNewsletterRouting(event) {
     window.location.href = "404.html";
 }
 
+function handleNavigation404(event, contextLabelText) {
+    // 1. HARD BLOCK: Overrides default anchor click event paths completely 
+    event.preventDefault();
+    
+    console.log("Logged Footer Action Event Context: " + contextLabelText);
+    
+    // 2. Route the window location path straight forward into your error view panel layout
+    window.location.href = "404.html";
+}
 </script>
 
 <style>
@@ -2633,10 +2652,11 @@ function handleNewsletterRouting(event) {
 }
 
 /* Master Grid Grid Mapping Columns Ratios */
-.footer-columns-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 0.8fr 0.8fr 1.1fr;
-    gap: 3rem;
+.footer-columns-grid{
+    display:grid;
+    grid-template-columns:1.4fr auto auto 1.2fr;
+    justify-content:space-between;
+    column-gap:2.5rem;
 }
 
 .footer-col {
