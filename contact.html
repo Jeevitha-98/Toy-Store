@@ -715,7 +715,7 @@ a.form-submit-capsule-btn:hover svg {
 .form-input-node input:focus,
 .form-input-node select:focus,
 .form-input-node textarea:focus {
-    border-color: var(--secondary-teal, #3bbcb4) !important;
+    border-color: var(black, #3bbcb4) !important;
     background-color: rgba(0, 0, 0, 0.4) !important;
 }
 
@@ -724,9 +724,14 @@ a.form-submit-capsule-btn:hover svg {
 .toy-contact-section {
     position: relative;
     width: 100%;
-    padding: 35px 5% 55px 5%; /* Tight padding profile compresses layout gaps completely */
-    background-color: #0d0f14; /* Pure high-contrast dark palette context matches dark workspace mockups */
-    overflow: hidden !important; /* Forces strict browser boundaries to eliminate horizontal scrollbar leakage */
+    padding: 35px 5% 55px;
+    background: radial-gradient(
+        circle at 80% 20%,
+        #ffffff 0%,
+        #f4f8f9 60%,
+        #edf3f5 100%
+    );
+    overflow: hidden;
     display: flex;
     align-items: center;
 }
@@ -747,15 +752,16 @@ a.form-submit-capsule-btn:hover svg {
 }
 
 /* Dark contrast screen shields visibility loops */
-.contact-section-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(13, 15, 20, 0.95) 0%, rgba(10, 12, 16, 0.98) 100%);
-    z-index: 2;
-    pointer-events: none;
+.contact-section-overlay{
+    position:absolute;
+    inset:0;
+    background: radial-gradient(
+        circle at 80% 20%,
+        rgba(255,255,255,.92) 0%,
+        rgba(244,248,249,.82) 60%,
+        rgba(237,243,245,.75) 100%
+    );
+    z-index:2;
 }
 
 .contact-max-container {
@@ -788,7 +794,7 @@ a.form-submit-capsule-btn:hover svg {
 }
 
 .contact-headline {
-    color: #ffffff;
+    color: black;
     font-size: clamp(2rem, 4.5vw, 3rem);
     font-weight: 900;
     line-height: 1.15;
@@ -797,7 +803,7 @@ a.form-submit-capsule-btn:hover svg {
 }
 
 .glow-teal-text {
-    color: var(--secondary-teal, #3bbcb4);
+    color: var (-- black, #3bbcb4);
     text-shadow: 0 0 20px rgba(78, 205, 196, 0.2);
 }
 
@@ -814,7 +820,7 @@ a.form-submit-capsule-btn:hover svg {
     align-items: flex-start;
     gap: 16px;
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    border: 1px solid black;
     padding: 1.2rem 1.5rem;
     border-radius: 16px;
     transition: all 0.3s ease;
@@ -823,7 +829,7 @@ a.form-submit-capsule-btn:hover svg {
 .card-icon-hull {
     width: 24px;
     height: 24px;
-    color: var(--secondary-teal, #3bbcb4);
+    color: var(-- black, #3bbcb4);
     flex-shrink: 0;
     margin-top: 2px;
 }
@@ -845,7 +851,7 @@ a.form-submit-capsule-btn:hover svg {
 }
 
 .coordinate-value {
-    color: rgba(255, 255, 255, 0.85);
+    color: black;
     font-size: 0.94rem;
     line-height: 1.5;
     margin: 0;
@@ -854,7 +860,7 @@ a.form-submit-capsule-btn:hover svg {
 
 /* Outlook High-Visibility Redirection Direct Links */
 a.outlook-direct-link, a.phone-tel-link {
-    color: #ffffff;
+    color: black;
     text-decoration: none;
     font-weight: 700;
     position: relative;
@@ -885,14 +891,14 @@ a.outlook-direct-link:hover::after { transform: scaleX(1.04); background-color: 
 }
 
 .form-console-header h3 {
-    color: #ffffff;
+    color: black;
     font-size: 1.4rem;
     font-weight: 800;
     margin: 0 0 6px 0;
 }
 
 .form-console-header p {
-    color: #a0aec0;
+    color: black;
     font-size: 0.88rem;
     line-height: 1.45;
     margin: 0;
@@ -912,7 +918,7 @@ a.outlook-direct-link:hover::after { transform: scaleX(1.04); background-color: 
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #a0aec0;
+    color: black;
     margin-bottom: 6px;
 }
 
@@ -925,7 +931,7 @@ a.outlook-direct-link:hover::after { transform: scaleX(1.04); background-color: 
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-radius: 12px;
     padding: 0.9rem 1.2rem;
-    color: #ffffff !important;
+    color: black !important;
     font-size: 0.95rem;
     font-family: inherit;
     outline: none;
@@ -947,7 +953,7 @@ a.outlook-direct-link:hover::after { transform: scaleX(1.04); background-color: 
 .form-input-node input:focus,
 .form-input-node select:focus,
 .form-input-node textarea:focus {
-    border-color: var(--secondary-teal, #3bbcb4) !important;
+    border-color: var(-- black, #3bbcb4) !important;
     box-shadow: 0 0 14px rgba(78, 205, 196, 0.15) !important;
     background-color: rgba(0, 0, 0, 0.4) !important;
 }
@@ -981,7 +987,7 @@ a.outlook-direct-link:hover::after { transform: scaleX(1.04); background-color: 
 button.form-submit-capsule-btn {
     width: 100%;
     background-color: transparent;
-    color: #ffffff;
+    color: black;
     border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 1.1rem 2rem;
     font-size: 0.95rem;
