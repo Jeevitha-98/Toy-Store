@@ -64,10 +64,18 @@
     </div>
 
             <!-- Mobile Responsive View Dedicated Auth Actions Menu Footer -->
-            <div class="mobile-drawer-auth">
-                <button class="auth-btn mobile-nav-login" onclick="handleNavigation404(event, 'Login Prompt')">Log In</button>
-                <button class="auth-btn mobile-nav-signup" onclick="handleNavigation404(event, 'Account Registration')">Sign Up</button>
-            </div>
+           <div class="mobile-drawer-auth">
+    <!-- FIXED 1: Upgraded from button to anchor tag with strict login.html system navigation -->
+    <a href="login.html" class="auth-btn mobile-nav-login" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+        <span>Log In</span>
+    </a>
+    
+    <!-- FIXED 2: Upgraded from button to anchor tag with strict signup.html system navigation -->
+    <a href="signup.html" class="auth-btn mobile-nav-signup" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+        <span>Sign Up</span>
+    </a>
+</div>
+
         </nav>
 
         <!-- Right Action Utilities Terminal -->
@@ -461,7 +469,237 @@ function handleBrandRefresh(event) {
     .pos-beta { bottom: 15px; right: 15px; }
 }
 
+/*====================================================
+        NEW ARRIVALS RESPONSIVE ADD-ON
+=====================================================*/
 
+/* ---------- Laptop ---------- */
+@media (max-width:1200px){
+
+    .content-hub{
+        padding:120px 6% 40px;
+    }
+
+    .arrivals-mini-card{
+        width:190px;
+    }
+
+    .arrivals-card-media-wrapper{
+        height:145px;
+    }
+
+}
+
+
+/* ---------- Tablet ---------- */
+@media (max-width:991px){
+
+    .arrivals-split-hero{
+        width:100%;
+        min-height:auto;
+    }
+
+    .arrivals-split-container{
+        display:flex !important;
+        flex-direction:column !important;
+        height:auto !important;
+    }
+
+    .content-hub{
+        order:1;
+        width:100%;
+        padding:120px 30px 50px;
+        align-items:center;
+        text-align:center;
+    }
+
+    .arrivals-cta-row{
+        justify-content:center;
+    }
+
+    .media-deck{
+        order:2;
+        width:100%;
+        height:500px;
+        margin:0;
+        border-radius:0;
+    }
+
+    .arrivals-split-bg{
+        object-position:center;
+    }
+
+    .pos-alpha{
+        top:60px;
+        left:40px;
+    }
+
+    .pos-beta{
+        bottom:50px;
+        right:40px;
+    }
+
+}
+
+
+/* ---------- Mobile ---------- */
+@media (max-width:768px){
+
+    .content-hub{
+        padding:110px 20px 40px;
+    }
+
+    .arrivals-micro-badge{
+        font-size:12px;
+    }
+
+    .arrivals-hero-headline{
+        font-size:2.2rem;
+        line-height:1.25;
+    }
+
+    .arrivals-hero-paragraph{
+        font-size:15px;
+        line-height:1.8;
+        max-width:100%;
+    }
+
+    .arrivals-prime-btn{
+        width:100%;
+        justify-content:center;
+    }
+
+    .media-deck{
+        height:420px;
+    }
+
+    .arrivals-mini-card{
+        width:180px;
+        padding:10px;
+    }
+
+    .arrivals-card-media-wrapper{
+        height:135px;
+    }
+
+    .product-title-dark{
+        font-size:14px;
+    }
+
+    .arrivals-card-price{
+        font-size:15px;
+    }
+
+    .pos-alpha{
+        top:35px;
+        left:20px;
+    }
+
+    .pos-beta{
+        bottom:30px;
+        right:20px;
+    }
+
+}
+
+
+/* ---------- Small Mobile ---------- */
+@media (max-width:576px){
+
+    .content-hub{
+        padding:100px 18px 35px;
+    }
+
+    .arrivals-hero-headline{
+        font-size:1.9rem;
+    }
+
+    .arrivals-hero-paragraph{
+        font-size:14px;
+    }
+
+    .media-deck{
+        height:340px;
+    }
+
+    .arrivals-mini-card{
+        width:145px;
+        border-radius:16px;
+    }
+
+    .arrivals-card-media-wrapper{
+        height:100px;
+    }
+
+    .product-title-dark{
+        font-size:13px;
+    }
+
+    .arrivals-card-price{
+        font-size:14px;
+    }
+
+    .arrivals-new-badge,
+    .arrivals-mini-discount-tag{
+        font-size:9px;
+        padding:4px 8px;
+    }
+
+    .pos-alpha{
+        top:20px;
+        left:12px;
+    }
+
+    .pos-beta{
+        bottom:20px;
+        right:12px;
+    }
+
+}
+
+
+/* ---------- Extra Small Phones ---------- */
+@media (max-width:400px){
+
+    .arrivals-hero-headline{
+        font-size:1.7rem;
+    }
+
+    .media-deck{
+        height:300px;
+    }
+
+    .arrivals-mini-card{
+        width:125px;
+        padding:8px;
+    }
+
+    .arrivals-card-media-wrapper{
+        height:85px;
+    }
+
+    .product-title-dark{
+        font-size:12px;
+    }
+
+    .arrivals-card-price{
+        font-size:13px;
+    }
+
+    .arrivals-new-badge,
+    .arrivals-mini-discount-tag{
+        display:none;
+    }
+
+    .pos-alpha{
+        left:8px;
+    }
+
+    .pos-beta{
+        right:8px;
+    }
+
+}
 </style>
 
 <script>

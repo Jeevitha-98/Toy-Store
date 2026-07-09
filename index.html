@@ -65,10 +65,18 @@
     </div>
 
             <!-- Mobile Responsive View Dedicated Auth Actions Menu Footer -->
-            <div class="mobile-drawer-auth">
-                <button class="auth-btn mobile-nav-login" onclick="handleNavigation404(event, 'Login Prompt')">Log In</button>
-                <button class="auth-btn mobile-nav-signup" onclick="handleNavigation404(event, 'Account Registration')">Sign Up</button>
-            </div>
+          <div class="mobile-drawer-auth">
+    <!-- FIXED 1: Upgraded from button to anchor tag with strict login.html system navigation -->
+    <a href="login.html" class="auth-btn mobile-nav-login" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+        <span>Log In</span>
+    </a>
+    
+    <!-- FIXED 2: Upgraded from button to anchor tag with strict signup.html system navigation -->
+    <a href="signup.html" class="auth-btn mobile-nav-signup" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+        <span>Sign Up</span>
+    </a>
+</div>
+
         </nav>
 
         <!-- Right Action Utilities Terminal -->
