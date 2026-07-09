@@ -47,10 +47,12 @@
                         <svg class="menu-svg-icon" xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                         <span>Atelier Overview</span>
                     </button>
-                    <button class="sidebar-menu-btn" onclick="routeDashboardActiveSection('section-client-commissions', this)">
-                        <svg class="menu-svg-icon" xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-                        <span>Custom Blueprints</span>
-                    </button>
+                  <!-- FIXED: Changed the routing string parameter inside the onclick function to section-partner-commissions -->
+<button class="sidebar-menu-btn" onclick="routeDashboardActiveSection('section-partner-commissions', this)">
+    <svg class="menu-svg-icon" xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+    <span>Custom Blueprints</span>
+</button>
+
                 </nav>
             </div>
 
@@ -58,10 +60,12 @@
             <div class="sidebar-menu-category-group">
                 <span class="category-group-label">Inventory Log</span>
                 <nav class="sidebar-nav-list-track">
-                    <button class="sidebar-menu-btn" onclick="routeDashboardActiveSection('section-client-stock', this)">
-                        <svg class="menu-svg-icon" xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                        <span>Timber Block Registry</span>
-                    </button>
+                  <!-- FIXED: Parameter matched directly to section-block-registry -->
+<button class="sidebar-menu-btn" onclick="routeDashboardActiveSection('section-block-registry', this)">
+    <svg class="menu-svg-icon" xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    <span>Timber Block Registry</span>
+</button>
+
                 </nav>
             </div>
 
@@ -69,10 +73,12 @@
             <div class="sidebar-menu-category-group">
                 <span class="category-group-label">Financial Ledger</span>
                 <nav class="sidebar-nav-list-track">
-                    <button class="sidebar-menu-btn" onclick="routeDashboardActiveSection('section-client-earnings', this)">
-                        <svg class="menu-svg-icon" xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                        <span>Payout Matrix</span>
-                    </button>
+                 <!-- FIXED: Parameter matched directly to section-partner-earnings -->
+<button class="sidebar-menu-btn" onclick="routeDashboardActiveSection('section-partner-earnings', this)">
+    <svg class="menu-svg-icon" xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+    <span>Payout Matrix</span>
+</button>
+
                 </nav>
             </div>
 
@@ -309,6 +315,26 @@
 </section>
 
 <style>
+    @media (max-width:768px){
+
+    .overview-logistics-split-row{
+        display:flex !important;
+        flex-direction:column !important;
+        gap:20px !important;
+    }
+
+    .overview-metrics-deck-grid{
+        display:flex !important;
+        flex-direction:column !important;
+        gap:20px !important;
+    }
+
+    .overview-metric-card-unit,
+    .logistics-data-card{
+        width:100% !important;
+    }
+
+}
     /* =======================================================================
    EXTENSIVE OVERVIEW DECK ADVANCED INTERACTIVE LAYOUT GRAPHICS OVERRIDES
    ======================================================================= */
@@ -537,7 +563,1220 @@
     border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 0.8rem;font-weight: 800;flex-shrink: 0;z-index: 5;}.step-meta-stack { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }.step-main-title-txt { font-size: 0.9rem; font-weight: 800; color: #1a202c; }.step-sub-time-txt { font-size: 0.75rem; font-weight: 700; color: #718096; margin-top: 1px; }/* Status condition switches formatting matrix overlay maps /.step-completed .step-indicator-avatar-hull { background-color: #e6fffa; color: #3bbcb4; border: 1px solid rgba(59,188,180,0.2); }.step-completed:not(:last-child)::before { background-color: #3bbcb4 !important; } / Line illuminates teal on finished steps paths */.step-active .step-indicator-avatar-hull { background-color: #fff5f5; border: 1px solid rgba(255,107,107,0.3); color: #ff6b6b; display: flex; align-items: center; justify-content: center; }.mini-pulsing-node-dot { width: 8px; height: 8px; background-color: #ff6b6b; border-radius: 50%; box-shadow: 0 0 8px #ff6b6b; animation: stepPulseGlow 2s infinite ease-in-out; }.step-pending .step-indicator-avatar-hull { background-color: #f7fafc; border: 1px dashed #cbd5e0; color: #a0aec0; }.step-pending .step-main-title-txt { color: #718096; }@keyframes stepPulseGlow { 0%, 100% { transform: scale(0.9); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }/* --- 6. Mobile Responsive Viewports Overhaul (Collapse Splits Columns Grid) --- /@media (max-width: 1024px) {/ Collapse the equal side grid columns framework down into a single vertical timeline flow track */.overview-logistics-split-row {grid-template-columns: 1fr !important;gap: 1.5rem !important;}}
 </style>
 
+<!-- =======================================================================
+     PAGE SECTION VIEW 2: CUSTOM BLUEPRINTS ANALYTICS (Hidden by default)
+     ======================================================================= -->
+<!-- Page Section View 2: Extensive Custom Blueprints Orders Workspace -->
+<section id="section-partner-commissions" class="dashboard-view-panel-viewport-node">
+    
+    <!-- 1. Header Banner Panel Component Header -->
+    <div class="panel-section-title-wrapper-hull">
+        <h2>Custom Blueprint Orders &amp; Toolpath Ledger</h2>
+        <p>Audit, filter, and execute precision laser CNC toolpaths and structural block layout vectors submitted across our global sandbox creator networks.</p>
+    </div>
 
+    <!-- 2. High-Density Operational Workflow Split Grid Matrix Layer -->
+    <div class="blueprint-workflow-matrix-row">
+        
+        <!-- ==========================================
+             LEFT COLUMN WING: EXTENSIVE DATA LOG ORDER QUEUE
+             ========================================== -->
+        <div class="blueprint-data-card card-table-hull">
+            <div class="card-inner-header-track">
+                <div class="pane-headline-stack">
+                    <h3>Incoming Toolpath Registries</h3>
+                    <span class="pane-micro-counter-badge">3 Pending Execution</span>
+                </div>
+                
+                <!-- Advanced Workspace Content Filter Selection Navigation Pills -->
+                <div class="pane-mini-filter-pills">
+                    <span class="filter-pill active-pill">All Builds</span>
+                    <span class="filter-pill">CNC Mills</span>
+                    <span class="filter-pill">Laser Etch</span>
+                </div>
+            </div>
+            
+            <!-- FIXED RESPONSIVE TABLE OVERFLOW SHIELD: Prevents horizontal column layout distortion natively -->
+            <div class="table-viewport-scroll-overflow-shield">
+                <table class="logistics-data-table-matrix">
+                    <thead>
+                        <tr>
+                            <th>Blueprint ID</th>
+                            <th>Artisan Blueprint Profile</th>
+                            <th>Timber Category</th>
+                            <th>Milling Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="monospace-code">#BLU-2094</span></td>
+                            <td>
+                                <div class="table-profile-title-stack">
+                                    <span class="main-profile-title">Gravity Spiral Run</span>
+                                    <span class="sub-profile-spec">CNC Engraving Toolpath</span>
+                                </div>
+                            </td>
+                            <td><span class="spec-label-badge wood-maple">Certified Maple Wood</span></td>
+                            <td><span class="status-pill priority-high">Pending Review</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="monospace-code">#BLU-2095</span></td>
+                            <td>
+                                <div class="table-profile-title-stack">
+                                    <span class="main-profile-title">Interlocking Cubes Trio</span>
+                                    <span class="sub-profile-spec">Sub-Millimeter Laser Etch</span>
+                                </div>
+                            </td>
+                            <td><span class="spec-label-badge wood-walnut">Organic Walnut Shell</span></td>
+                            <td><span class="status-pill priority-medium">In Laser Queue</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="monospace-code">#BLU-2096</span></td>
+                            <td>
+                                <div class="table-profile-title-stack">
+                                    <span class="main-profile-title">Nested Fractal Arc Pillar</span>
+                                    <span class="sub-profile-spec">3D Geometry Trajectory</span>
+                                </div>
+                            </td>
+                            <td><span class="spec-label-badge wood-cedar">High-Density Cedar</span></td>
+                            <td><span class="status-pill priority-low">Drafting Stage</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Extended Data Readout: Live Workspace System Performance Matrix Footer -->
+            <div class="extended-logistics-readout-footer">
+                <div class="readout-stat-node">
+                    <span class="readout-lbl">Average Laser Burn Time</span>
+                    <span class="readout-val">4m 12s</span>
+                </div>
+                <div class="readout-stat-node">
+                    <span class="readout-lbl">Active CNC Drills Ready</span>
+                    <span class="readout-val text-teal-weight">3 / 4 Units</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             RIGHT COLUMN WING: DYNAMIC ASSET UPLOAD STAGING CONSOLE
+             ========================================== -->
+        <div class="blueprint-data-card card-dropzone-hull">
+            <div class="card-inner-header-track">
+                <div class="pane-headline-stack">
+                    <h3>Vector Validation Terminal</h3>
+                    <p>Load custom creator files to verify CNC parameters before milling.</p>
+                </div>
+            </div>
+            
+            <!-- FIXED INTERACTIVE DROPZONE CORE CONTAINER CANVAS COMPONENT -->
+            <div class="blueprint-upload-dropzone-box" onclick="triggerBlueprintFileStagingClick()">
+                <div class="dropzone-vector-illustration-hull">
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="upload-cloud-svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                </div>
+                <div class="dropzone-instructional-text">
+                    <span class="dropzone-main-prompt">Upload Toolpath Vector Dataset</span>
+                    <span class="dropzone-sub-specs-lbl">Supports .DXF, .SVG, or .CAD files up to 25MB</span>
+                </div>
+                <input type="file" id="blueprint-file-raw-input" class="display-hidden-input-node" onchange="executeBlueprintFileStagingAlert(this)">
+            </div>
+
+            <!-- Dynamic File Information Readout Panel Chassis (Populates via input triggers elements) -->
+            <div class="dropzone-file-meta-panel-chassis">
+                <div class="file-meta-info-row">
+                    <div class="file-icon-avatar">📄</div>
+                    <div class="file-naming-stack">
+                        <span id="staged-file-name-label" class="file-actual-name">No file currently staged</span>
+                        <span id="staged-file-size-label" class="file-size-metrics">Workspace Ready</span>
+                    </div>
+                </div>
+                
+                <!-- Operational Progress Track Indicator Loading Area -->
+                <div class="dropzone-progress-bar-track">
+                    <span class="progress-track-label-lbl">CNC Toolpath Vector Verification Metric</span>
+                    <div class="bar-outer-shell">
+                        <div id="blueprint-loading-progress-bar" class="bar-inner-fill-glow" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Console Action Button Trigger Capsule Row Block -->
+            <div class="blueprint-console-actions-row">
+                <button class="blueprint-secondary-action-btn" onclick="clearCurrentBlueprintWorkspaceConsole()">
+                    <span>Purge Toolpath Cache</span>
+                </button>
+                <button class="blueprint-primary-action-btn" onclick="initializeCNCProductionMilling()">
+                    <span>Initialize CNC Burn</span>
+                    <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<style>
+    /* =======================================================================
+   HIGH-VISIBILITY CUSTOM BLUEPRINTS EXTENSIVE WORKSPACE OVERRIDES
+   ======================================================================= */
+
+/* --- 1. Workflow Split Grid Layout Architecture Configuration --- */
+#section-partner-commissions .blueprint-workflow-matrix-row {
+    display: grid !important;
+    grid-template-columns: 1.15fr 0.85fr !important; /* Asymmetrical row balances workspace columns tightly */
+    gap: 1.8rem !important;
+    width: 100% !important;
+    margin-top: 2rem !important;
+    align-items: stretch !important; /* Equal heights prevent layout break clipping boxes */
+}
+
+#section-partner-commissions .blueprint-data-card {
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    border-radius: 24px !important;
+    padding: 2.2rem !important;
+    box-shadow: 0 12px 30px rgba(160, 175, 185, 0.05) !important;
+    display: flex;
+    flex-direction: column;
+}
+
+#section-partner-commissions .card-inner-header-track {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1.8rem;
+    border-bottom: 1px solid #f1f5f7;
+    padding-bottom: 1rem;
+}
+.pane-headline-stack { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+.pane-headline-stack h3 { color: #1a202c; font-size: 1.25rem; font-weight: 800; margin: 0; }
+.pane-headline-stack p { color: #718096; font-size: 0.82rem; margin-top: 4px; }
+
+.pane-micro-counter-badge {
+    background-color: #fff5f5;
+    color: #ff6b6b;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 0.25rem 0.65rem;
+    border-radius: 30px;
+    margin-top: 4px;
+    border: 1px solid rgba(255,107,107,0.15);
+}
+
+/* Content Filter Pills */
+.pane-mini-filter-pills { display: flex; gap: 0.5rem; }
+.filter-pill { font-size: 0.68rem; font-weight: 800; color: #718096; padding: 0.35rem 0.75rem; background-color: #f7fafc; border-radius: 30px; cursor: pointer; border: 1px solid rgba(0,0,0,0.02); }
+.filter-pill:hover { background-color: #edf2f7; color: #1a202c; }
+.filter-pill.active-pill { background-color: #1a202c; color: #ffffff; }
+
+/* --- 2. Live Ledger Data Logging Table Overflows --- */
+.table-viewport-scroll-overflow-shield {
+    width: 100% !important;
+    overflow-x: auto !important; /* FIXED SCREEN SHIELD: Grants fluid touch swiping on mobile viewports natively */
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
+}
+
+.logistics-data-table-matrix { width: 100% !important; border-collapse: collapse !important; text-align: left; }
+.logistics-data-table-matrix th { font-size: 0.72rem !important; font-weight: 800 !important; text-transform: uppercase; letter-spacing: 1px !important; color: #718096 !important; padding: 0.8rem 1rem !important; background-color: #f8fafc !important; border-bottom: 1px solid #edf2f7 !important; }
+.logistics-data-table-matrix td { padding: 1.1rem 1rem !important; font-size: 0.9rem !important; font-weight: 600 !important; color: #2d3748 !important; border-bottom: 1px solid #f1f5f7 !important; white-space: nowrap !important; }
+
+.table-profile-title-stack { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+.main-profile-title { font-size: 0.92rem; font-weight: 800; color: #1a202c; }
+.sub-profile-spec { font-size: 0.72rem; font-weight: 700; color: #718096; margin-top: 2px; }
+
+.monospace-code { font-family: monospace !important; font-weight: 700 !important; color: #ff6b6b !important; background-color: #fff5f5; padding: 0.2rem 0.5rem; border-radius: 6px; font-size: 0.85rem !important; }
+.spec-label-badge { font-size: 0.68rem; font-weight: 800; padding: 0.3rem 0.65rem; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.wood-maple { background-color: #f0f4f8; color: #4a5568; }
+.wood-walnut { background-color: #fefaf0; color: #b7791f; }
+.wood-cedar { background-color: #f5f3ff; color: #6b46c1; }
+
+.status-pill { font-size: 0.68rem !important; font-weight: 800 !important; padding: 0.35rem 0.75rem !important; border-radius: 30px !important; text-transform: uppercase; display: inline-block !important; }
+.priority-high { background-color: rgba(255, 107, 107, 0.1) !important; color: #ff6b6b !important; }
+.priority-medium { background-color: rgba(59, 188, 180, 0.1) !important; color: #3bbcb4 !important; }
+.priority-low { background-color: rgba(159, 122, 234, 0.1) !important; color: #9f7aea !important; }
+
+/* Performance Readout Footer Stat Box Row */
+.extended-logistics-readout-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: auto; /* Pins metrics deck row to card grid bottom base floor layout guidelines */
+    background-color: #f8fafc;
+    border: 1px dashed #cbd5e0;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+}
+.readout-stat-node { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+.readout-lbl { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #718096; }
+.readout-val { font-size: 1.1rem; font-weight: 900; color: #1a202c; margin-top: 2px; }
+.text-teal-weight { color: #3bbcb4 !important; }
+
+/* --- 3. Interactive Blueprint Upload Dropzone Node Layer & Control Actions --- */
+.blueprint-upload-dropzone-box {
+    width: 100% !important;
+    background-color: #f8fafc !important;
+    border: 2px dashed #cbd5e0 !important; /* FIXED DEEP GRAY OUTLINE BORDER MARKERS */
+    border-radius: 18px !important;
+    padding: 2.8rem 1.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 14px !important;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    box-sizing: border-box;
+}
+.blueprint-upload-dropzone-box:hover { background-color: #ffffff !important; border-color: #3bbcb4 !important; box-shadow: 0 10px 25px rgba(78,205,196,0.06) !important; }
+
+.dropzone-vector-illustration-hull { color: #a0aec0; width: 34px; height: 34px; }
+.upload-cloud-svg { width: 100%; height: 100%; }
+.dropzone-instructional-text { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.dropzone-main-prompt { color: #1a202c; font-size: 0.9rem; font-weight: 800; margin-bottom: 2px; }
+.dropzone-sub-specs-lbl { color: #718096; font-size: 0.72rem; font-weight: 600; }
+
+.display-hidden-input-node { display: none !important; }
+
+/* Metadata Status Console Panel Layout */
+.dropzone-file-meta-panel-chassis {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #f8fafc;
+    border: 1px solid #edf2f7;
+    border-radius: 16px;
+    padding: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.file-meta-info-row { display: flex; align-items: center; gap: 12px; width: 100%; margin-bottom: 1rem; }
+.file-icon-avatar { font-size: 1.2rem; }
+.file-naming-stack { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+.file-actual-name { font-size: 0.9rem; font-weight: 800; color: #1a202c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 240px; }
+.file-size-metrics { font-size: 0.72rem; font-weight: 700; color: #718096; margin-top: 1px; }
+
+/* Operational Loading Progress tracks bars */
+.dropzone-progress-bar-track { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
+.progress-track-label-lbl { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #a0aec0; margin-bottom: 6px; }
+.bar-outer-shell { width: 100%; height: 6px; background-color: #e2e8f0; border-radius: 10px; overflow: hidden; position: relative; }
+
+.bar-inner-fill-glow {
+    position: absolute; top: 0; left: 0; height: 100%; background-color: #3bbcb4; border-radius: 10px;
+    box-shadow: 0 0 10px rgba(59, 188, 180, 0.4);
+    transition: width 0.5s ease-in-out; /* Smooth animated width fill loading updates */
+}
+
+/* Action button trigger row */
+.blueprint-console-actions-row { width: 100% !important; display: flex !important; justify-content: flex-end !important; gap: 1rem !important; margin-top: 1.5rem !important; }
+
+button.blueprint-secondary-action-btn {
+    background-color: transparent !important; border: 1px solid #cbd5e0 !important; color: #4a5568 !important;
+    padding: 0.9rem 1.5rem !important; font-size: 0.88rem !important; font-weight: 800 !important; border-radius: 50px !important; cursor: pointer !important;
+}
+button.blueprint-secondary-action-btn:hover { background-color: #f7fafc !important; color: #1a202c !important; border-color: #1a202c !important; }
+
+button.blueprint-primary-action-btn {
+    background-color: #1a202c !important; color: #ffffff !important; border: none !important;
+    padding: 1rem 1.8rem !important; font-size: 0.88rem !important; font-weight: 800 !important; border-radius: 50px !important;
+    display: inline-flex !important; align-items: center !important; gap: 8px !important; cursor: pointer !important;
+}
+button.blueprint-primary-action-btn:hover { background-color: #3bbcb4 !important; box-shadow: 0 6px 20px rgba(59, 188, 180, 0.35) !important; }
+
+/* --- 4. Mobile Responsive Overhaul Breakpoint --- */
+@media (max-width: 992px) {
+    /* Collapses landscape split grids down to stacked single columns natively */
+    #section-partner-commissions .blueprint-workflow-matrix-row {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+}
+
+/* ==========================================
+   MOBILE VERTICAL STACK LAYOUT
+========================================== */
+
+@media (max-width:768px){
+
+    /* Main Grid */
+    #section-partner-commissions .blueprint-workflow-matrix-row{
+        display:flex !important;
+        flex-direction:column !important;
+        gap:20px !important;
+    }
+
+    /* Cards */
+    #section-partner-commissions .blueprint-data-card{
+        width:100% !important;
+        max-width:100% !important;
+    }
+
+    /* Card Header */
+    #section-partner-commissions .card-inner-header-track{
+        display:flex !important;
+        flex-direction:column !important;
+        align-items:flex-start !important;
+        gap:15px !important;
+    }
+
+    .pane-headline-stack{
+        width:100%;
+    }
+
+    /* Filter Pills */
+    .pane-mini-filter-pills{
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        width:100%;
+        gap:10px;
+    }
+
+    .filter-pill{
+        width:100%;
+        text-align:center;
+    }
+
+    /* Upload Information */
+    .file-meta-info-row{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .file-naming-stack{
+        width:100%;
+    }
+
+    /* Footer Stats */
+    .extended-logistics-readout-footer{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .readout-stat-node{
+        width:100%;
+    }
+
+    /* Action Buttons */
+    .blueprint-console-actions-row{
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .blueprint-console-actions-row button{
+        width:100%;
+        justify-content:center;
+    }
+
+    /* Table */
+    .table-viewport-scroll-overflow-shield{
+        overflow-x:auto;
+        width:100%;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .logistics-data-table-matrix{
+        min-width:700px;
+    }
+
+}
+</style>
+
+<!-- =======================================================================
+     PAGE SECTION VIEW 3: TIMBER STOCKS LOGS REGISTER (Hidden by default)
+     ======================================================================= -->
+<!-- Page Section View 3: Timber Block Storage Logs (Extensive Responsive Layout) -->
+<section id="section-block-registry" class="dashboard-view-panel-viewport-node">
+    
+    <!-- 1. Header Banner Panel Component -->
+    <div class="panel-section-title-wrapper-hull">
+        <h2>Timber Block Registry &amp; Stock Ledger</h2>
+        <p>Monitor real-time volumetric raw materials storage capacities, audit custom timber source certifications, and order priority milling replacements.</p>
+    </div>
+
+    <!-- 2. High-Density Raw Materials Volumetric Status Gauge Cards -->
+    <div class="stock-material-gauges-grid">
+        
+        <!-- Card Unit 1: Premium Maple Wood -->
+        <div class="material-gauge-card-unit border-maple">
+            <div class="gauge-header-row">
+                <div class="material-title-stack">
+                    <h4>Milling Maple Blocks</h4>
+                    <span class="material-source-lbl">Premium Certified Sourcing</span>
+                </div>
+                <span class="stock-status-pill tag-stable">In Stable Yield</span>
+            </div>
+            <div class="gauge-numerical-display">
+                <span class="gauge-large-value">42.8 <span class="gauge-unit-lbl">m³</span></span>
+            </div>
+            <div class="gauge-progress-shell-bar">
+                <div class="gauge-inner-fill-color bg-maple-glow" style="width: 78%;"></div>
+            </div>
+            <div class="gauge-footer-meta">
+                <span>78% Capacity Limit Used</span>
+            </div>
+        </div>
+
+        <!-- Card Unit 2: Organic Beeswax Walnut -->
+        <div class="material-gauge-card-unit border-walnut">
+            <div class="gauge-header-row">
+                <div class="material-title-stack">
+                    <h4>Organic Walnut Shells</h4>
+                    <span class="material-source-lbl">Premium Oil Coating Stock</span>
+                </div>
+                <span class="stock-status-pill tag-stable">In Stable Yield</span>
+            </div>
+            <div class="gauge-numerical-display">
+                <span class="gauge-large-value">26.5 <span class="gauge-unit-lbl">m³</span></span>
+            </div>
+            <div class="gauge-progress-shell-bar">
+                <div class="gauge-inner-fill-color bg-walnut-glow" style="width: 54%;"></div>
+            </div>
+            <div class="gauge-footer-meta">
+                <span>54% Capacity Limit Used</span>
+            </div>
+        </div>
+
+        <!-- Card Unit 3: High-Density Red Cedar -->
+        <div class="material-gauge-card-unit border-cedar">
+            <div class="gauge-header-row">
+                <div class="material-title-stack">
+                    <h4>High-Density Red Cedar</h4>
+                    <span class="material-source-lbl">Kinetic Maze Raw Timber</span>
+                </div>
+                <span class="stock-status-pill tag-low-alert">Low Supply Flag</span>
+            </div>
+            <div class="gauge-numerical-display">
+                <span class="gauge-large-value">14.9 <span class="gauge-unit-lbl">m³</span></span>
+            </div>
+            <div class="gauge-progress-shell-bar">
+                <div class="gauge-inner-fill-color bg-cedar-glow" style="width: 29%;"></div>
+            </div>
+            <div class="gauge-footer-meta">
+                <span>29% Capacity Limit Used</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 3. Primary Inventory Tracking Ledger Table Module -->
+    <div class="stock-inventory-ledger-card">
+        <div class="card-inner-header-track">
+            <div class="pane-headline-stack">
+                <h3>Sustainable Material Logs</h3>
+                <span class="pane-micro-counter-badge">Active Batches Audit</span>
+            </div>
+            
+            <!-- FIXED 404 NAVIGATION TO BUTTONS -->
+            <a href="404.html" class="stock-action-header-btn">
+                <span>Request Core Restock</span>
+                <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </a>
+        </div>
+
+        <!-- FIXED RESPONSIVE TABLE OVERFLOW SHIELD -->
+        <div class="table-viewport-scroll-overflow-shield">
+            <table class="logistics-data-table-matrix">
+                <thead>
+                    <tr>
+                        <th>Batch Code</th>
+                        <th>Wood Sourcing Node</th>
+                        <th>Moisture Scale</th>
+                        <th>Milling Request Router</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="monospace-code">#TMB-5510</span></td>
+                        <td>
+                            <div class="table-profile-title-stack">
+                                <span class="main-profile-title">Nordic Maple Logs</span>
+                                <span class="sub-profile-spec">Laser Milled Sector A</span>
+                            </div>
+                        </td>
+                        <td><span class="stock-spec-metric-lbl">8.4% — Verified Dry</span></td>
+                        <td>
+                            <!-- FIXED 404 NAVIGATION TO BUTTONS -->
+                            <a href="404.html" class="stock-table-action-row-btn">Milling Request</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="monospace-code">#TMB-5511</span></td>
+                        <td>
+                            <div class="table-profile-title-stack">
+                                <span class="main-profile-title">Appalachian Walnut Shells</span>
+                                <span class="sub-profile-spec">Artisan Turning Blocks</span>
+                            </div>
+                        </td>
+                        <td><span class="stock-spec-metric-lbl">9.1% — Stable</span></td>
+                        <td>
+                            <!-- FIXED 404 NAVIGATION TO BUTTONS -->
+                            <a href="404.html" class="stock-table-action-row-btn">Milling Request</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+
+<style>
+    /* =======================================================================
+   TIMBER BLOCK REGISTRY WORKSPACE ADVANCED INTERACTIVE LAYOUT CSS
+   ======================================================================= */
+
+/* --- 1. Material Gauges Data Matrix Grid --- */
+.stock-material-gauges-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1.8rem !important;
+    box-sizing: border-box;
+}
+
+.material-gauge-card-unit {
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    border-radius: 24px !important;
+    padding: 1.5rem 1.8rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-shadow: 0 12px 30px rgba(160, 175, 185, 0.05) !important;
+}
+
+.gauge-header-row { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; margin-bottom: 1.5rem; }
+.material-title-stack { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+.material-title-stack h4 { color: #1a202c; font-size: 1.05rem; font-weight: 800; margin: 0; }
+.material-source-lbl { font-size: 0.72rem; font-weight: 700; color: #a0aec0; margin-top: 2px; }
+
+.stock-status-pill { font-size: 0.62rem; font-weight: 800; padding: 0.25rem 0.6rem; border-radius: 30px; text-transform: uppercase; letter-spacing: 0.5px; }
+.tag-stable { background-color: rgba(59, 188, 180, 0.08); color: #3bbcb4; border: 1px solid rgba(59, 188, 180, 0.15); }
+.tag-low-alert { background-color: rgba(255, 107, 107, 0.08); color: #ff6b6b; border: 1px solid rgba(255, 107, 107, 0.15); }
+
+.gauge-numerical-display { display: flex; align-items: baseline; width: 100%; margin-bottom: 0.8rem; }
+.gauge-large-value { font-size: 2.1rem; font-weight: 900; color: #1a202c; letter-spacing: -1px; }
+.gauge-unit-lbl { font-size: 1rem; font-weight: 700; color: #718096; margin-left: 2px; }
+
+.gauge-progress-shell-bar { width: 100%; height: 6px; background-color: #e2e8f0; border-radius: 10px; overflow: hidden; position: relative; margin-bottom: 0.6rem; }
+.gauge-inner-fill-color { position: absolute; top: 0; left: 0; height: 100%; border-radius: 10px; }
+
+.bg-maple-glow { background-color: #4a5568; }
+.bg-walnut-glow { background-color: #b7791f; }
+.bg-cedar-glow { background-color: #ff6b6b; }
+
+.gauge-footer-meta span { font-size: 0.72rem; font-weight: 800; color: #718096; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* --- 2. Sustainable Inventory Tracking Card Ledger --- */
+.stock-inventory-ledger-card {
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    border-radius: 24px !important;
+    padding: 2.2rem !important;
+    box-shadow: 0 12px 30px rgba(160, 175, 185, 0.05) !important;
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+a.stock-action-header-btn {
+    text-decoration: none !important;
+    background-color: #1a202c !important;
+    color: #ffffff !important;
+    font-size: 0.82rem !important;
+    font-weight: 800 !important;
+    padding: 0.6rem 1.4rem !important;
+    border-radius: 50px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+a.stock-action-header-btn:hover { background-color: #ff6b6b !important; }
+
+.stock-spec-metric-lbl { font-size: 0.88rem !important; font-weight: 700 !important; color: #4a5568 !important; }
+
+a.stock-table-action-row-btn {
+    text-decoration: none !important;
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e0 !important;
+    color: #1a202c !important;
+    font-size: 0.78rem !important;
+    font-weight: 800 !important;
+    padding: 0.45rem 1rem !important;
+    border-radius: 30px !important;
+    display: inline-block !important;
+}
+a.stock-table-action-row-btn:hover { border-color: #ff6b6b !important; color: #ff6b6b !important; }
+
+/*==================================================
+    RESPONSIVE ADD-ON
+==================================================*/
+
+/* ---------- Tablets ---------- */
+@media (max-width:991px){
+
+    .stock-material-gauges-grid{
+        grid-template-columns:repeat(2,1fr)!important;
+        gap:20px!important;
+    }
+
+    .stock-inventory-ledger-card{
+        padding:1.8rem!important;
+    }
+
+    .card-inner-header-track{
+        display:flex;
+        flex-wrap:wrap;
+        gap:18px;
+        align-items:flex-start;
+        justify-content:space-between;
+    }
+
+}
+
+
+/* ---------- Mobile ---------- */
+@media (max-width:767px){
+
+    #section-block-registry{
+        padding:20px 15px!important;
+    }
+
+    /* Heading */
+
+    .panel-section-title-wrapper-hull{
+        text-align:center;
+    }
+
+    .panel-section-title-wrapper-hull h2{
+        font-size:28px;
+        line-height:1.3;
+    }
+
+    .panel-section-title-wrapper-hull p{
+        font-size:14px;
+        line-height:1.8;
+    }
+
+    /* Cards */
+
+    .stock-material-gauges-grid{
+        display:flex!important;
+        flex-direction:column!important;
+        gap:18px!important;
+    }
+
+    .material-gauge-card-unit{
+        width:100%!important;
+        padding:20px!important;
+        border-radius:18px!important;
+    }
+
+    .gauge-header-row{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+
+    .stock-status-pill{
+        align-self:flex-start;
+    }
+
+    .gauge-large-value{
+        font-size:30px;
+    }
+
+    /* Ledger */
+
+    .stock-inventory-ledger-card{
+        padding:18px!important;
+        border-radius:18px!important;
+    }
+
+    .stock-inventory-ledger-card .card-inner-header-track{
+        flex-direction:column;
+        align-items:stretch;
+        gap:18px;
+    }
+
+    .stock-action-header-btn{
+        width:100%;
+        justify-content:center;
+    }
+
+    /* Responsive Table */
+
+    .table-viewport-scroll-overflow-shield{
+        overflow-x:auto;
+        overflow-y:hidden;
+        width:100%;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .logistics-data-table-matrix{
+        min-width:600px;
+        width:100%;
+    }
+
+    .logistics-data-table-matrix th,
+    .logistics-data-table-matrix td{
+        padding:14px 16px;
+        white-space:normal!important;
+        word-break:break-word;
+        vertical-align:top;
+    }
+
+    .table-profile-title-stack{
+        display:flex;
+        flex-direction:column;
+        gap:4px;
+        width:100%;
+    }
+
+    .main-profile-title{
+        font-size:15px;
+        line-height:1.5;
+    }
+
+    .sub-profile-spec{
+        font-size:13px;
+        line-height:1.5;
+    }
+
+    .stock-table-action-row-btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        white-space:nowrap;
+    }
+
+}
+
+
+/* ---------- Small Phones ---------- */
+@media (max-width:480px){
+
+    .panel-section-title-wrapper-hull h2{
+        font-size:24px;
+    }
+
+    .panel-section-title-wrapper-hull p{
+        font-size:13px;
+    }
+
+    .gauge-large-value{
+        font-size:26px;
+    }
+
+    .material-gauge-card-unit{
+        padding:18px!important;
+    }
+
+    .stock-inventory-ledger-card{
+        padding:16px!important;
+    }
+
+    .stock-action-header-btn,
+    .stock-table-action-row-btn{
+        font-size:13px!important;
+        padding:10px 16px!important;
+    }
+
+}
+</style>
+
+
+<!-- Page Section View 4: Payout Financial Analytics Console (Extensive Ledger View) -->
+<section id="section-partner-earnings" class="dashboard-view-panel-viewport-node">
+    
+    <!-- 1. Header Banner Panel Component -->
+    <div class="panel-section-title-wrapper-hull">
+        <h2>Payout Matrix &amp; Royalty Ledger</h2>
+        <p>Track your artisan studio workshop royalty margins, audit chronological sandbox bulk item payouts, and configure your secure checkout clearing parameters.</p>
+    </div>
+
+    <!-- 2. High-Density Financial Analytics Balance Card Deck -->
+    <div class="payout-balance-analytics-grid">
+        
+        <!-- Balance Unit 1: Cleared Ledger Balance -->
+        <div class="financial-balance-card-unit background-teal-glow">
+            <div class="card-inner-header-track">
+                <span class="financial-meta-lbl">Cleared Royalty Capital</span>
+                <div class="financial-vector-icon">
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                </div>
+            </div>
+            <div class="financial-value-display">
+                <span class="currency-digits-large">₹84,250<span class="currency-decimals">.00</span></span>
+            </div>
+            <!-- FIXED ROUTING CAP: Button paths natively forward directly into 404.html -->
+            <div class="financial-card-action-horizon">
+                <a href="404.html" class="financial-card-embedded-btn btn-teal-solid">Request Priority Payout</a>
+            </div>
+        </div>
+
+        <!-- Balance Unit 2: Escrow Staged Bulk Orders -->
+        <div class="financial-balance-card-unit background-coral-glow">
+            <div class="card-inner-header-track">
+                <span class="financial-meta-lbl">Escrow Processing Funds</span>
+                <div class="financial-vector-icon">
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+            </div>
+            <div class="financial-value-display">
+                <span class="currency-digits-large">₹31,900<span class="currency-decimals">.50</span></span>
+            </div>
+            <div class="financial-card-action-horizon">
+                <a href="404.html" class="financial-card-embedded-btn btn-coral-border">Audit Escrow Rules</a>
+            </div>
+        </div>
+
+        <!-- Balance Unit 3: Total Historical Earnings -->
+        <div class="financial-balance-card-unit background-charcoal-glow">
+            <div class="card-inner-header-track">
+                <span class="financial-meta-lbl">Lifetime Yield Distributed</span>
+                <div class="financial-vector-icon">
+                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+            </div>
+            <div class="financial-value-display">
+                <span class="currency-digits-large">₹4,12,600<span class="currency-decimals">.00</span></span>
+            </div>
+            <div class="financial-card-action-horizon">
+                <a href="404.html" class="financial-card-embedded-btn btn-charcoal-border">Download Full Sheets</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 3. Primary Chronological Clearing Ledger Table Module -->
+    <div class="payout-history-ledger-card">
+        <div class="card-inner-header-track">
+            <div class="pane-headline-stack">
+                <h3>Chronological Distribution Logs</h3>
+                <span class="pane-micro-counter-badge">Milling Clearing Node Active</span>
+            </div>
+            
+            <a href="404.html" class="payout-action-header-btn">
+                <span>Configure Bank Settings</span>
+                <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83 2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </a>
+        </div>
+
+        <!-- FIXED RESPONSIVE TABLE OVERFLOW SHIELD: Prevents browser blowout anomalies on smartphones natively -->
+        <div class="table-viewport-scroll-overflow-shield">
+            <table class="logistics-data-table-matrix">
+                <thead>
+                    <tr>
+                        <th>Distribution Clearing ID</th>
+                        <th>Artisan Order Origin</th>
+                        <th>Settlement Valuation</th>
+                        <th>Transaction Sheet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="monospace-code">#PAY-9920</span></td>
+                        <td>
+                            <div class="table-profile-title-stack">
+                                <span class="main-profile-title">Salem Flagship Kindergarten Bulk</span>
+                                <span class="sub-profile-spec">Laser Milled Module Block Sets</span>
+                            </div>
+                        </td>
+                        <td><span class="financial-bold-metric-lbl text-teal-weight">+ ₹42,500.00</span></td>
+                        <td>
+                            <!-- FIXED ROUTING CAP: Individual row buttons route forward into 404.html -->
+                            <a href="404.html" class="payout-table-action-row-btn">Download PDF</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="monospace-code">#PAY-9921</span></td>
+                        <td>
+                            <div class="table-profile-title-stack">
+                                <span class="main-profile-title">Kinetic Maze Run Custom Blueprint</span>
+                                <span class="sub-profile-spec">Sub-Millimeter Cedar Milling Trajectory</span>
+                            </div>
+                        </td>
+                        <td><span class="financial-bold-metric-lbl text-teal-weight">+ ₹18,400.00</span></td>
+                        <td>
+                            <a href="404.html" class="payout-table-action-row-btn">Download PDF</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+
+<style>
+    /*==================================================
+  MOBILE RESPONSIVE ADD-ON
+===================================================*/
+
+@media (max-width:768px){
+
+    /* Entire Section */
+    #section-partner-earnings{
+        padding:20px 15px !important;
+    }
+
+    /* Cards */
+    .payout-balance-analytics-grid{
+        display:flex !important;
+        flex-direction:column !important;
+        gap:18px !important;
+    }
+
+    .financial-balance-card-unit{
+        width:100% !important;
+        padding:20px !important;
+        border-radius:18px !important;
+    }
+
+    .financial-value-display{
+        margin:18px 0;
+    }
+
+    .currency-digits-large{
+        font-size:30px !important;
+        line-height:1.2;
+        word-break:break-word;
+    }
+
+    .financial-card-embedded-btn{
+        width:100%;
+        justify-content:center;
+    }
+
+    /* Ledger Card */
+    .payout-history-ledger-card{
+        padding:18px !important;
+        border-radius:18px;
+    }
+
+    .payout-history-ledger-card .card-inner-header-track{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .pane-headline-stack{
+        width:100%;
+    }
+
+    .payout-action-header-btn{
+        width:100%;
+        justify-content:center;
+    }
+
+    /* Table */
+    .table-viewport-scroll-overflow-shield{
+        overflow-x:auto;
+        overflow-y:hidden;
+        width:100%;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .logistics-data-table-matrix{
+        min-width:650px;
+        width:100%;
+    }
+
+    .logistics-data-table-matrix th,
+    .logistics-data-table-matrix td{
+        white-space:normal !important;
+        word-break:break-word;
+        overflow-wrap:break-word;
+        padding:14px;
+        vertical-align:top;
+    }
+
+    .table-profile-title-stack{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:4px;
+        width:100%;
+    }
+
+    .main-profile-title{
+        font-size:15px;
+        line-height:1.4;
+    }
+
+    .sub-profile-spec{
+        font-size:13px;
+        line-height:1.4;
+    }
+
+    .monospace-code{
+        white-space:normal !important;
+        word-break:break-all;
+    }
+
+    .financial-bold-metric-lbl{
+        white-space:nowrap;
+    }
+
+    .payout-table-action-row-btn{
+        display:inline-flex;
+        justify-content:center;
+        align-items:center;
+        padding:10px 18px !important;
+        white-space:nowrap;
+    }
+
+}
+
+
+/* Small Phones */
+
+@media (max-width:480px){
+
+    .panel-section-title-wrapper-hull h2{
+        font-size:24px;
+    }
+
+    .panel-section-title-wrapper-hull p{
+        font-size:14px;
+    }
+
+    .currency-digits-large{
+        font-size:24px !important;
+    }
+
+    .financial-meta-lbl{
+        font-size:11px;
+    }
+
+    .financial-card-embedded-btn,
+    .payout-action-header-btn{
+        font-size:13px;
+    }
+
+}
+    /* =======================================================================
+   PAYOUT MATRIX ADVANCED INTERACTIVE LEDGER LAYOUT CSS
+   ======================================================================= */
+
+/* --- 1. Financial Balance Data Deck Grid --- */
+.payout-balance-analytics-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1.8rem !important;
+    box-sizing: border-box;
+}
+
+.financial-balance-card-unit {
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    border-radius: 24px !important;
+    padding: 1.8rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-shadow: 0 12px 30px rgba(160, 175, 185, 0.05) !important;
+}
+
+.financial-balance-card-unit .card-inner-header-track {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.financial-meta-lbl { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #718096; }
+.financial-vector-icon { width: 20px; height: 20px; color: #a0aec0; }
+
+.background-teal-glow:hover { border-color: rgba(59, 188, 180, 0.25) !important; }
+.background-coral-glow:hover { border-color: rgba(255, 107, 107, 0.25) !important; }
+.background-charcoal-glow:hover { border-color: rgba(26, 32, 44, 0.2) !important; }
+
+.financial-value-display { display: flex; align-items: baseline; width: 100%; margin-bottom: 1.5rem; }
+.currency-digits-large { font-size: 2.2rem; font-weight: 900; color: #1a202c; letter-spacing: -1px; }
+.currency-decimals { font-size: 1.1rem; font-weight: 700; color: #718096; }
+
+.financial-card-action-horizon { width: 100%; margin-top: auto; }
+
+a.financial-card-embedded-btn {
+    text-decoration: none !important;
+    width: 100%;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.25rem !important;
+    font-size: 0.85rem !important;
+    font-weight: 800 !important;
+    border-radius: 50px !important;
+}
+.btn-teal-solid { background-color: #1a202c !important; color: #ffffff !important; }
+.btn-teal-solid:hover { background-color: #3bbcb4 !important; }
+
+.btn-coral-border { background-color: transparent !important; border: 1px solid #cbd5e0 !important; color: #4a5568 !important; }
+.btn-coral-border:hover { border-color: #ff6b6b !important; color: #ff6b6b; }
+
+.btn-charcoal-border { background-color: transparent !important; border: 1px solid #cbd5e0 !important; color: #4a5568 !important; }
+.btn-charcoal-border:hover { border-color: #1a202c !important; color: #1a202c !important; }
+
+/* --- 2. Chronological History Sheet Card Ledger --- */
+.payout-history-ledger-card {
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    border-radius: 24px !important;
+    padding: 2.2rem !important;
+    box-shadow: 0 12px 30px rgba(160, 175, 185, 0.05) !important;
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+}
+
+a.payout-action-header-btn {
+    text-decoration: none !important;
+    background-color: #1a202c !important;
+    color: #ffffff !important;
+    font-size: 0.82rem !important;
+    font-weight: 800 !important;
+    padding: 0.6rem 1.4rem !important;
+    border-radius: 50px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+a.payout-action-header-btn:hover { background-color: #3bbcb4 !important; }
+
+.financial-bold-metric-lbl { font-size: 0.95rem !important; font-weight: 800 !important; }
+
+a.payout-password-btn, a.payout-table-action-row-btn {
+    text-decoration: none !important;
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e0 !important;
+    color: #1a202c !important;
+    font-size: 0.78rem !important;
+    font-weight: 800 !important;
+    padding: 0.45rem 1rem !important;
+    border-radius: 30px !important;
+    display: inline-block !important;
+}
+a.payout-table-action-row-btn:hover { border-color: #1a202c !important; }
+
+</style>
                 <style>
 
                     /* =======================================================================
